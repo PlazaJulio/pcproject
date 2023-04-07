@@ -15,10 +15,10 @@
 ## Tecnologias utilizadas: 
 
 - Back-end:
-  - Php - com framework lumen
+  - PHP - com o micro-framework Lumen
 
 - Front-end:
 
 - Banco de dados:
-  - PostgreSQL
+  - PostgreSQL(Modelo-Relacional de banco)
   

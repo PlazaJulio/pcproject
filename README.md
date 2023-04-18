@@ -4,7 +4,7 @@
 
 ## Integrantes:
 
-- Responsavel pela equipe:
+- Responsável pela equipe:
   - Luiz Hilario
 
 - Estagiários:

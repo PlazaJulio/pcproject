@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('rua');
             $table->string('bairro');
             $table->integer('numero');
-            $table->string('complemento');
+            $table->string('complemento')->nullable(true);
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
         });

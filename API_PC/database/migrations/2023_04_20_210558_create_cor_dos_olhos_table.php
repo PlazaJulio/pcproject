@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('cor_dos_olhos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string("cor");
+            $table->timestamp('criado_em')->useCurrent();
+            $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
         });
     }
 

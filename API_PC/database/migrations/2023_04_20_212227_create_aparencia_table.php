@@ -13,10 +13,6 @@ return new class extends Migration
     {
         Schema::create('aparencia', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-        });
-        Schema::create('aparencia', function (Blueprint $table) {
-            $table->id();
             $table->float("altura");
             $table->string("etnia");
             $table->string("foto_de_perfil_esquerdo")->nullable(true);

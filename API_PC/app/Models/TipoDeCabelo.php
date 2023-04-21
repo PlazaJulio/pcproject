@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
  
 class TipoDeCabelo extends Model
 {
-    protected $table = 'endereco';
+    protected $table = 'tipo_de_cabelo';
     protected $fillable = ['tipo'];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';

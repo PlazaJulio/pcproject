@@ -4,17 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Database\Seeders\CorSeeder;
+use App\Models\Cor;
 
-class DatabaseSeeder extends Seeder
+class CorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $this->call([CorSeeder::class]);
+        Cor::factory()->count(10)->create();
     }
 }

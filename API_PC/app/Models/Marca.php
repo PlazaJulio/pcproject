@@ -4,7 +4,7 @@ namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
  
-class PorteFisico extends Model
+class Marca extends Model
 {
     protected $table = 'marca';
     protected $fillable = ['cicatriz_ou_tatuagem', 'descricao', 'parte_do_corpo', 'foto', 'tipo', 'aparencia_id'];

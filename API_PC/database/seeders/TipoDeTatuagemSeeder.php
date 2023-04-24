@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use App\Models\TipoDeTatuagem;
 
-class TipoTatuagem extends Seeder
+class TipoDeTatuagemSeeder extends Seeder
 {
     public function run(): void
     {

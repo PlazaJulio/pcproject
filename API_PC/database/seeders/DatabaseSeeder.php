@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([CorSeeder::class]);
+        $this->call([CorSeeder::class, TipoTatuagem::class]);
     }
 }

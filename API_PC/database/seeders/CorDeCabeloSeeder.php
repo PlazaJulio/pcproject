@@ -11,27 +11,27 @@ class CorDeCabeloSeeder extends Seeder
     public function run(): void
     {
         $corUm = new CorDoCabelo;
-        $corUm->tipo = 'Preto';
+        $corUm->cor = 'Preto';
         $corUm->save();
 
         $corDois = new CorDoCabelo;
-        $corDois->tipo = 'Castanho';
+        $corDois->cor = 'Castanho';
         $corDois->save();
 
         $corTres = new CorDoCabelo;
-        $corTres->tipo = 'Loiro';
+        $corTres->cor = 'Loiro';
         $corTres->save();
 
         $corQuatro = new CorDoCabelo;
-        $corQuatro->tipo = 'Ruivo';
+        $corQuatro->cor = 'Ruivo';
         $corQuatro->save();
 
         $corCinco = new CorDoCabelo;
-        $corCinco->tipo = 'Grisalhos ';
+        $corCinco->cor = 'Grisalhos ';
         $corCinco->save();
 
         $corSeis = new CorDoCabelo;
-        $corSeis->tipo = 'Outros';
+        $corSeis->cor = 'Outros';
         $corSeis->save();
     }
 }

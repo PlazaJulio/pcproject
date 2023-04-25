@@ -3,9 +3,18 @@
 namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Database\Factories\AparenciaFactory;
+
  
 class Aparencia extends Model
 {
+
+    protected static function factory(): Factory
+    {
+        return AparenciaFactory::new();
+    }
+
     protected $table = 'aparencia';
     protected $fillable = ['altura', 
                            'etnia', 

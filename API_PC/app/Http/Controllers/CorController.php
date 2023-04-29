@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cor;
-use Illuminate\Http\Response;
-use Illuminate\Http\Request;
-use Exception;
 
 class CorController extends Controller
 {

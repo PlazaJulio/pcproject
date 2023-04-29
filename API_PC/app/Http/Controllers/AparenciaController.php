@@ -42,4 +42,21 @@ class AparenciaController extends Controller
             return response("Requisição feita de maneira incorreta", 400);
         }
     }
+
+    public function deletar($id)
+    {
+        $dadoExcluido = Aparencia::findOrFail($id);
+        $dadoExcluido->delete();
+        return $dadoExcluido;
+    }
+
+    public function alterar($id, Request $request)
+    {
+        $dadoASerAlterado = Aparencia::findOrFail($id);
+        foreach ($request->except('_token') as $chave => $valor){
+            $dadoASerAlterado->update([$chave => $valor]);
+        }
+        return $dadoASerAlterado;
+    }
+    
 }

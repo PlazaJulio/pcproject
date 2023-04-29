@@ -3,11 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\AparenciaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $this->call([]);
+        $this->call(
+            [
+                AparenciaSeeder::class
+            ]
+        );
     }
 }

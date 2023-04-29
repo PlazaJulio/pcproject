@@ -10,3 +10,6 @@ $router->get('/', function () use ($router) {
 $router->get("/aparencia/{id}", "AparenciaController@mostrarPorId");
 $router->get("/aparencia", "AparenciaController@mostrarTodos");
 $router->post("/aparencia/inserir", "AparenciaController@inserir");
+$router->delete("/aparencia/{id}", "AparenciaController@deletar");
+$router->patch("/aparencia/{id}", "AparenciaController@alterar");
+

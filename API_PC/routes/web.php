@@ -13,3 +13,6 @@ $router->post("/aparencia/inserir", "AparenciaController@inserir");
 
 $router->get("/cor/{id}", "CorController@mostrarPorId");
 $router->get("/cor", "CorController@mostrarTodos");
+
+$router->get("/cor-do-cabelo/{id}", "CorDoCabeloController@mostrarPorId");
+$router->get("/cor-do-cabelo", "CorDoCabeloController@mostrarTodos");

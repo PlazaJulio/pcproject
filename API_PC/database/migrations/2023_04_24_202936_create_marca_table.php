@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('parte_do_corpo');
             $table->string('foto');
 
-            $table->unsignedBigInteger('tipo_de_tatuagem_id');
+            $table->unsignedBigInteger('tipo_de_tatuagem_id')->nullable('true');
             $table->foreign('tipo_de_tatuagem_id')->references('id')->on('tipo_de_tatuagem');
             
             $table->unsignedBigInteger('aparencia_id');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\CorDosOlhos;
 
-class PorteFisicoController extends Controller
+class CorDosOlhosController extends Controller
 {
     public function __construct()
     {

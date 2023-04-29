@@ -23,3 +23,6 @@ $router->get("/tipo-de-cabelo", "TipoDeCabeloController@mostrarTodos");
 
 $router->get("/porte-fisico/{id}", "PorteFisicoController@mostrarPorId");
 $router->get("/porte-fisico", "PorteFisicoController@mostrarTodos");
+
+$router->get("/cor-dos-olhos/{id}", "CorDosOlhosController@mostrarPorId");
+$router->get("/cor-dos-olhos", "CorDosOlhosController@mostrarTodos");

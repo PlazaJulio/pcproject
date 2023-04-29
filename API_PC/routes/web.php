@@ -1,7 +1,6 @@
 <?php
 
 /** @var \Laravel\Lumen\Routing\Router $router */
-use Illuminate\Http\Request;
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
@@ -21,3 +20,6 @@ $router->get("/cor-do-cabelo", "CorDoCabeloController@mostrarTodos");
 
 $router->get("/tipo-de-cabelo/{id}", "TipoDeCabeloController@mostrarPorId");
 $router->get("/tipo-de-cabelo", "TipoDeCabeloController@mostrarTodos");
+
+$router->get("/porte-fisico/{id}", "PorteFisicoController@mostrarPorId");
+$router->get("/porte-fisico", "PorteFisicoController@mostrarTodos");

@@ -18,3 +18,6 @@ $router->get("/cor", "CorController@mostrarTodos");
 
 $router->get("/cor-do-cabelo/{id}", "CorDoCabeloController@mostrarPorId");
 $router->get("/cor-do-cabelo", "CorDoCabeloController@mostrarTodos");
+
+$router->get("/tipo-de-cabelo/{id}", "TipoDeCabeloController@mostrarPorId");
+$router->get("/tipo-de-cabelo", "TipoDeCabeloController@mostrarTodos");

@@ -13,3 +13,6 @@ $router->post("/aparencia/inserir", "AparenciaController@inserir");
 $router->delete("/aparencia/{id}", "AparenciaController@deletar");
 $router->patch("/aparencia/{id}", "AparenciaController@alterar");
 
+
+$router->get("/cor/{id}", "CorController@mostrarPorId");
+$router->get("/cor", "CorController@mostrarTodos");

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\EnderecoSeeder;
 use Database\Seeders\AparenciaSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,7 +12,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-                AparenciaSeeder::class
+                AparenciaSeeder::class,
+                EnderecoSeeder::class
             ]
         );
     }

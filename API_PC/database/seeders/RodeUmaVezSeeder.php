@@ -11,6 +11,8 @@ use Database\Seeders\GeneroSeeder;
 use Database\Seeders\PorteFisicoSeeder;
 use Database\Seeders\TipoDeCabeloSeeder;
 use Database\Seeders\TipoDeTatuagemSeeder;
+use Database\Seeders\EstadoCivilSeeder;
+use Database\Seeders\GrauDeEscolaridadeSeeder;
 
 class RodeUmaVezSeeder extends Seeder
 {
@@ -25,7 +27,9 @@ class RodeUmaVezSeeder extends Seeder
                 GeneroSeeder::class,
                 PorteFisicoSeeder::class,
                 TipoDeCabeloSeeder::class,
-                TipoDeTatuagemSeeder::class
+                TipoDeTatuagemSeeder::class,
+                EstadoCivilSeeder::class,
+                GrauDeEscolaridadeSeeder::class
             ]
         );
     }

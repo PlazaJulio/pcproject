@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
                 EnderecoSeeder::class,
                 MarcaSeeder::class,
                 CriminosoSeeder::class,
+                AntecedenteSeeder::class,
             ]
         );
     }

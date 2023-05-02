@@ -32,3 +32,6 @@ $router->get("/estado-civil", "EstadoCivilController@mostrarTodos");
 
 $router->get("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@mostrarPorId");
 $router->get("/grau-de-escolaridade", "GrauDeEscolaridadeController@mostrarTodos");
+
+$router->get("/genero/{id}", "GeneroController@mostrarPorId");
+$router->get("/genero", "GeneroController@mostrarTodos");

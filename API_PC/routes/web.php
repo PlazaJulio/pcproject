@@ -29,3 +29,6 @@ $router->get("/cor-dos-olhos", "CorDosOlhosController@mostrarTodos");
 
 $router->get("/estado-civil/{id}", "EstadoCivilController@mostrarPorId");
 $router->get("/estado-civil", "EstadoCivilController@mostrarTodos");
+
+$router->get("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@mostrarPorId");
+$router->get("/grau-de-escolaridade", "GrauDeEscolaridadeController@mostrarTodos");

@@ -3,9 +3,17 @@
 namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Database\Factories\CriminosoFactory;
  
 class Criminoso extends Model
-{
+{   
+
+    protected static function factory(): Factory
+    {
+        return CriminosoFactory::new();
+    }
+
     protected $table = 'criminoso';
     protected $fillable = ['nome',
                            'alcunha',

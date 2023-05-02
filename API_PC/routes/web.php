@@ -26,3 +26,6 @@ $router->get("/porte-fisico", "PorteFisicoController@mostrarTodos");
 
 $router->get("/cor-dos-olhos/{id}", "CorDosOlhosController@mostrarPorId");
 $router->get("/cor-dos-olhos", "CorDosOlhosController@mostrarTodos");
+
+$router->get("/estado-civil/{id}", "EstadoCivilController@mostrarPorId");
+$router->get("/estado-civil", "EstadoCivilController@mostrarTodos");

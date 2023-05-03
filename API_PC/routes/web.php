@@ -41,3 +41,9 @@ $router->get("/acusacao", "AcusacaoController@mostrarTodos");
 $router->post("/acusacao/inserir", "AcusacaoController@inserir");
 $router->delete("/acusacao/{id}", "AcusacaoController@deletar");
 $router->patch("/acusacao/{id}", "AcusacaoController@alterar");
+
+$router->get("/endereco/{id}", "EnderecoController@mostrarPorId");
+$router->get("/endereco", "EnderecoController@mostrarTodos");
+$router->post("/endereco/inserir", "EnderecoController@inserir");
+$router->delete("/endereco/{id}", "EnderecoController@deletar");
+$router->patch("/endereco/{id}", "EnderecoController@alterar");

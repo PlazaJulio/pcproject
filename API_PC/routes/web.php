@@ -41,3 +41,15 @@ $router->get("/criminoso", "CriminosoController@mostrarTodos");
 $router->post("/criminoso/inserir", "CriminosoController@inserir");
 $router->delete("/criminoso/{id}", "CriminosoController@deletar");
 $router->patch("/criminoso/{id}", "CriminosoController@alterar");
+
+$router->get("/acusacao/{id}", "AcusacaoController@mostrarPorId");
+$router->get("/acusacao", "AcusacaoController@mostrarTodos");
+$router->post("/acusacao/inserir", "AcusacaoController@inserir");
+$router->delete("/acusacao/{id}", "AcusacaoController@deletar");
+$router->patch("/acusacao/{id}", "AcusacaoController@alterar");
+
+$router->get("/endereco/{id}", "EnderecoController@mostrarPorId");
+$router->get("/endereco", "EnderecoController@mostrarTodos");
+$router->post("/endereco/inserir", "EnderecoController@inserir");
+$router->delete("/endereco/{id}", "EnderecoController@deletar");
+$router->patch("/endereco/{id}", "EnderecoController@alterar");

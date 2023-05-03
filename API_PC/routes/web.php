@@ -36,6 +36,12 @@ $router->get("/grau-de-escolaridade", "GrauDeEscolaridadeController@mostrarTodos
 $router->get("/genero/{id}", "GeneroController@mostrarPorId");
 $router->get("/genero", "GeneroController@mostrarTodos");
 
+$router->get("/criminoso/{id}", "CriminosoController@mostrarPorId");
+$router->get("/criminoso", "CriminosoController@mostrarTodos");
+$router->post("/criminoso/inserir", "CriminosoController@inserir");
+$router->delete("/criminoso/{id}", "CriminosoController@deletar");
+$router->patch("/criminoso/{id}", "CriminosoController@alterar");
+
 $router->get("/acusacao/{id}", "AcusacaoController@mostrarPorId");
 $router->get("/acusacao", "AcusacaoController@mostrarTodos");
 $router->post("/acusacao/inserir", "AcusacaoController@inserir");

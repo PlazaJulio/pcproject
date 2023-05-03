@@ -53,3 +53,9 @@ $router->get("/endereco", "EnderecoController@mostrarTodos");
 $router->post("/endereco/inserir", "EnderecoController@inserir");
 $router->delete("/endereco/{id}", "EnderecoController@deletar");
 $router->patch("/endereco/{id}", "EnderecoController@alterar");
+
+$router->get("/antecedente/{id}", "AntecedenteController@mostrarPorId");
+$router->get("/antecedente", "AntecedenteController@mostrarTodos");
+$router->post("/antecedente/inserir", "AntecedenteController@inserir");
+$router->delete("/antecedente/{id}", "AntecedenteController@deletar");
+$router->patch("/antecedente/{id}", "AntecedenteController@alterar");

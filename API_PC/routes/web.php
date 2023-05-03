@@ -59,3 +59,15 @@ $router->get("/antecedente", "AntecedenteController@mostrarTodos");
 $router->post("/antecedente/inserir", "AntecedenteController@inserir");
 $router->delete("/antecedente/{id}", "AntecedenteController@deletar");
 $router->patch("/antecedente/{id}", "AntecedenteController@alterar");
+
+$router->get("/marca/{id}", "MarcaController@mostrarPorId");
+$router->get("/marca", "MarcaController@mostrarTodos");
+$router->post("/marca/inserir", "MarcaController@inserir");
+$router->delete("/marca/{id}", "MarcaController@deletar");
+$router->patch("/marca/{id}", "MarcaController@alterar");
+
+$router->get("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@mostrarPorId");
+$router->get("/tipo-de-tatuagem", "TipoDeTatuagemController@mostrarTodos");
+$router->post("/tipo-de-tatuagem/inserir", "TipoDeTatuagemController@inserir");
+$router->delete("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@deletar");
+$router->patch("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@alterar");

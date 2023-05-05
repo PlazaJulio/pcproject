@@ -71,3 +71,9 @@ $router->get("/tipo-de-tatuagem", "TipoDeTatuagemController@mostrarTodos");
 $router->post("/tipo-de-tatuagem/inserir", "TipoDeTatuagemController@inserir");
 $router->delete("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@deletar");
 $router->patch("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@alterar");
+
+$router->get("/usuario/{id}", "UsuarioController@mostrarPorId");
+$router->get("/usuario", "UsuarioController@mostrarTodos");
+$router->post("/usuario/inserir", "UsuarioController@inserir");
+$router->delete("/usuario/{id}", "UsuarioController@deletar");
+$router->patch("/usuario/{id}", "UsuarioController@alterar");

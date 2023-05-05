@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('usuario');
             $table->string('senha');
             $table->string('nome');
+            $table->boolean('permissao_de_escrita');
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
         });

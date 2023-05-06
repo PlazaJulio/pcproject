@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('usuario', function (Blueprint $table) {
             $table->id();
             $table->string('usuario');
-            $table->string('senha');
+            $table->string('password');
             $table->string('nome');
             $table->boolean('permissao_de_escrita');
             $table->timestamp('criado_em')->useCurrent();

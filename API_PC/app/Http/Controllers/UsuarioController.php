@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Hash;
 use Exception;
+
 
 class UsuarioController extends Controller
 {
@@ -30,7 +31,7 @@ class UsuarioController extends Controller
                 "usuario" => $request->usuario,
                 "nome" => $request->nome,
                 'permissao_de_escrita' => $request->permissao_de_escrita,
-                "senha" => $request->senha
+                "password" => Hash::make($request->password)
                 
             ]);
         }catch(Exception){
@@ -49,9 +50,24 @@ class UsuarioController extends Controller
     {
         $dadoASerAlterado = Usuario::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
-            $dadoASerAlterado->update([$chave => $valor]);
+            if($chave == "password"){
+                $dadoASerAlterado->update([$chave => Hash::make($valor)]);
+            }
+            else
+            {
+                $dadoASerAlterado->update([$chave => $valor]);
+            }    
+            
         }
         return $dadoASerAlterado;
     }
+
+    public function eu()
+    {
+        return response()->json(
+            auth()->user()
+        );
+    }
+
     
 }

@@ -77,7 +77,8 @@ $app->configure('app');
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'admin' => App\Http\Middleware\EhUsuarioAdmin::class
+    'admin' => App\Http\Middleware\EhUsuarioAdmin::class,
+    'pode_alterar' => App\Http\Middleware\PodeFazerAlteracoesNoBanco::class
 ]);
 
 /*

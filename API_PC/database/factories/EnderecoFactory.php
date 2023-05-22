@@ -20,6 +20,7 @@ class EnderecoFactory extends Factory
             'bairro' => $this->faker->name,
             'numero' => $this->faker->numberBetween(0, 1000),
             'complemento' => $this->faker->randomElement(['Bloco A', 'Bloco B', 'Bloco C', null]),
+            'usuario_id' => 1
         ];
     }
 }

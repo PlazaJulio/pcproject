@@ -5,7 +5,7 @@
 ## Integrantes:
 
 - Responsável pela equipe:
-  - Luiz Hilario
+  - Luis Hilário Tobler Garcia
 
 - Estagiários:
   - Igor Rafael de Sousa (R.A: 607568)

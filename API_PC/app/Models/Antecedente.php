@@ -15,7 +15,7 @@ class Antecedente extends Model
     }
 
     protected $table = 'antecedente';
-    protected $fillable = ['local','data','hora','descricao','acusacao_id','criminoso_id'];
+    protected $fillable = ['local','data','hora','descricao','acusacao_id','criminoso_id', 'usuario_id'];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';
 }

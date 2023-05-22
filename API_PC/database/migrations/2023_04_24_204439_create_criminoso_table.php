@@ -21,8 +21,8 @@ return new class extends Migration
             $table->date('data_de_nascimento');
             $table->boolean('obito');
             $table->boolean('foragido');
-            $table->string('rg');
-            $table->string('cpf');
+            $table->string('rg')->unique();
+            $table->string('cpf')->unique();
             $table->string('naturalidade');
             $table->string('nacionalidade');
 

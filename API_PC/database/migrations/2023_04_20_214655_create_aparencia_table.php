@@ -29,6 +29,8 @@ return new class extends Migration
             $table->foreign('cor_dos_olhos_id')->references('id')->on('cor_dos_olhos');
             $table->unsignedBigInteger('porte_fisico_id');
             $table->foreign('porte_fisico_id')->references('id')->on('porte_fisico');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuario');
 
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);

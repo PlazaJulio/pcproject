@@ -36,7 +36,8 @@ class AparenciaController extends Controller
                 "porte_fisico_id" => $request->porte_fisico_id,
                 "foto_de_perfil_esquerdo" => $request->foto_de_perfil_esquerdo,
                 "foto_de_perfil_direito" => $request->foto_de_perfil_direito,
-                "foto_de_frente" => $request->foto_de_frente
+                "foto_de_frente" => $request->foto_de_frente,
+                "usuario_id" => $request->usuario_id
             ]);
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);

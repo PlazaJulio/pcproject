@@ -10,6 +10,7 @@ class RodeUmaVezSeeder extends Seeder
     {
         $this->call(
             [
+                UsuarioSeeder::class,
                 AcusacaoSeeder::class, 
                 CorDeCabeloSeeder::class, 
                 CorDosOlhosSeeder::class,
@@ -20,7 +21,6 @@ class RodeUmaVezSeeder extends Seeder
                 TipoDeTatuagemSeeder::class,
                 EstadoCivilSeeder::class,
                 GrauDeEscolaridadeSeeder::class,
-                UsuarioSeeder::class
             ]
         );
     }

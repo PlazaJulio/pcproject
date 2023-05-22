@@ -26,7 +26,8 @@ class EnderecoController extends Controller
                 "rua" => $request->rua,
                 "bairro" => $request->bairro,
                 "numero" => $request->numero,
-                "complemento" => $request->complemento
+                "complemento" => $request->complemento,
+                "usuario_id" => $request->usuario_id
             ]);
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);

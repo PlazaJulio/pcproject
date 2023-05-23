@@ -33,7 +33,8 @@ class Criminoso extends Model
                            'profissao',
                            'genero_id',
                            'endereco_id',
-                           'aparencia_id'];
+                           'aparencia_id',
+                           'excluido'];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';
 }

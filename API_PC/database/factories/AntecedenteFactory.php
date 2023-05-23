@@ -24,7 +24,8 @@ class AntecedenteFactory extends Factory
             'descricao' => $this->faker->sentence,
             'acusacao_id' => random_int(1, 5),
             'criminoso_id' => random_int(1, 10),
-            'usuario_id' => 1
+            'usuario_id' => 1,
+            'excluido' => false
         ];
     }
 }

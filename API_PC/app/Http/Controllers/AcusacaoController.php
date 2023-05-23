@@ -28,7 +28,8 @@ class AcusacaoController extends Controller
         try{
             return Acusacao::create([
                 "tipo" => $request->tipo,
-                "usuario_id" => $request->usuario_id
+                "usuario_id" => $request->usuario_id, 
+                "excluido" => false
             ]);
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);

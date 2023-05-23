@@ -23,6 +23,7 @@ class MarcaFactory extends Factory
             'foto' => $this->faker->sentence,
             'tipo_de_tatuagem_id' => ($cOuT == 't')? random_int(1, 5): null,
             'aparencia_id' => random_int(1, 10),
+            'usuario_id' => 1
         ];
     }
 }

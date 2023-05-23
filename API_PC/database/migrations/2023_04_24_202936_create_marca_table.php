@@ -24,6 +24,8 @@ return new class extends Migration
             $table->unsignedBigInteger('aparencia_id');
             $table->foreign('aparencia_id')->references('id')->on('aparencia');
 
+            $table->boolean('excluido');
+
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuario');
 

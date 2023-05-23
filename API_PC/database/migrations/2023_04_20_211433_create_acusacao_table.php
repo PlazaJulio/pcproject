@@ -17,6 +17,7 @@ return new class extends Migration
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
             $table->unsignedBigInteger('usuario_id');
+            $table->boolean('excluido');
             $table->foreign('usuario_id')->references('id')->on('usuario');
         });
     }

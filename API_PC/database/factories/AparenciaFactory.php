@@ -24,7 +24,8 @@ class AparenciaFactory extends Factory
             'foto_de_perfil_esquerdo' => Str::random(5),
             'foto_de_perfil_direito' => Str::random(5),
             'foto_de_frente' => Str::random(5),
-            "usuario_id" => 1
+            "usuario_id" => 1,
+            'excluido' => false
         ];
     }
 }

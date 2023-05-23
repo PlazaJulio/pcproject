@@ -9,7 +9,7 @@ use Database\Factories\EnderecoFactory;
 class Endereco extends Model
 {
     protected $table = 'endereco';
-    protected $fillable = ['cep','rua','bairro','numero','complemento', 'usuario_id'];
+    protected $fillable = ['cep','rua','bairro','numero','complemento', 'usuario_id','excluido'];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';
 

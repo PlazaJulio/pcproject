@@ -47,6 +47,7 @@ class CriminosoController extends Controller
                 "genero_id" => $request->genero_id,
                 "endereco_id" => $request->endereco_id,
                 "aparencia_id" => $request->aparencia_id,
+                "excluido" => false,
                 "usuario_id" => $request->usuario_id
                 
             ]);

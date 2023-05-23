@@ -34,6 +34,7 @@ class Criminoso extends Model
                            'genero_id',
                            'endereco_id',
                            'aparencia_id',
+                           'excluido',
                            'usuario_id'];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';

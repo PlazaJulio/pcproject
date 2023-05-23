@@ -22,6 +22,7 @@ class TipoDeTatuagemController extends Controller
         try{
             return TipoDeTatuagem::create([
                 "tipo" => $request->tipo,
+                "usuario_id" => $request->usuario_id
             ]);
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);

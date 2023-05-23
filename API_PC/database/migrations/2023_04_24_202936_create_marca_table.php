@@ -24,6 +24,9 @@ return new class extends Migration
             $table->unsignedBigInteger('aparencia_id');
             $table->foreign('aparencia_id')->references('id')->on('aparencia');
 
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuario');
+
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
         });

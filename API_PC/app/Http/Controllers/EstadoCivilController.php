@@ -14,12 +14,15 @@ class EstadoCivilController extends Controller
     
     public function mostrarPorId($id)
     {
-        return EstadoCivil::findOrFail($id);
+        return EstadoCivil::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return EstadoCivil::where('excluido', false);
+        return EstadoCivil::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)

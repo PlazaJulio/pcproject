@@ -13,12 +13,15 @@ class GrauDeEscolaridadeController extends Controller
     
     public function mostrarPorId($id)
     {
-        return GrauDeEscolaridade::findOrFail($id);
+        return GrauDeEscolaridade::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return GrauDeEscolaridade::where('excluido', false);
+        return GrauDeEscolaridade::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)

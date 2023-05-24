@@ -18,7 +18,7 @@ class GrauDeEscolaridadeController extends Controller
 
     public function mostrarTodos()
     {
-        return GrauDeEscolaridade::all();
+        return GrauDeEscolaridade::where('excluido', false);
     }
 
     public function inserir(Request $request)

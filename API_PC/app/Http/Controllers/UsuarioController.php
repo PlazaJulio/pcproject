@@ -21,7 +21,7 @@ class UsuarioController extends Controller
 
     public function mostrarTodos()
     {
-        return Usuario::all();
+        return Usuario::where('excluido', false);
     }
 
     public function inserir(Request $request)

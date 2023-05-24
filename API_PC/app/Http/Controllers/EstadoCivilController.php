@@ -19,7 +19,7 @@ class EstadoCivilController extends Controller
 
     public function mostrarTodos()
     {
-        return EstadoCivil::all();
+        return EstadoCivil::where('excluido', false);
     }
 
     public function inserir(Request $request)

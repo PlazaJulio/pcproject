@@ -56,6 +56,14 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/cor-dos-olhos/inserir", "CorDosOlhosController@inserir");
         $router->delete("/cor-dos-olhos/{id}", "CorDosOlhosController@deletar");
         $router->patch("/cor-dos-olhos/{id}", "CorDosOlhosController@alterar");
+        
+        $router->post("/grau-de-escolaridade/inserir", "GrauDeEscolaridadeController@inserir");
+        $router->delete("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@deletar");
+        $router->patch("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@alterar");
+
+        $router->post("/estado-civil/inserir", "EstadoCivilController@inserir");
+        $router->delete("/estado-civil/{id}", "EstadoCivilController@deletar");
+        $router->patch("/estado-civil/{id}", "EstadoCivilController@alterar");
     });
     
     $router->group(['middleware' => 'admin'], function ($router){

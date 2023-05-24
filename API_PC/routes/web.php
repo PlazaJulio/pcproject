@@ -40,6 +40,14 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/tipo-de-tatuagem/inserir", "TipoDeTatuagemController@inserir");
         $router->delete("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@deletar");
         $router->patch("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@alterar");
+
+        $router->post("/cor/inserir", "CorController@inserir");
+        $router->delete("/cor/{id}", "CorController@deletar");
+        $router->patch("/cor/{id}", "CorController@alterar");
+
+        $router->post("/genero/inserir", "GeneroController@inserir");
+        $router->delete("/genero/{id}", "GeneroController@deletar");
+        $router->patch("/genero/{id}", "GeneroController@alterar");
     });
     
     $router->group(['middleware' => 'admin'], function ($router){

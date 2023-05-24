@@ -41,8 +41,8 @@ class CriminosoFactory extends Factory
             'genero_id' => random_int(1, 3),
             'endereco_id' => random_int(1, 10),
             'aparencia_id' => random_int(1, 10),
-            'excluido' => false,
-            'usuario_id' => 1
+            'usuario_id' => 1,
+            'excluido' => false
         ];
     }
 }

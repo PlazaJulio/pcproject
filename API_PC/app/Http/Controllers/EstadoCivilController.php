@@ -38,7 +38,7 @@ class EstadoCivilController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = EstadoCivil::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

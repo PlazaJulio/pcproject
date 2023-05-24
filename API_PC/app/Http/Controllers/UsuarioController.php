@@ -42,7 +42,7 @@ class UsuarioController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Usuario::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

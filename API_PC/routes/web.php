@@ -41,6 +41,22 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->delete("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@deletar");
         $router->patch("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@alterar");
 
+        $router->post("/cor/inserir", "CorController@inserir");
+        $router->delete("/cor/{id}", "CorController@deletar");
+        $router->patch("/cor/{id}", "CorController@alterar");
+
+        $router->post("/genero/inserir", "GeneroController@inserir");
+        $router->delete("/genero/{id}", "GeneroController@deletar");
+        $router->patch("/genero/{id}", "GeneroController@alterar");
+
+        $router->post("/porte-fisico/inserir", "PorteFisicoController@inserir");
+        $router->delete("/porte-fisico/{id}", "PorteFisicoController@deletar");
+        $router->patch("/porte-fisico/{id}", "PorteFisicoController@alterar");
+
+        $router->post("/cor-dos-olhos/inserir", "CorDosOlhosController@inserir");
+        $router->delete("/cor-dos-olhos/{id}", "CorDosOlhosController@deletar");
+        $router->patch("/cor-dos-olhos/{id}", "CorDosOlhosController@alterar");
+        
         $router->post("/grau-de-escolaridade/inserir", "GrauDeEscolaridadeController@inserir");
         $router->delete("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@deletar");
         $router->patch("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@alterar");

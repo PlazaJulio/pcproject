@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Exception;
 use App\Models\CorDosOlhos;
 
 class CorDosOlhosController extends Controller

@@ -20,9 +20,12 @@ return new class extends Migration
 
             $table->unsignedBigInteger('tipo_de_tatuagem_id')->nullable('true');
             $table->foreign('tipo_de_tatuagem_id')->references('id')->on('tipo_de_tatuagem');
-            
             $table->unsignedBigInteger('aparencia_id');
             $table->foreign('aparencia_id')->references('id')->on('aparencia');
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuario');
+
+            $table->boolean('excluido');
 
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);

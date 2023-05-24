@@ -31,8 +31,8 @@ class UsuarioController extends Controller
                 "usuario" => $request->usuario,
                 "nome" => $request->nome,
                 'permissao_de_escrita' => $request->permissao_de_escrita,
-                "password" => Hash::make($request->password)
-                
+                "password" => Hash::make($request->password),
+                "excluido" => false
             ]);
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);

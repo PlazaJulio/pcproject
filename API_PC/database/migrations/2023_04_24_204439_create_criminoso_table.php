@@ -40,7 +40,11 @@ return new class extends Migration
             $table->foreign('endereco_id')->references('id')->on('endereco');
             $table->unsignedBigInteger('aparencia_id');
             $table->foreign('aparencia_id')->references('id')->on('aparencia');
-            
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuario');
+
+            $table->boolean('excluido');
+
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
         });

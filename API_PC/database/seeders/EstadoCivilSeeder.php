@@ -16,26 +16,31 @@ class EstadoCivilSeeder extends Seeder
         $estadoUm = new EstadoCivil;
         $estadoUm->estado = "solteiro";
         $estadoUm->usuario_id = 1;
+        $estadoUm->excluido = false;
         $estadoUm->save();
 
         $estadoDois = new EstadoCivil;
         $estadoDois->estado = "casado";
         $estadoDois->usuario_id = 1;
+        $estadoDois->excluido = false;
         $estadoDois->save();
 
         $estadoTres = new EstadoCivil;
         $estadoTres->estado = "separado";
         $estadoTres->usuario_id = 1;
+        $estadoTres->excluido = false;
         $estadoTres->save();
 
         $estadoQuatro = new EstadoCivil;
         $estadoQuatro->estado = "divorciado";
         $estadoQuatro->usuario_id = 1;
+        $estadoQuatro->excluido = false;
         $estadoQuatro->save();
 
         $estadoCinco = new EstadoCivil;
         $estadoCinco->estado = "viúvo";
         $estadoCinco->usuario_id = 1;
+        $estadoCinco->excluido = false;
         $estadoCinco->save();
     }
 }

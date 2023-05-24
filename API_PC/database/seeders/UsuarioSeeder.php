@@ -19,6 +19,7 @@ class UsuarioSeeder extends Seeder
         $usuario->usuario = "admin";
         $usuario->permissao_de_escrita = true;
         $usuario->password = Hash::make("123");
+        $usuario->excluido = false;
         $usuario->save();
     }
 }

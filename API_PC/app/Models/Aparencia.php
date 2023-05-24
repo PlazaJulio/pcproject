@@ -26,7 +26,8 @@ class Aparencia extends Model
                            'foto_de_perfil_esquerdo', 
                            'foto_de_perfil_direito', 
                            'foto_de_frente',
-                           'usuario_id'];
+                           'usuario_id',
+                           'excluido'];
                            
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';

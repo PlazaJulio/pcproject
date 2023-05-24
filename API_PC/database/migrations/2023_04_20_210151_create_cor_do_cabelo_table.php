@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('cor_do_cabelo', function (Blueprint $table) {
             $table->id();
             $table->string("cor");
+
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('usuario');
+            
+            $table->boolean('excluido');
+
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);
         });

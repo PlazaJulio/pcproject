@@ -16,12 +16,15 @@ class UsuarioController extends Controller
     }
     public function mostrarPorId($id)
     {
-        return Usuario::findOrFail($id);
+        return Usuario::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Usuario::all();
+        return Usuario::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -42,7 +45,7 @@ class UsuarioController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Usuario::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

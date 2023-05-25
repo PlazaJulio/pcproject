@@ -44,7 +44,7 @@ class AparenciaController extends Controller
                 "excluido" => false
             ]);
         }catch(Exception){
-            return response("Requisição feita de maneira incorreta", 400);
+            return response("", 400);
         }
     }
 

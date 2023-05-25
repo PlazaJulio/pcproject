@@ -12,7 +12,7 @@ class EnderecoController extends Controller
     {
         return Endereco::where('id', $id)->where('excluido', false)->firstOr(
             function() {
-                return response("Nenhum dado foi encontrado!", 404);
+                return response("", 404);
         });
     }
 

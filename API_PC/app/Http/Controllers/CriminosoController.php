@@ -18,7 +18,7 @@ class CriminosoController extends Controller
     {
         return Criminoso::where('id', $id)->where('excluido', false)->firstOr(
             function() {
-                return response("Nenhum dado foi encontrado!", 404);
+                return response("", 404);
         });
     }
 

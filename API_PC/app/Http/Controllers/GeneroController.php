@@ -20,7 +20,7 @@ class GeneroController extends Controller
     {
         return Genero::where('id', $id)->where('excluido', false)->firstOr(
             function() {
-                return response("Nenhum dado foi encontrado!", 404);
+                return response("", 404);
         });
     }
 

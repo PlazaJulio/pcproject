@@ -18,12 +18,15 @@ class GeneroController extends Controller
     
     public function mostrarPorId($id)
     {
-        return Genero::findOrFail($id);
+        return Genero::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("Nenhum dado foi encontrado!", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Genero::all();
+        return Genero::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -42,7 +45,7 @@ class GeneroController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Genero::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

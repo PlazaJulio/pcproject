@@ -37,7 +37,7 @@ class AparenciaController extends Controller
                 "foto_de_perfil_esquerdo" => $request->foto_de_perfil_esquerdo,
                 "foto_de_perfil_direito" => $request->foto_de_perfil_direito,
                 "foto_de_frente" => $request->foto_de_frente,
-                "usuario_id" => $request->usuario_id,
+                "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
         }catch(Exception){

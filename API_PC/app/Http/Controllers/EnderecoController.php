@@ -27,7 +27,7 @@ class EnderecoController extends Controller
                 "bairro" => $request->bairro,
                 "numero" => $request->numero,
                 "complemento" => $request->complemento,
-                "usuario_id" => $request->usuario_id,
+                "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
         }catch(Exception){

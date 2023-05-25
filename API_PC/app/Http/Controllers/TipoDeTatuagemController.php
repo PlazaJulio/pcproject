@@ -22,7 +22,7 @@ class TipoDeTatuagemController extends Controller
         try{
             return TipoDeTatuagem::create([
                 "tipo" => $request->tipo,
-                "usuario_id" => $request->usuario_id,
+                "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
         }catch(Exception){

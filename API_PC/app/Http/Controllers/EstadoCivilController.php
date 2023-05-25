@@ -16,7 +16,7 @@ class EstadoCivilController extends Controller
     {
         return EstadoCivil::where('id', $id)->where('excluido', false)->firstOr(
             function() {
-                return response("", 404);
+                return response("Nenhum dado foi encontrado!", 404);
         });
     }
 

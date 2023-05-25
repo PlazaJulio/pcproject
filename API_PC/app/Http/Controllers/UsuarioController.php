@@ -18,7 +18,7 @@ class UsuarioController extends Controller
     {
         return Usuario::where('id', $id)->where('excluido', false)->firstOr(
             function() {
-                return response("", 404);
+                return response("Nenhum dado foi encontrado!", 404);
         });
     }
 

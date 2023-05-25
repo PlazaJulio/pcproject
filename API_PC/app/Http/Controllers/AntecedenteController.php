@@ -16,12 +16,15 @@ class AntecedenteController extends Controller
     }
     public function mostrarPorId($id)
     {
-        return Antecedente::findOrFail($id);
+        return Antecedente::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("Nenhum dado foi encontrado!", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Antecedente::all();
+        return Antecedente::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -45,7 +48,7 @@ class AntecedenteController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Antecedente::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

@@ -15,12 +15,15 @@ class AcusacaoController extends Controller
     }
     public function mostrarPorId($id)
     {
-        return Acusacao::findOrFail($id);
+        return Acusacao::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("Nenhum dado foi encontrado!", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Acusacao::all();
+        return Acusacao::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -39,7 +42,7 @@ class AcusacaoController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Acusacao::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

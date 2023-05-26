@@ -9,12 +9,15 @@ class MarcaController extends Controller
 {
     public function mostrarPorId($id)
     {
-        return Marca::findOrFail($id);
+        return Marca::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Marca::all();
+        return Marca::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -39,7 +42,7 @@ class MarcaController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Marca::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

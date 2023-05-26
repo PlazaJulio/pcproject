@@ -6,7 +6,9 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('/autorizacao/login', 'AutorizacaoController@login');
+$router->post('/autorizacao/login', 'AutorizacaoController@login');$router->post("/antecedente/inserir", "AntecedenteController@inserir");
+        $router->delete("/antecedente/{id}", "AntecedenteController@deletar");
+        $router->patch("/antecedente/{id}", "AntecedenteController@alterar");
 
 $router->group(['middleware' => 'auth:api'], function ($router) {
     $router->post('/autorizacao/logout', 'AutorizacaoController@logout');
@@ -29,9 +31,7 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->delete("/endereco/{id}", "EnderecoController@deletar");
         $router->patch("/endereco/{id}", "EnderecoController@alterar");
         
-        $router->post("/antecedente/inserir", "AntecedenteController@inserir");
-        $router->delete("/antecedente/{id}", "AntecedenteController@deletar");
-        $router->patch("/antecedente/{id}", "AntecedenteController@alterar");
+        
         
         $router->post("/marca/inserir", "MarcaController@inserir");
         $router->delete("/marca/{id}", "MarcaController@deletar");
@@ -82,9 +82,15 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
 
     $router->get("/cor-do-cabelo/{id}", "CorDoCabeloController@mostrarPorId");
     $router->get("/cor-do-cabelo", "CorDoCabeloController@mostrarTodos");
+    $router->post("/cor-do-cabelo/inserir", "CorDoCabeloController@inserir");
+    $router->delete("/cor-do-cabelo/{id}", "CorDoCabeloController@deletar");
+    $router->patch("/cor-do-cabelo/{id}", "CorDoCabeloController@alterar");
 
     $router->get("/tipo-de-cabelo/{id}", "TipoDeCabeloController@mostrarPorId");
     $router->get("/tipo-de-cabelo", "TipoDeCabeloController@mostrarTodos");
+    $router->post("/tipo-de-cabelo", "TipoDeCabeloController@inserir");
+    $router->delete("/tipo-de-cabelo/{id}", "TipoDeCabeloController@deletar");
+    $router->patch("/tipo-de-cabelo/{id}", "TipoDeCabeloController@alterar");
 
     $router->get("/porte-fisico/{id}", "PorteFisicoController@mostrarPorId");
     $router->get("/porte-fisico", "PorteFisicoController@mostrarTodos");

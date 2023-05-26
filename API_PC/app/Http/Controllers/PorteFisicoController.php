@@ -16,12 +16,15 @@ class PorteFisicoController extends Controller
     
     public function mostrarPorId($id)
     {
-        return PorteFisico::findOrFail($id);
+        return PorteFisico::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return PorteFisico::all();
+        return PorteFisico::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -40,7 +43,7 @@ class PorteFisicoController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = PorteFisico::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

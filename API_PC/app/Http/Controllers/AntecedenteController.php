@@ -37,7 +37,7 @@ class AntecedenteController extends Controller
                 "descricao" => $request->descricao,
                 "acusacao_id" => $request->acusacao_id,
                 "criminoso_id" => $request->criminoso_id,
-                "usuario_id" => $request->usuario_id,
+                "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
         }catch(Exception){

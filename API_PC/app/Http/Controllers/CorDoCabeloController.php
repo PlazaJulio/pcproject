@@ -28,8 +28,8 @@ class CorDoCabeloController extends Controller
     {   
         try{
             return CorDoCabelo::create([
-                "tipo" => $request->local,
-                "usuario_id" => $request->usuario_id,
+                "cor" => $request->cor,
+                "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
         }catch(Exception){

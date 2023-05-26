@@ -28,8 +28,8 @@ class TipoDeCabeloController extends Controller
     {   
         try{
             return TipoDeCabelo::create([
-                "tipo" => $request->local,
-                "usuario_id" => $request->usuario_id,
+                "tipo" => $request->tipo,
+                "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
         }catch(Exception){

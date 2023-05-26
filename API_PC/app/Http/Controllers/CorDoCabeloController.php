@@ -16,12 +16,15 @@ class CorDoCabeloController extends Controller
     
     public function mostrarPorId($id)
     {
-        return CorDoCabelo::findOrFail($id);
+        return CorDoCabelo::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return CorDoCabelo::all();
+        return CorDoCabelo::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -40,7 +43,7 @@ class CorDoCabeloController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = CorDoCabelo::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

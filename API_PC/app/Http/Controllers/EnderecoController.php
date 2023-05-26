@@ -10,12 +10,15 @@ class EnderecoController extends Controller
 {
     public function mostrarPorId($id)
     {
-        return Endereco::findOrFail($id);
+        return Endereco::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Endereco::all();
+        return Endereco::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -38,7 +41,7 @@ class EnderecoController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Endereco::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

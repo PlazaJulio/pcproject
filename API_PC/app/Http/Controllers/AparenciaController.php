@@ -15,12 +15,15 @@ class AparenciaController extends Controller
     }
     public function mostrarPorId($id)
     {
-        return Aparencia::findOrFail($id);
+        return Aparencia::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("Nenhum dado foi encontrado!", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Aparencia::all();
+        return Aparencia::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -41,14 +44,14 @@ class AparenciaController extends Controller
                 "excluido" => false
             ]);
         }catch(Exception){
-            return response("Requisição feita de maneira incorreta", 400);
+            return response("", 400);
         }
     }
 
     public function deletar($id)
     {
         $dadoExcluido = Aparencia::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

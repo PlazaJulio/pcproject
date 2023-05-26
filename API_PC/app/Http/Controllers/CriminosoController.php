@@ -16,12 +16,15 @@ class CriminosoController extends Controller
     }
     public function mostrarPorId($id)
     {
-        return Criminoso::findOrFail($id);
+        return Criminoso::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Criminoso::all();
+        return Criminoso::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -59,7 +62,7 @@ class CriminosoController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = Criminoso::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

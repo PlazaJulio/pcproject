@@ -16,12 +16,15 @@ class TipoDeCabeloController extends Controller
     
     public function mostrarPorId($id)
     {
-        return TipoDeCabelo::findOrFail($id);
+        return TipoDeCabelo::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return TipoDeCabelo::all();
+        return TipoDeCabelo::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -40,7 +43,7 @@ class TipoDeCabeloController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = TipoDeCabelo::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Models\CorDoCabelo;
+
+use Exception;
 
 class CorDoCabeloController extends Controller
 {
@@ -12,11 +16,43 @@ class CorDoCabeloController extends Controller
     
     public function mostrarPorId($id)
     {
-        return CorDoCabelo::findOrFail($id);
+        return CorDoCabelo::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return CorDoCabelo::all();
+        return CorDoCabelo::all()->where('excluido', false);
+    }
+
+    public function inserir(Request $request)
+    {   
+        try{
+            return CorDoCabelo::create([
+                "cor" => $request->cor,
+                "usuario_id" => auth()->user()->id,
+                "excluido" => false
+            ]);
+        }catch(Exception){
+            return response("Requisição feita de maneira incorreta", 400);
+        }
+    }
+
+    public function deletar($id)
+    {
+        $dadoExcluido = CorDoCabelo::findOrFail($id);
+        $dadoExcluido->update(["excluido" => true]);
+        return $dadoExcluido;
+    }
+
+    public function alterar($id, Request $request)
+    {
+        $dadoASerAlterado = CorDoCabelo::findOrFail($id);
+        foreach ($request->except('_token') as $chave => $valor){
+            $dadoASerAlterado->update([$chave => $valor]);
+        }
+        return $dadoASerAlterado;
     }
 }

@@ -9,12 +9,15 @@ class TipoDeTatuagemController extends Controller
 {
     public function mostrarPorId($id)
     {
-        return TipoDeTatuagem::findOrFail($id);
+        return TipoDeTatuagem::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return TipoDeTatuagem::all();
+        return TipoDeTatuagem::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -33,7 +36,7 @@ class TipoDeTatuagemController extends Controller
     public function deletar($id)
     {
         $dadoExcluido = TipoDeTatuagem::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

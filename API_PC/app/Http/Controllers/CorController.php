@@ -17,12 +17,15 @@ class CorController extends Controller
     
     public function mostrarPorId($id)
     {
-        return Cor::findOrFail($id);
+        return Cor::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return Cor::all();
+        return Cor::all()->where('excluido', false);
     }
 
     public function inserir(Request $request)
@@ -34,14 +37,14 @@ class CorController extends Controller
                 "excluido" => false
             ]);
         }catch(Exception){
-            return response("Requisição feita de maneira incorreta", 400);
+            return response("", 400);
         }
     }
 
     public function deletar($id)
     {
         $dadoExcluido = Cor::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

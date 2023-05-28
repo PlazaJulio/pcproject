@@ -65,6 +65,14 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/estado-civil/inserir", "EstadoCivilController@inserir");
         $router->delete("/estado-civil/{id}", "EstadoCivilController@deletar");
         $router->patch("/estado-civil/{id}", "EstadoCivilController@alterar");
+
+        $router->post("/tipo-de-cabelo/inserir", "TipoDeCabeloController@inserir");
+        $router->delete("/tipo-de-cabelo/{id}", "TipoDeCabeloController@deletar");
+        $router->patch("/tipo-de-cabelo/{id}", "TipoDeCabeloController@alterar");
+
+        $router->post("/cor-do-cabelo/inserir", "CorDoCabeloController@inserir");
+        $router->delete("/cor-do-cabelo/{id}", "CorDoCabeloController@deletar");
+        $router->patch("/cor-do-cabelo/{id}", "CorDoCabeloController@alterar");
     });
     
     $router->group(['middleware' => 'admin'], function ($router){

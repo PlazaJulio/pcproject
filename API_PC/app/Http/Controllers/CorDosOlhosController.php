@@ -16,12 +16,15 @@ class CorDosOlhosController extends Controller
     
     public function mostrarPorId($id)
     {
-        return CorDosOlhos::findOrFail($id);
+        return CorDosOlhos::where('id', $id)->where('excluido', false)->firstOr(
+            function() {
+                return response("", 404);
+        });
     }
 
     public function mostrarTodos()
     {
-        return CorDosOlhos::all();
+        return CorDosOlhos::all()->where('excluido', false);
     }
     
     public function inserir(Request $request)
@@ -33,14 +36,14 @@ class CorDosOlhosController extends Controller
                 "excluido" => false
             ]);
         }catch(Exception){
-            return response("Requisição feita de maneira incorreta", 400);
+            return response("", 400);
         }
     }
 
     public function deletar($id)
     {
         $dadoExcluido = CorDosOlhos::findOrFail($id);
-        $dadoExcluido->delete();
+        $dadoExcluido->update(["excluido" => true]);
         return $dadoExcluido;
     }
 

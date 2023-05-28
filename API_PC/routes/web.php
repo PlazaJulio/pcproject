@@ -20,6 +20,7 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/criminoso/inserir", "CriminosoController@inserir");
         $router->delete("/criminoso/{id}", "CriminosoController@deletar");
         $router->patch("/criminoso/{id}", "CriminosoController@alterar");
+        $router->post("/criminoso/filtragem", "CriminosoController@mostrarDadosComFiltroDinamico");
         
         $router->post("/acusacao/inserir", "AcusacaoController@inserir");
         $router->delete("/acusacao/{id}", "AcusacaoController@deletar");

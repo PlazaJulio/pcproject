@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Criminoso;
+use App\Helpers\Converter;
 
 use Exception;
 
@@ -14,6 +15,58 @@ class CriminosoController extends Controller
     {
         //
     }
+
+    private static function jaFezJoinComTabelaAparencia(&$jaFezJoin, $criminosos){
+        if(!$jaFezJoin){
+            $criminosos->join("aparencia", "criminoso.aparencia_id", "=", "aparencia.id");
+            $jaFezJoin = true;
+        }
+    }
+    public function mostrarDadosComFiltroDinamico(Request $request)
+    {
+        $criminosos = Criminoso::query();
+        $jaFezJoin = false;
+        foreach ($request->except('_token') as $chave => $valor){
+            if($chave == "usuario_id"){
+                continue;
+            }
+            else if($chave == "excluido"){
+                continue;
+            }
+            else if($chave == "nome" || $chave == "alcunha" || $chave == "pai" || $chave == "mae"){
+                $criminosos->where($chave, "LIKE", "%". $valor ."%");
+            }
+            else if ($chave == "idade_minima" || $chave == "idade_maxima"){
+                if($request->idade_minima != null && $request->idade_maxima != null){
+                    $maiorData = Converter::idadeEmDataDeNascimentoMax($request->idade_minima);
+                    $menorData = Converter::idadeEmDataDeNascimentoMin($request->idade_maxima);
+                    $criminosos = $criminosos->whereBetween('data_de_nascimento', [$menorData, $maiorData]);
+                }
+                continue;
+            }
+            else if ($chave == "etnia") { 
+                $this->jaFezJoinComTabelaAparencia($jaFezJoin, $criminosos);
+                $criminosos->where("aparencia." . $chave, $valor);
+            } 
+            else if ($chave == "altura_min" || $chave == "altura_max") {
+                $this->jaFezJoinComTabelaAparencia($jaFezJoin, $criminosos);
+                if ($request->altura_max != null && $request->altura_min != null) {
+                    $criminosos->whereBetween("aparencia.altura", [$request->altura_min, $request->altura_max]);
+                }
+                continue;
+            }
+            else if ($chave == "cor_id" || $chave == "cor_do_cabelo_id" || $chave == "tipo_de_cabelo_id" ||
+            $chave == "cor_dos_olhos_id" || $chave == "porte_fisico_id"){
+                $this->jaFezJoinComTabelaAparencia($jaFezJoin, $criminosos);
+                $criminosos->where("aparencia.".$chave, $valor);
+            }
+            else{
+                $criminosos->where($chave, $valor);
+            }
+        }
+        return $criminosos->where("excluido", false)->get();
+    }
+
     public function mostrarPorId($id)
     {
         return Criminoso::findOrFail($id);

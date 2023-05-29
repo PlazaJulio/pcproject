@@ -52,6 +52,7 @@ class AparenciaController extends Controller
     {
         $dadoExcluido = Aparencia::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 
@@ -59,8 +60,13 @@ class AparenciaController extends Controller
     {
         $dadoASerAlterado = Aparencia::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
+           if($chave == "excluido" || $chave == "usuairo_id")
+           {
+                continue;
+           }
             $dadoASerAlterado->update([$chave => $valor]);
         }
+        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
         return $dadoASerAlterado;
     }
     

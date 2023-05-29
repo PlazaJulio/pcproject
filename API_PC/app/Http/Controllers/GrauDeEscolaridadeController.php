@@ -41,6 +41,7 @@ class GrauDeEscolaridadeController extends Controller
     {
         $dadoExcluido = GrauDeEscolaridade::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

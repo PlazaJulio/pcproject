@@ -53,8 +53,13 @@ class CorController extends Controller
     {
         $dadoASerAlterado = Cor::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
+           if($chave == "excluido" || $chave == "usuairo_id")
+           {
+                continue;
+           }
             $dadoASerAlterado->update([$chave => $valor]);
         }
+        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
         return $dadoASerAlterado;
     }
 }

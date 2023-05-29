@@ -46,6 +46,7 @@ class GeneroController extends Controller
     {
         $dadoExcluido = Genero::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

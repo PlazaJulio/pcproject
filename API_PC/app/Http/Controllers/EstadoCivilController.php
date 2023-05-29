@@ -42,6 +42,7 @@ class EstadoCivilController extends Controller
     {
         $dadoExcluido = EstadoCivil::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 
@@ -49,8 +50,13 @@ class EstadoCivilController extends Controller
     {
         $dadoASerAlterado = EstadoCivil::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
+           if($chave == "excluido" || $chave == "usuairo_id")
+           {
+                continue;
+           }
             $dadoASerAlterado->update([$chave => $valor]);
         }
+        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
         return $dadoASerAlterado;
     }
 }

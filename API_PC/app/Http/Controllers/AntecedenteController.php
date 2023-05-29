@@ -56,16 +56,13 @@ class AntecedenteController extends Controller
     {
         $dadoASerAlterado = Antecedente::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
-            if($chave == "excluido"){
+           if($chave == "excluido" || $chave == "usuairo_id")
+           {
                 continue;
-            }else{
-                if($chave == "usuario_id"){
-                    $dadoASerAlterado->update([$chave => auth()->user()->id]);
-                }else{
-                    $dadoASerAlterado->update([$chave => $valor]);
-                }
-            }
+           }
+            $dadoASerAlterado->update([$chave => $valor]);
         }
+        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
         return $dadoASerAlterado;
     }
     

@@ -52,6 +52,7 @@ class AparenciaController extends Controller
     {
         $dadoExcluido = Aparencia::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

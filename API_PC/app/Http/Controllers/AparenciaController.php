@@ -60,7 +60,7 @@ class AparenciaController extends Controller
     {
         $dadoASerAlterado = Aparencia::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
-           if($chave == "excluido" || $chave == "usuairo_id")
+           if($chave == "excluido" || $chave == "usuario_id")
            {
                 continue;
            }

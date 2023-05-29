@@ -42,6 +42,7 @@ class EnderecoController extends Controller
     {
         $dadoExcluido = Endereco::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

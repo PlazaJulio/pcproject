@@ -46,6 +46,7 @@ class UsuarioController extends Controller
     {
         $dadoExcluido = Usuario::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

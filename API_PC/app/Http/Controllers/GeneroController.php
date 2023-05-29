@@ -52,7 +52,7 @@ class GeneroController extends Controller
 
    public function alterar($id, Request $request)
     {
-        $dadoASerAlterado = Criminoso::findOrFail($id);
+        $dadoASerAlterado = Genero::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
            if($chave == "excluido" || $chave == "usuario_id")
            {

@@ -50,8 +50,13 @@ class AcusacaoController extends Controller
     {
         $dadoASerAlterado = Acusacao::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
+           if($chave == "excluido" || $chave == "usuairo_id")
+           {
+                continue;
+           }
             $dadoASerAlterado->update([$chave => $valor]);
         }
+        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
         return $dadoASerAlterado;
     }
     

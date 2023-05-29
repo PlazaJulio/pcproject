@@ -44,6 +44,7 @@ class CorDosOlhosController extends Controller
     {
         $dadoExcluido = CorDosOlhos::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

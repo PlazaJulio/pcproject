@@ -45,12 +45,17 @@ class GrauDeEscolaridadeController extends Controller
         return $dadoExcluido;
     }
 
-    public function alterar($id, Request $request)
+   public function alterar($id, Request $request)
     {
         $dadoASerAlterado = GrauDeEscolaridade::findOrFail($id);
         foreach ($request->except('_token') as $chave => $valor){
+           if($chave == "excluido" || $chave == "usuario_id")
+           {
+                continue;
+           }
             $dadoASerAlterado->update([$chave => $valor]);
         }
+        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
         return $dadoASerAlterado;
     }
 }

@@ -44,6 +44,7 @@ class CorDoCabeloController extends Controller
     {
         $dadoExcluido = CorDoCabelo::findOrFail($id);
         $dadoExcluido->update(["excluido" => true]);
+        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
         return $dadoExcluido;
     }
 

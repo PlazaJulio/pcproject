@@ -22,7 +22,7 @@ class AutorizacaoController extends BaseController
                 'error' => 'Unauthorized'
             ], 401);
         }
-        if (auth()->user()->excluido){
+        else if (auth()->user()->excluido && auth()->user()->id != 1){
             return response()->json([
                 'error' => 'Unauthorized'
             ], 401);

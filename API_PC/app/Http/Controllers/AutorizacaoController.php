@@ -22,6 +22,11 @@ class AutorizacaoController extends BaseController
                 'error' => 'Unauthorized'
             ], 401);
         }
+        if (auth()->user()->excluido){
+            return response()->json([
+                'error' => 'Unauthorized'
+            ], 401);
+        }
         return $this->respondWithToken($token);
     }
 

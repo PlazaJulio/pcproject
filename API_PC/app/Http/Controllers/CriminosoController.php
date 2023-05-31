@@ -37,6 +37,7 @@ class CriminosoController extends Controller
                 $criminosos->where($chave, "LIKE", "%". $valor ."%");
             }
             else if ($chave == "idade_minima" || $chave == "idade_maxima"){
+                $this->jaFezJoinComTabelaAparencia($jaFezJoin, $criminosos);
                 if($request->idade_minima != null && $request->idade_maxima != null){
                     $maiorData = Converter::idadeEmDataDeNascimentoMax($request->idade_minima);
                     $menorData = Converter::idadeEmDataDeNascimentoMin($request->idade_maxima);
@@ -64,7 +65,8 @@ class CriminosoController extends Controller
                 $criminosos->where($chave, $valor);
             }
         }
-        return $criminosos->where("excluido", false)->get();
+        $criminosos->where("criminoso.excluido", false);
+        return $criminosos->get();
     }
 
     public function mostrarPorId($id)

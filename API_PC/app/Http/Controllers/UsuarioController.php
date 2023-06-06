@@ -44,26 +44,36 @@ class UsuarioController extends Controller
 
     public function deletar($id)
     {
-        $dadoExcluido = Usuario::findOrFail($id);
-        $dadoExcluido->update(["excluido" => true]);
-        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
-        return $dadoExcluido;
+        try{
+            $dadoExcluido = Usuario::findOrFail($id);
+            $dadoExcluido->update(["excluido" => true]);
+            $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
+            return $dadoExcluido;
+        }catch(Exception){
+            return response("", 404);
+        }
     }
 
     public function alterar($id, Request $request)
-    {
-        $dadoASerAlterado = Usuario::findOrFail($id);
-        foreach ($request->except('_token') as $chave => $valor){
-            if($chave == "password"){
-                $dadoASerAlterado->update([$chave => Hash::make($valor)]);
+    {   
+        try{
+            $dadoASerAlterado = Usuario::findOrFail($id);
+            foreach ($request->except('_token') as $chave => $valor){
+                if($chave == "password"){
+                    $dadoASerAlterado->update([$chave => Hash::make($valor)]);
+                }
+                else
+                {
+                    $dadoASerAlterado->update([$chave => $valor]);
+                }    
+                
             }
-            else
-            {
-                $dadoASerAlterado->update([$chave => $valor]);
-            }    
-            
+            return $dadoASerAlterado;
+        }catch(Exception){
+            return response("", 404);
         }
-        return $dadoASerAlterado;
+        
+        
     }
 
     public function eu()

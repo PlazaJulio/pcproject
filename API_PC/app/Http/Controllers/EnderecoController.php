@@ -41,7 +41,7 @@ class EnderecoController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = Endereco::findOrFail($id);
+            $dadoExcluido = Endereco::where('excluido', false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;

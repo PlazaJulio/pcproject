@@ -42,24 +42,31 @@ class TipoDeCabeloController extends Controller
 
     public function deletar($id)
     {
-        $dadoExcluido = TipoDeCabelo::findOrFail($id);
-        $dadoExcluido->update(["excluido" => true]);
-        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
-        return $dadoExcluido;
+        try{
+            $dadoExcluido = TipoDeCabelo::findOrFail($id);
+            $dadoExcluido->update(["excluido" => true]);
+            $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
+            return $dadoExcluido;
+        }catch(Exception){
+            return response("", 404);
+        }
     }
 
     public function alterar($id, Request $request)
     {
-        $dadoASerAlterado = TipoDeCabelo::findOrFail($id);
-        foreach ($request->except('_token') as $chave => $valor){
-           if($chave == "excluido" || $chave == "usuario_id")
-           {
-                continue;
-           }
-            $dadoASerAlterado->update([$chave => $valor]);
+        try{
+            $dadoASerAlterado = TipoDeCabelo::findOrFail($id);
+            foreach ($request->except('_token') as $chave => $valor){
+                if($chave == "excluido" || $chave == "usuario_id")
+                {
+                    continue;
+                }
+                $dadoASerAlterado->update([$chave => $valor]);
+            }
+            $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
+            return $dadoASerAlterado;
+        }catch(Exception){
+            return response("", 404);
         }
-        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
-        return $dadoASerAlterado;
-    }
-    
+    }  
 }

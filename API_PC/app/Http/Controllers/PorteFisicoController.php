@@ -43,7 +43,7 @@ class PorteFisicoController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = PorteFisico::findOrFail($id);
+            $dadoExcluido = PorteFisico::where('excluido', false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;

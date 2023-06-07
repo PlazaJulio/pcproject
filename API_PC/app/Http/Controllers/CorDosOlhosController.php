@@ -43,7 +43,7 @@ class CorDosOlhosController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = CorDosOlhos::findOrFail($id);
+            $dadoExcluido = CorDosOlhos::where('excluido', false)->findOrFail($id);;
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;

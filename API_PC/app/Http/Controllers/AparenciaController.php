@@ -51,7 +51,7 @@ class AparenciaController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = Aparencia::findOrFail($id);
+            $dadoExcluido = Aparencia::where('excluido', false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;

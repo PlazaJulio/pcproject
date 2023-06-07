@@ -57,7 +57,7 @@ class UsuarioController extends Controller
     public function alterar($id, Request $request)
     {   
         try{
-            $dadoASerAlterado = Usuario::findOrFail($id);
+            $dadoASerAlterado = Usuario::where('excluido', false)->findOrFail($id);;
             foreach ($request->except('_token') as $chave => $valor){
                 if($chave == "password"){
                     $dadoASerAlterado->update([$chave => Hash::make($valor)]);

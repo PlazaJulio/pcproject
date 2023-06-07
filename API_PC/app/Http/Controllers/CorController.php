@@ -44,7 +44,7 @@ class CorController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = Cor::findOrFail($id);
+            $dadoExcluido = Cor::where('excluido', false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;
@@ -56,18 +56,18 @@ class CorController extends Controller
     public function alterar($id, Request $request)
     {
         try{
-           $dadoASerAlterado = Cor::where('excluido', false)->findOrFail($id); // Alteracao
-           foreach ($request->except('_token') as $chave => $valor){
-              if($chave == "excluido" || $chave == "usuario_id")
-              {
-                 continue;
-              }
-              $dadoASerAlterado->update([$chave => $valor]);
-           }
-           $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
-           return $dadoASerAlterado;
-           }catch(Exception){
-              return response("", 404);
+            $dadoASerAlterado = Cor::where('excluido', false)->findOrFail($id);
+            foreach ($request->except('_token') as $chave => $valor){
+                if($chave == "excluido" || $chave == "usuario_id")
+                {
+                    continue;
+                }
+                $dadoASerAlterado->update([$chave => $valor]);
+            }
+            $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
+            return $dadoASerAlterado;
+        }catch(Exception){
+            return response("", 404);
         }
     }
 }

@@ -45,7 +45,7 @@ class GeneroController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = Genero::findOrFail($id);
+            $dadoExcluido = Genero::where('excluido', false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;

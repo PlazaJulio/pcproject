@@ -52,7 +52,7 @@ class GrauDeEscolaridadeController extends Controller
     public function alterar($id, Request $request)
     {
         try{
-            $dadoASerAlterado = GrauDeEscolaridade::findOrFail($id);
+            $dadoASerAlterado = GrauDeEscolaridade::where('excluido', false)->findOrFail($id);
             foreach ($request->except('_token') as $chave => $valor){
                 if($chave == "excluido" || $chave == "usuario_id")
                 {

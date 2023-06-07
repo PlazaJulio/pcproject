@@ -53,7 +53,7 @@ class EstadoCivilController extends Controller
     public function alterar($id, Request $request)
     {   
         try{
-            $dadoASerAlterado = EstadoCivil::findOrFail($id);
+            $dadoASerAlterado = EstadoCivil::where('excluido', false)->findOrFail($id);
             foreach ($request->except('_token') as $chave => $valor){
                 if($chave == "excluido" || $chave == "usuario_id")
                 {

@@ -53,18 +53,18 @@ class EnderecoController extends Controller
     public function alterar($id, Request $request)
     {
         try{
-            $dadoASerAlterado = Endereco::findOrFail($id);
-            foreach ($request->except('_token') as $chave => $valor){
-                if($chave == "excluido" || $chave == "usuario_id")
-                {
-                    continue;
-                }
-                $dadoASerAlterado->update([$chave => $valor]);
-            }
-            $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
-            return $dadoASerAlterado;
-        }catch(Exception){
-            return response("", 404);
+           $dadoASerAlterado = Endereco::where('excluido', false)->findOrFail($id); // Alteracao
+           foreach ($request->except('_token') as $chave => $valor){
+              if($chave == "excluido" || $chave == "usuario_id")
+              {
+                 continue;
+              }
+              $dadoASerAlterado->update([$chave => $valor]);
+           }
+           $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
+           return $dadoASerAlterado;
+           }catch(Exception){
+              return response("", 404);
         }
     }
     

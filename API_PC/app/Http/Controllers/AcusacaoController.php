@@ -42,7 +42,7 @@ class AcusacaoController extends Controller
     public function deletar($id)
     {
         try{
-            $dadoExcluido = Acusacao::findOrFail($id);
+            $dadoExcluido = Acusacao::where('excluido', false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;
@@ -54,7 +54,7 @@ class AcusacaoController extends Controller
     public function alterar($id, Request $request)
     {
         try{
-            $dadoASerAlterado = Acusacao::findOrFail($id);
+            $dadoASerAlterado = Acusacao::where('excluido', false)->findOrFail($id);
             foreach ($request->except('_token') as $chave => $valor){
                 if($chave == "excluido" || $chave == "usuario_id")
                 {

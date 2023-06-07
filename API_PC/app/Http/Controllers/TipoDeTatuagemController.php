@@ -35,24 +35,32 @@ class TipoDeTatuagemController extends Controller
 
     public function deletar($id)
     {
-        $dadoExcluido = TipoDeTatuagem::findOrFail($id);
-        $dadoExcluido->update(["excluido" => true]);
-        $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
-        return $dadoExcluido;
+        try{
+            $dadoExcluido = TipoDeTatuagem::findOrFail($id);
+            $dadoExcluido->update(["excluido" => true]);
+            $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
+            return $dadoExcluido;
+        }catch(Exception){
+            return response("", 404);
+        }
     }
 
     public function alterar($id, Request $request)
     {
-        $dadoASerAlterado = TipoDeTatuagem::findOrFail($id);
-        foreach ($request->except('_token') as $chave => $valor){
-           if($chave == "excluido" || $chave == "usuario_id")
-           {
-                continue;
-           }
-            $dadoASerAlterado->update([$chave => $valor]);
+        try{
+            $dadoASerAlterado = TipoDeTatuagem::findOrFail($id);
+            foreach ($request->except('_token') as $chave => $valor){
+                if($chave == "excluido" || $chave == "usuario_id")
+                {
+                    continue;
+                }
+                $dadoASerAlterado->update([$chave => $valor]);
+            }
+            $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
+            return $dadoASerAlterado;
+        }catch(Exception){
+            return response("", 404);
         }
-        $dadoASerAlterado->update(["usuario_id" => auth()->user()->id]);
-        return $dadoASerAlterado;
     }
     
 }

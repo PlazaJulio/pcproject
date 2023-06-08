@@ -15,7 +15,7 @@ class Usuario extends Model implements AuthenticatableContract, AuthorizableCont
  
     protected $table = 'usuario';
     protected $fillable = ['usuario', 'nome','permissao_de_escrita','password', 'excluido'];
-    protected $hidden = ['password', 'excluido', 'permissao_de_escrita'];
+    protected $hidden = ['password'];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';
     public function getJWTIdentifier()

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Laravel\Lumen\Routing\Controller as BaseController;
+use App\Models\Usuario;
+use Carbon\Carbon;
 
 class AutorizacaoController extends BaseController
 {
@@ -27,6 +29,11 @@ class AutorizacaoController extends BaseController
                 'error' => 'Unauthorized'
             ], 401);
         }
+
+        $dadoASerAlterado = Usuario::where('id', auth()->user()->id )->where('excluido', false);
+        $currentTime = Carbon::now();
+
+        $dadoASerAlterado->update(["ultimo_acesso" => $currentTime->toDateTimeString()]); 
         return $this->respondWithToken($token);
     }
 

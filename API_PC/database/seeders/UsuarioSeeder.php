@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UsuarioSeeder extends Seeder
 {
@@ -14,11 +15,14 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
+        $currentTime = Carbon::now();
+
         $usuario = new Usuario;
         $usuario->nome = "admin";
         $usuario->usuario = "admin";
-        $usuario->permissao_de_escrita = true;
         $usuario->password = Hash::make("123");
+        $usuario->ultimo_acesso = $currentTime->toDateTimeString();
+        $usuario->permissao_de_escrita = true;
         $usuario->excluido = false;
         $usuario->save();
     }

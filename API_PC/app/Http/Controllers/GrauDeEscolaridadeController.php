@@ -40,7 +40,7 @@ class GrauDeEscolaridadeController extends Controller
     public function deletar($id)
     {   
         try{
-            $dadoExcluido = GrauDeEscolaridade::findOrFail($id);
+            $dadoExcluido = GrauDeEscolaridade::where("excluido", false)->findOrFail($id);
             $dadoExcluido->update(["excluido" => true]);
             $dadoExcluido->update(["usuario_id" =>  auth()->user()->id]);
             return $dadoExcluido;

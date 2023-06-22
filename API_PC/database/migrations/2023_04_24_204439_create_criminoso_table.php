@@ -33,6 +33,8 @@ return new class extends Migration
             $table->float('altura');
             $table->string('etnia');
             $table->string('foto_perfil_esquerdo');
+            $table->string('foto_perfil_direito');
+
             $table->string('foto_frente');
             $table->string('cor_da_pele');
 

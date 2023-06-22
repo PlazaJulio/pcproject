@@ -36,6 +36,7 @@ class Criminoso extends Model
                            'etnia',
                            'foto_perfil_esquerdo',
                            'foto_frente',
+                           'cor_da_pele',
                            'endereco_id',
                            'aparencia_id',
                            'excluido',

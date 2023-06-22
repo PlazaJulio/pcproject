@@ -31,7 +31,7 @@ class Criminoso extends Model
                            'grau_de_escolaridade',
                            'local_de_trabalho',
                            'profissao',
-                           'genero_id',
+                           'genero',
                            'endereco_id',
                            'aparencia_id',
                            'excluido',

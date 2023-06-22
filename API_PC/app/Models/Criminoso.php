@@ -32,6 +32,7 @@ class Criminoso extends Model
                            'local_de_trabalho',
                            'profissao',
                            'genero',
+                           'altura',
                            'endereco_id',
                            'aparencia_id',
                            'excluido',

@@ -37,6 +37,7 @@ class CriminosoFactory extends Factory
             'local_de_trabalho' => $this->faker->randomElement($listaLocalTra),
             'profissao' => $this->faker->randomElement($listaTrabalho),
             'porte_fisico' => $this->faker->word(),
+            'cor_dos_olhos' => $this->faker->word(),
             'endereco_id' => random_int(1, 10),
             'usuario_id' => 1,
             'excluido' => false

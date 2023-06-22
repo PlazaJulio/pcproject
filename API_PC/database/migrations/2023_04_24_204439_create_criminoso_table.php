@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('local_de_trabalho');
             $table->string('profissao');
             $table->string('porte_fisico');
+            $table->string('cor_dos_olhos');
             
             $table->foreign('endereco_id')->references('id')->on('endereco');
 

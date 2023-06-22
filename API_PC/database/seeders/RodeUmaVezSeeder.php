@@ -14,7 +14,6 @@ class RodeUmaVezSeeder extends Seeder
                 AcusacaoSeeder::class, 
                 CorDeCabeloSeeder::class, 
                 CorDosOlhosSeeder::class,
-                CorSeeder::class,
                 PorteFisicoSeeder::class,
                 TipoDeCabeloSeeder::class,
                 TipoDeTatuagemSeeder::class

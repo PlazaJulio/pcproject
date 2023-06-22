@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('etnia');
             $table->string('foto_perfil_esquerdo');
             $table->string('foto_frente');
+            $table->string('cor_da_pele');
 
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('endereco_id')->references('id')->on('endereco');

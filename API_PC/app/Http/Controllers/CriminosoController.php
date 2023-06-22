@@ -106,6 +106,7 @@ class CriminosoController extends Controller
                 "altura" => $request->altura,
                 "etnia" => $request->etnia,
                 "foto_perfil_esquerdo" => $request->foto_perfil_esquerdo,
+                "foto_perfil_direito" => $request->foto_perfil_direito,
                 "foto_frente" => $request->foto_frente,
                 "cor_da_pele" => $request->cor_da_pele,
                 "endereco_id" => $request->endereco_id,

@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('profissao');
             $table->string('genero');
             $table->float('altura');
+            $table->string('etnia')->nullable('true');
 
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('endereco_id')->references('id')->on('endereco');

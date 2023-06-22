@@ -19,7 +19,7 @@ class Marca extends Model
         'parte_do_corpo', 
         'foto', 
         'tipo_de_tatuagem_id', 
-        'aparencia_id', 
+        'criminoso_id', 
         'usuario_id', 
         'excluido'
     ];

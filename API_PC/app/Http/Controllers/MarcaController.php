@@ -29,7 +29,7 @@ class MarcaController extends Controller
                 "parte_do_corpo" => $request->parte_do_corpo,
                 "foto" => $request->foto,
                 "tipo_de_tatuagem_id" => $request->tipo_de_tatuagem_id,
-                "aparencia_id" => $request->aparencia_id,
+                "criminoso_id" => $request->criminoso_id,
                 "usuario_id" => auth()->user()->id,
                 "excluido" => false
                 

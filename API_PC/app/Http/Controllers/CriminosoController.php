@@ -100,11 +100,8 @@ class CriminosoController extends Controller
                 "nacionalidade" => $request->nacionalidade,
                 "local_de_trabalho" => $request->local_de_trabalho,
                 "profissao" => $request->profissao,
-                "estado_civil_id" => $request->estado_civil_id,
-                "grau_de_escolaridade_id" => $request->grau_de_escolaridade_id,
-                "genero_id" => $request->genero_id,
+                "porte_fisico" => $request->porte_fisico,
                 "endereco_id" => $request->endereco_id,
-                "aparencia_id" => $request->aparencia_id,
                 "usuario_id" => auth()->user()->id,
                 "excluido" => false
                 

@@ -27,13 +27,9 @@ class Criminoso extends Model
                            'cpf',
                            'naturalidade',
                            'nacionalidade',
-                           'estado_civil_id',
-                           'grau_de_escolaridade_id',
                            'local_de_trabalho',
+                           'porte_fisico',
                            'profissao',
-                           'genero_id',
-                           'endereco_id',
-                           'aparencia_id',
                            'excluido',
                            'usuario_id'];
     const CREATED_AT = 'criado_em';

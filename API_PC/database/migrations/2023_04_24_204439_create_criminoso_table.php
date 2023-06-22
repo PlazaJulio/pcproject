@@ -25,22 +25,14 @@ return new class extends Migration
             $table->string('cpf')->unique();
             $table->string('naturalidade');
             $table->string('nacionalidade');
-
-            $table->unsignedBigInteger('estado_civil_id');
-            $table->foreign('estado_civil_id')->references('id')->on('estado_civil');
-            $table->unsignedBigInteger('grau_de_escolaridade_id');
-            $table->foreign('grau_de_escolaridade_id')->references('id')->on('grau_de_escolaridade');
-
             $table->string('local_de_trabalho');
             $table->string('profissao');
-
-            $table->unsignedBigInteger('genero_id');
-            $table->foreign('genero_id')->references('id')->on('genero');
-            $table->unsignedBigInteger('endereco_id');
+            $table->string('porte_fisico');
+            
             $table->foreign('endereco_id')->references('id')->on('endereco');
-            $table->unsignedBigInteger('aparencia_id');
-            $table->foreign('aparencia_id')->references('id')->on('aparencia');
-            $table->unsignedBigInteger('usuario_id');
+
+            
+
             $table->foreign('usuario_id')->references('id')->on('usuario');
 
             $table->boolean('excluido');

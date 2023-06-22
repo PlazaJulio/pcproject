@@ -28,7 +28,7 @@ class Criminoso extends Model
                            'naturalidade',
                            'nacionalidade',
                            'estado_civil',
-                           'grau_de_escolaridade_id',
+                           'grau_de_escolaridade',
                            'local_de_trabalho',
                            'profissao',
                            'genero_id',

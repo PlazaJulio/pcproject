@@ -30,6 +30,7 @@ class Criminoso extends Model
                            'local_de_trabalho',
                            'porte_fisico',
                            'cor_dos_olhos',
+                           'tipo_de_cabelo',
                            'profissao',
                            'excluido',
                            'usuario_id'];

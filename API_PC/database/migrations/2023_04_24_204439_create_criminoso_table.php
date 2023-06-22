@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('profissao');
             $table->string('porte_fisico');
             $table->string('cor_dos_olhos');
+            $table->string('tipo_de_cabelo');
             
             $table->foreign('endereco_id')->references('id')->on('endereco');
 

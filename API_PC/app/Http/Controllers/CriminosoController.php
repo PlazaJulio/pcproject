@@ -102,6 +102,7 @@ class CriminosoController extends Controller
                 "profissao" => $request->profissao,
                 "porte_fisico" => $request->porte_fisico,
                 "cor_dos_olhos" => $request->cor_dos_olhos,
+                "tipo_de_cabelo" => $request->tipo_de_cabelo,
                 "endereco_id" => $request->endereco_id,
                 "usuario_id" => auth()->user()->id,
                 "excluido" => false

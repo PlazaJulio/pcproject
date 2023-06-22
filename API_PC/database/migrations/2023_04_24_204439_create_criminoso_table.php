@@ -26,9 +26,7 @@ return new class extends Migration
             $table->string('naturalidade');
             $table->string('nacionalidade');
             $table->string('estado_civil');
-
-            $table->unsignedBigInteger('grau_de_escolaridade_id');
-            $table->foreign('grau_de_escolaridade_id')->references('id')->on('grau_de_escolaridade');
+            $table->string('grau_de_escolaridade');
 
             $table->string('local_de_trabalho');
             $table->string('profissao');

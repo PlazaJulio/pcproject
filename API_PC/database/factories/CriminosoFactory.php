@@ -16,8 +16,6 @@ class CriminosoFactory extends Factory
         
         $listaDatasNsci = ["2000-05-22", "2005-04-21", "2001-03-04", "2003-12-12"];
         $listaobito_foragido = [true, false];
-        $listaCpf = ["249.058.768-42", "716.582.776-51", "716.582.776-51", "858.431.915-83"];
-        $listaRg = ["80.776.309-3", "95.983.118-6", "38.692.546-7", "65.700.374-8"];
         $listaLocalTra = ["Padaria", "Buteco do Ze", "Amigao", "FarmaciaMarilia"];
         $listaTrabalho = ["Carpinteiro", "Pedreiro", "Pinto", "Vendedor"];
         
@@ -38,8 +36,8 @@ class CriminosoFactory extends Factory
             'profissao' => $this->faker->randomElement($listaTrabalho),
             'estado_civil' => $this->faker->word,
             'grau_de_escolaridade' => $this->faker->word,
-            
-            'genero_id' => random_int(1, 3),
+            'genero' => $this->faker->word,
+
             'endereco_id' => random_int(1, 10),
             'aparencia_id' => random_int(1, 10),
             'usuario_id' => 1,

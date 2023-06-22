@@ -104,6 +104,7 @@ class CriminosoController extends Controller
                 "grau_de_escolaridade" => $request->grau_de_escolaridade,
                 "genero" => $request->genero,
                 "altura" => $request->altura,
+                "etnia" => $request->etnia,
                 "endereco_id" => $request->endereco_id,
                 "aparencia_id" => $request->aparencia_id,
                 "usuario_id" => auth()->user()->id,

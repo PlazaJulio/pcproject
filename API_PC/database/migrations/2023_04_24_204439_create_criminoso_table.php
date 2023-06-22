@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('local_de_trabalho');
             $table->string('profissao');
             $table->string('genero');
+            $table->float('altura');
 
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('endereco_id')->references('id')->on('endereco');

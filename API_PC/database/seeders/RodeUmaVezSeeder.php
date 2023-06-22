@@ -12,15 +12,7 @@ class RodeUmaVezSeeder extends Seeder
             [
                 UsuarioSeeder::class,
                 AcusacaoSeeder::class, 
-                CorDeCabeloSeeder::class, 
-                CorDosOlhosSeeder::class,
-                CorSeeder::class,
-                GeneroSeeder::class,
-                PorteFisicoSeeder::class,
-                TipoDeCabeloSeeder::class,
-                TipoDeTatuagemSeeder::class,
-                EstadoCivilSeeder::class,
-                GrauDeEscolaridadeSeeder::class,
+                TipoDeTatuagemSeeder::class
             ]
         );
     }

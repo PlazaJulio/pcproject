@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Criminoso;
 use Illuminate\Database\Seeder;
 use Database\Seeders\EnderecoSeeder;
-use Database\Seeders\AparenciaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +11,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-                AparenciaSeeder::class,
                 EnderecoSeeder::class,
                 MarcaSeeder::class,
                 CriminosoSeeder::class,

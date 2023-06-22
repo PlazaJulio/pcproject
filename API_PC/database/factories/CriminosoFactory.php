@@ -44,9 +44,10 @@ class CriminosoFactory extends Factory
             'foto_frente' => $this->faker->sentence,
             'cor_da_pele' => $this->faker->word,
             'cor_do_cabelo' => $this->faker->word,
-
+            'porte_fisico' => $this->faker->word(),
+            'cor_dos_olhos' => $this->faker->word(),
+            'tipo_de_cabelo' => $this->faker->word(),
             'endereco_id' => random_int(1, 10),
-            'aparencia_id' => random_int(1, 10),
             'usuario_id' => 1,
             'excluido' => false
         ];

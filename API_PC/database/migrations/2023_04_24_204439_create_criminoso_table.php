@@ -25,27 +25,28 @@ return new class extends Migration
             $table->string('cpf')->unique();
             $table->string('naturalidade');
             $table->string('nacionalidade');
-            $table->string('estado_civil')->nullable('true');
-            $table->string('grau_de_escolaridade')->nullable('true');
             $table->string('local_de_trabalho');
             $table->string('profissao');
+            $table->string('estado_civil')->nullable('true');
+            $table->string('grau_de_escolaridade')->nullable('true');
             $table->string('genero');
             $table->float('altura');
             $table->string('etnia');
+            $table->string('porte_fisico');
+            $table->string('cor_dos_olhos');
+            $table->string('cor_da_pele');
+            $table->string('cor_do_cabelo');
+            $table->string('tipo_de_cabelo');
             $table->string('foto_perfil_esquerdo');
             $table->string('foto_perfil_direito');
             $table->string('foto_frente');
-            $table->string('cor_da_pele');
-            $table->string('cor_do_cabelo');
-
+            $table->boolean('excluido');
+            
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('endereco_id')->references('id')->on('endereco');
-            $table->unsignedBigInteger('aparencia_id');
-            $table->foreign('aparencia_id')->references('id')->on('aparencia');
+
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuario');
-
-            $table->boolean('excluido');
 
             $table->timestamp('criado_em')->useCurrent();
             $table->timestamp('alterado_em')->useCurrentOnUpdate()->nullable(true);

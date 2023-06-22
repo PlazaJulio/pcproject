@@ -12,7 +12,6 @@ class RodeUmaVezSeeder extends Seeder
             [
                 UsuarioSeeder::class,
                 AcusacaoSeeder::class, 
-                TipoDeCabeloSeeder::class,
                 TipoDeTatuagemSeeder::class
             ]
         );

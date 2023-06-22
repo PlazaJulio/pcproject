@@ -43,6 +43,7 @@ class CriminosoFactory extends Factory
             'foto_perfil_direito' => $this->faker->sentence,
             'foto_frente' => $this->faker->sentence,
             'cor_da_pele' => $this->faker->word,
+            'cor_do_cabelo' => $this->faker->word,
 
             'endereco_id' => random_int(1, 10),
             'aparencia_id' => random_int(1, 10),

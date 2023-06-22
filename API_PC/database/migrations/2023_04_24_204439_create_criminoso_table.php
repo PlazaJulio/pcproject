@@ -25,9 +25,8 @@ return new class extends Migration
             $table->string('cpf')->unique();
             $table->string('naturalidade');
             $table->string('nacionalidade');
+            $table->string('estado_civil');
 
-            $table->unsignedBigInteger('estado_civil_id');
-            $table->foreign('estado_civil_id')->references('id')->on('estado_civil');
             $table->unsignedBigInteger('grau_de_escolaridade_id');
             $table->foreign('grau_de_escolaridade_id')->references('id')->on('grau_de_escolaridade');
 

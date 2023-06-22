@@ -19,7 +19,6 @@ class RodeUmaVezSeeder extends Seeder
                 PorteFisicoSeeder::class,
                 TipoDeCabeloSeeder::class,
                 TipoDeTatuagemSeeder::class,
-                EstadoCivilSeeder::class,
                 GrauDeEscolaridadeSeeder::class,
             ]
         );

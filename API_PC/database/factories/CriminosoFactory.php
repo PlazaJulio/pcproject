@@ -38,6 +38,7 @@ class CriminosoFactory extends Factory
             'grau_de_escolaridade' => $this->faker->word,
             'genero' => $this->faker->word,
             'altura' => round(rand(1, 2) + (mt_rand() / mt_getrandmax()), 2),
+            'etnia' => $this->faker->country,
 
             'endereco_id' => random_int(1, 10),
             'aparencia_id' => random_int(1, 10),

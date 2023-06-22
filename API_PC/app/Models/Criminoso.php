@@ -33,6 +33,7 @@ class Criminoso extends Model
                            'profissao',
                            'genero',
                            'altura',
+                           "etnia",
                            'endereco_id',
                            'aparencia_id',
                            'excluido',

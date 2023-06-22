@@ -101,7 +101,7 @@ class CriminosoController extends Controller
                 "local_de_trabalho" => $request->local_de_trabalho,
                 "profissao" => $request->profissao,
                 "estado_civil" => $request->estado_civil,
-                "grau_de_escolaridade_id" => $request->grau_de_escolaridade_id,
+                "grau_de_escolaridade" => $request->grau_de_escolaridade,
                 "genero_id" => $request->genero_id,
                 "endereco_id" => $request->endereco_id,
                 "aparencia_id" => $request->aparencia_id,

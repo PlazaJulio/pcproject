@@ -30,7 +30,8 @@ class AcusacaoController extends Controller
     {   
         try{
             return Acusacao::create([
-                "tipo" => $request->tipo,
+                "tipificacao"=> $request->tipificacao,
+                "descricao" => $request->descricao,
                 "usuario_id" => auth()->user()->id, 
                 "excluido" => false
             ]);

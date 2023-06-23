@@ -124,6 +124,7 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
     $router->get("/antecedente", "AntecedenteController@mostrarTodos");
 
     $router->get("/marca/{id}", "MarcaController@mostrarPorId");
+    $router->get("/marca/criminoso/{id}", "MarcaController@mostrarMarcasPorCriminosoId");
     $router->get("/marca", "MarcaController@mostrarTodos");
 
     $router->get("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@mostrarPorId");

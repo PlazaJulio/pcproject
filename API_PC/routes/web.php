@@ -20,7 +20,6 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/criminoso/inserir", "CriminosoController@inserir");
         $router->delete("/criminoso/{id}", "CriminosoController@deletar");
         $router->patch("/criminoso/{id}", "CriminosoController@alterar");
-        $router->post("/criminoso/filtragem", "CriminosoController@mostrarDadosComFiltroDinamico");
         
         $router->post("/acusacao/inserir", "AcusacaoController@inserir");
         $router->delete("/acusacao/{id}", "AcusacaoController@deletar");
@@ -82,7 +81,9 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->delete("/usuario/{id}", "UsuarioController@deletar");
         $router->patch("/usuario/{id}", "UsuarioController@alterar");
     });
-    
+
+    $router->post("/criminoso/filtro", "FiltroController@filtrarCriminosos");
+
     $router->get("/aparencia/{id}", "AparenciaController@mostrarPorId");
     $router->get("/aparencia", "AparenciaController@mostrarTodos");
 
@@ -123,6 +124,7 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
     $router->get("/antecedente", "AntecedenteController@mostrarTodos");
 
     $router->get("/marca/{id}", "MarcaController@mostrarPorId");
+    $router->get("/marca/criminoso/{id}", "MarcaController@mostrarMarcasPorCriminosoId");
     $router->get("/marca", "MarcaController@mostrarTodos");
 
     $router->get("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@mostrarPorId");

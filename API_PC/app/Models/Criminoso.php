@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Database\Factories\CriminosoFactory;
+use App\Models\Antecedente;
  
 class Criminoso extends Model
 {   
@@ -12,6 +13,11 @@ class Criminoso extends Model
     protected static function factory(): Factory
     {
         return CriminosoFactory::new();
+    }
+
+    public function antecedentes()
+    {
+        return $this->belongsToMany(Antecedente::class, 'criminoso_antecedente', 'criminoso_id', 'antecedente_id');
     }
 
     protected $table = 'criminoso';
@@ -43,7 +49,6 @@ class Criminoso extends Model
                            'cor_da_pele',
                            'cor_do_cabelo',
                            'endereco_id',
-                           'aparencia_id',
                            'excluido',
                            'usuario_id'];
     const CREATED_AT = 'criado_em';

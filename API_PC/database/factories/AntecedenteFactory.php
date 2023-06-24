@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Antecedente;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Criminoso;
 
 class AntecedenteFactory extends Factory
 {
@@ -23,9 +24,17 @@ class AntecedenteFactory extends Factory
             'hora' => $this->faker->randomElement($listaHora),
             'descricao' => $this->faker->sentence,
             'acusacao_id' => random_int(1, 5),
-            'criminoso_id' => random_int(1, 10),
             'usuario_id' => 1,
             'excluido' => false
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Antecedente $antecedente) {
+            // Criação dos relacionamentos
+            $criminosos = Criminoso::find(random_int(1, 10));
+            $antecedente->criminosos()->attach($criminosos);
+        });
     }
 }

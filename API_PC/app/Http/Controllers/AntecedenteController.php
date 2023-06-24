@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Antecedente;
+use App\Models\Criminoso;
 
 use Exception;
 
@@ -30,16 +31,21 @@ class AntecedenteController extends Controller
     public function inserir(Request $request)
     {   
         try{
-            return Antecedente::create([
+            $Antecedente = Antecedente::create([
                 "local" => $request->local,
                 "data" => $request->data,
                 "hora" => $request->hora,
                 "descricao" => $request->descricao,
                 "acusacao_id" => $request->acusacao_id,
-                "criminoso_id" => $request->criminoso_id,
                 "usuario_id" => auth()->user()->id,
                 "excluido" => false
             ]);
+
+            // Vinculando criminoso a antecedente na tabela intermediaria
+            $criminoso = Criminoso::find($request->criminoso_id);
+            $Antecedente->criminosos()->attach($criminoso->id);
+
+            return $Antecedente;
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);
         }

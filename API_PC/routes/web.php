@@ -66,6 +66,9 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
 
     $router->get("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@mostrarPorId");
     $router->get("/tipo-de-tatuagem", "TipoDeTatuagemController@mostrarTodos");
+
+    $router->get("/criminoso-antecedente/antecedentes/{id}", "CriminosoAntecedenteController@consultarPorCriminoso");
+    $router->get("/criminoso-antecedente/criminosos/{id}", "CriminosoAntecedenteController@consultarPorAntecedente");
     
     $router->get('eu', 'UsuarioController@eu');
 });

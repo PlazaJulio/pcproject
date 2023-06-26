@@ -13,10 +13,6 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
     $router->post('/autorizacao/refresh', 'AutorizacaoController@refresh');
     
     $router->group(['middleware' => 'pode_alterar'], function ($router) {
-        $router->post("/aparencia/inserir", "AparenciaController@inserir");
-        $router->delete("/aparencia/{id}", "AparenciaController@deletar");
-        $router->patch("/aparencia/{id}", "AparenciaController@alterar");
-        
         $router->post("/criminoso/inserir", "CriminosoController@inserir");
         $router->delete("/criminoso/{id}", "CriminosoController@deletar");
         $router->patch("/criminoso/{id}", "CriminosoController@alterar");
@@ -40,38 +36,6 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/tipo-de-tatuagem/inserir", "TipoDeTatuagemController@inserir");
         $router->delete("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@deletar");
         $router->patch("/tipo-de-tatuagem/{id}", "TipoDeTatuagemController@alterar");
-
-        $router->post("/cor/inserir", "CorController@inserir");
-        $router->delete("/cor/{id}", "CorController@deletar");
-        $router->patch("/cor/{id}", "CorController@alterar");
-
-        $router->post("/genero/inserir", "GeneroController@inserir");
-        $router->delete("/genero/{id}", "GeneroController@deletar");
-        $router->patch("/genero/{id}", "GeneroController@alterar");
-
-        $router->post("/porte-fisico/inserir", "PorteFisicoController@inserir");
-        $router->delete("/porte-fisico/{id}", "PorteFisicoController@deletar");
-        $router->patch("/porte-fisico/{id}", "PorteFisicoController@alterar");
-
-        $router->post("/cor-dos-olhos/inserir", "CorDosOlhosController@inserir");
-        $router->delete("/cor-dos-olhos/{id}", "CorDosOlhosController@deletar");
-        $router->patch("/cor-dos-olhos/{id}", "CorDosOlhosController@alterar");
-        
-        $router->post("/grau-de-escolaridade/inserir", "GrauDeEscolaridadeController@inserir");
-        $router->delete("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@deletar");
-        $router->patch("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@alterar");
-
-        $router->post("/estado-civil/inserir", "EstadoCivilController@inserir");
-        $router->delete("/estado-civil/{id}", "EstadoCivilController@deletar");
-        $router->patch("/estado-civil/{id}", "EstadoCivilController@alterar");
-
-        $router->post("/tipo-de-cabelo/inserir", "TipoDeCabeloController@inserir");
-        $router->delete("/tipo-de-cabelo/{id}", "TipoDeCabeloController@deletar");
-        $router->patch("/tipo-de-cabelo/{id}", "TipoDeCabeloController@alterar");
-
-        $router->post("/cor-do-cabelo/inserir", "CorDoCabeloController@inserir");
-        $router->delete("/cor-do-cabelo/{id}", "CorDoCabeloController@deletar");
-        $router->patch("/cor-do-cabelo/{id}", "CorDoCabeloController@alterar");
     });
     
     $router->group(['middleware' => 'admin'], function ($router){
@@ -83,33 +47,6 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
     });
 
     $router->post("/criminoso/filtro", "FiltroController@filtrarCriminosos");
-
-    $router->get("/aparencia/{id}", "AparenciaController@mostrarPorId");
-    $router->get("/aparencia", "AparenciaController@mostrarTodos");
-
-    $router->get("/cor/{id}", "CorController@mostrarPorId");
-    $router->get("/cor", "CorController@mostrarTodos");
-
-    $router->get("/cor-do-cabelo/{id}", "CorDoCabeloController@mostrarPorId");
-    $router->get("/cor-do-cabelo", "CorDoCabeloController@mostrarTodos");
-
-    $router->get("/tipo-de-cabelo/{id}", "TipoDeCabeloController@mostrarPorId");
-    $router->get("/tipo-de-cabelo", "TipoDeCabeloController@mostrarTodos");
-
-    $router->get("/porte-fisico/{id}", "PorteFisicoController@mostrarPorId");
-    $router->get("/porte-fisico", "PorteFisicoController@mostrarTodos");
-
-    $router->get("/cor-dos-olhos/{id}", "CorDosOlhosController@mostrarPorId");
-    $router->get("/cor-dos-olhos", "CorDosOlhosController@mostrarTodos");
-
-    $router->get("/estado-civil/{id}", "EstadoCivilController@mostrarPorId");
-    $router->get("/estado-civil", "EstadoCivilController@mostrarTodos");
-
-    $router->get("/grau-de-escolaridade/{id}", "GrauDeEscolaridadeController@mostrarPorId");
-    $router->get("/grau-de-escolaridade", "GrauDeEscolaridadeController@mostrarTodos");
-
-    $router->get("/genero/{id}", "GeneroController@mostrarPorId");
-    $router->get("/genero", "GeneroController@mostrarTodos");
 
     $router->get("/criminoso/{id}", "CriminosoController@mostrarPorId");
     $router->get("/criminoso", "CriminosoController@mostrarTodos");

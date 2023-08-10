@@ -12,9 +12,18 @@ class FiltroController extends Controller
         try{
             $criminosos = Marca::query()->rightJoin("criminoso", "criminoso.id", "=", "marca.criminoso_id");
             $criminosos->select('criminoso.*')->distinct();
+            $numero_de_dados_totais = $criminosos->count();
+            $limite = 10;
+            $deslocar = 0;
             foreach ($request->except('_token') as $chave => $valor){
                 if($chave == "usuario_id"){
                     continue;
+                }
+                else if($chave == "limite"){
+                    $limite = $valor > 0 ? $valor : 1;
+                }
+                else if($chave == "deslocar"){
+                    $deslocar = $valor;
                 }
                 else if($chave == "cicatriz_ou_tatuagem"){
                     $criminosos->where("cicatriz_ou_tatuagem", $valor);
@@ -54,7 +63,8 @@ class FiltroController extends Controller
                 }
             }
             $criminosos->where("criminoso.excluido", false);
-            return $criminosos->get();
+            return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "limite" => $limite, "deslocar" => $deslocar, "resultado" =>$criminosos->offset($deslocar)->limit($limite)->get()]);
+            return $criminosos->offset($deslocar)->limit($limite)->get();
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);
         }

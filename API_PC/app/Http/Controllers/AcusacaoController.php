@@ -21,9 +21,12 @@ class AcusacaoController extends Controller
         });
     }
 
-    public function mostrarTodos()
+    public function mostrarTodos(Request $request)
     {
-        return Acusacao::all()->where('excluido', false);
+        $limite = $request->limite ? $request->limite : 10;
+        $deslocar = $request->deslocar ? $request->deslocar : 0;
+        $numero_de_dados_totais = Acusacao::count();
+        return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar"=>$deslocar,"limite"=>$limite,"resultado" => Acusacao::offset($deslocar)->limit($limite)->where('excluido', false)->get()]);
     }
 
     public function inserir(Request $request)

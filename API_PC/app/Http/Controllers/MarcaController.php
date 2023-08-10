@@ -15,9 +15,12 @@ class MarcaController extends Controller
         });
     }
 
-    public function mostrarTodos()
+    public function mostrarTodos(Request $request)
     {
-        return Marca::all()->where('excluido', false);
+        $limite = $request->limite ? $request->limite : 10;
+        $deslocar = $request->deslocar ? $request->deslocar : 0;
+        $numero_de_dados_totais = Marca::count();
+        return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar"=>$deslocar,"limite"=>$limite,"resultado" => Marca::offset($deslocar)->limit($limite)->where('excluido', false)->get()]);
     }
 
     public function mostrarMarcasPorCriminosoId($id)

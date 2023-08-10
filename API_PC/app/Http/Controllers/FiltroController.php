@@ -63,7 +63,7 @@ class FiltroController extends Controller
                 }
             }
             $criminosos->where("criminoso.excluido", false);
-            return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "limite" => $limite, "deslocar" => $deslocar, "resultado" =>$criminosos->offset($deslocar)->limit($limite)->get()]);
+            return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar" => $deslocar, "limite" => $limite,  "resultado" =>$criminosos->offset($deslocar)->limit($limite)->get()]);
             return $criminosos->offset($deslocar)->limit($limite)->get();
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);

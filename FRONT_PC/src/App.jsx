@@ -1,6 +1,7 @@
 import Rotas from "./pages/Rotas"
 
 function App() {
+  var token = "";
   return (
     <>
       <Rotas/>

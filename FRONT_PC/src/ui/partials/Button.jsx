@@ -1,3 +1,3 @@
-export default function Button({children}){
-    return <button className="button is-fullwidth">{children}</button>
+export default function Button({onHandle, children}){
+    return <button className="button is-fullwidth" onClick={onHandle}>{children}</button>
 }

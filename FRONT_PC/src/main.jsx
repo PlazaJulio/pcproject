@@ -4,7 +4,7 @@ import App from './App.jsx'
 import "../node_modules/bulma/css/bulma.min.css"
 import "./ui/styles/style.css"
 import { Provider } from "react-redux";
-import store from './data/utils/store.js'
+import store from './app/store.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

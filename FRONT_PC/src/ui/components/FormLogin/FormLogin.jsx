@@ -1,22 +1,17 @@
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
 import Input from "../../partials/Input"
 import Button from "../../partials/Button"
 import requestPost from "../../../data/utils/requestPost";
-import { Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setJwtToken } from "../../../data/utils/store";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { TokenContext } from "../../../data/context/TokenContext";
+import { useNavigate } from "react-router-dom";
 
 export default function FormLogin(){
     const [usuario, setUsuario] = useState("");
     const [senha, setSenha] = useState("");
-    const [erro, setErro] = useState(false); 
-    const [logado, setLogado] = useState(false);
+    const { setTokenReact }= useContext(TokenContext)
+
+    const navigate = useNavigate()
     
-    const dispatch = useDispatch()
-
-
     return <div className="mt-6 column is-4 has-text-centered">
         <div className="field mb-6">        
             <figure className="image is-128x128 mx-auto">
@@ -31,25 +26,15 @@ export default function FormLogin(){
         </div>
         <div className="field">
             <Button onHandle={async ()=> {
-                try{
-                    setErro(false);
+                try{   
                     const resultado = await requestPost("/autorizacao/login", {"usuario": usuario, "password": senha})
-                    dispatch(setJwtToken(resultado.data["access_token"]));
-                    setLogado(true);
+                    setTokenReact(resultado.data["access_token"])
+                    navigate("/")
                 }catch(Exception){
-                    setErro(true);
+                    console.log(Exception)
                 }
             }
             }>Entrar</Button>
-        </div>
-        {
-            logado && <Navigate to="/"/>
-        }
-        {
-            erro && <div className="field">
-                <p>Senha ou usuario invalido</p>
-            </div>
-        }
-        
+        </div>     
     </div>
 }

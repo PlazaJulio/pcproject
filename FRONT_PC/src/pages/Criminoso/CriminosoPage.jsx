@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import requestPost from "../../data/utils/requestPost";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../../data/context/TokenContext";
+import Menu from "../../ui/components/Menu/Menu";
 
 export default function CriminosoPage() {
     const [criminosos, setCriminosos] = useState([]);
@@ -21,6 +22,7 @@ export default function CriminosoPage() {
 
     return (
         <div>
+            <Menu/>
             <h1>Criminoso</h1>
         </div>
     );

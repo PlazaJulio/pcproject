@@ -12,14 +12,18 @@ export default function AcusacaoPage() {
             const response = await requestGet("/acusacao", { "limite": 10 }, tokenReact);
             const responseData = response.data;
         } catch (error) {
-            navigate("/login")
+            if(error.response.status == 401){
+                navigate("/login")
+            }
         }
     }, []);
 
     return (
-        <div>
-            <Menu/>
-            <h1>Acusacao</h1>
+        <div className="columns">
+            <Menu />
+            <div className="column">
+                <h1>Acusacao</h1>
+            </div>
         </div>
     );
 }

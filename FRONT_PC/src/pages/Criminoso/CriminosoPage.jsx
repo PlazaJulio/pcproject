@@ -5,7 +5,7 @@ import { TokenContext } from "../../data/context/TokenContext";
 import Menu from "../../ui/components/Menu/Menu";
 
 export default function CriminosoPage() {
-    const [criminosos, setCriminosos] = useState([]);
+    const [criminosos, setCriminosos] = useState(null);
     const [pagina, setPagina] = useState(0);
     const { tokenReact } = useContext(TokenContext)
     const navigate = useNavigate()
@@ -16,14 +16,18 @@ export default function CriminosoPage() {
             setCriminosos(responseData);
         } catch (error) {
             setCriminosos({});
-            navigate("/login")
+            if(error.response.status == 401){
+                navigate("/login")
+            }
         }
     }, [pagina]);
 
     return (
-        <div>
+        <div className="columns">
             <Menu/>
-            <h1>Criminoso</h1>
+            <div className="column">
+                <p>Criminoso</p>
+            </div>
         </div>
     );
 }

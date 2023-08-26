@@ -50,7 +50,7 @@ class AutorizacaoController extends BaseController
         auth()->logout();
         return response()->json([
             'message' => 'Logout with success!'
-        ], 401);
+        ], 200);
     }
 
     protected function respondWithToken($token)

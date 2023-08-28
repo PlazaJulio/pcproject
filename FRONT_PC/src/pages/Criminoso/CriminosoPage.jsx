@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import requestPost from "../../data/utils/requestPost";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../../data/context/TokenContext";
+import Paginacao from "../../ui/components/Paginacao/Paginacao";
 import Menu from "../../ui/components/Menu/Menu";
 
 export default function CriminosoPage() {
@@ -11,9 +12,10 @@ export default function CriminosoPage() {
     const navigate = useNavigate()
     useEffect(() => async () => {
         try {
-            const response = await requestPost("/criminoso/filtro", null, { "limite": 8 }, tokenReact);
+            const response = await requestPost("/criminoso/filtro", null, { "limite": 8, "delocar": pagina }, tokenReact);
             const responseData = response.data;
             setCriminosos(responseData);
+            console.log(responseData)
         } catch (error) {
             setCriminosos({});
             if(error.response.status == 401){

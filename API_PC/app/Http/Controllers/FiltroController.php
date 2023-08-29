@@ -12,7 +12,6 @@ class FiltroController extends Controller
         try{
             $criminosos = Marca::query()->rightJoin("criminoso", "criminoso.id", "=", "marca.criminoso_id");
             $criminosos->select('criminoso.*')->distinct();
-            $numero_de_dados_totais = $criminosos->count();
             $limite = 10;
             $deslocar = 0;
             foreach ($request->except('_token') as $chave => $valor){
@@ -63,8 +62,8 @@ class FiltroController extends Controller
                 }
             }
             $criminosos->where("criminoso.excluido", false);
+            $numero_de_dados_totais = count($criminosos->get());
             return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar" => $deslocar, "limite" => $limite,  "resultado" =>$criminosos->offset($deslocar)->limit($limite)->get()]);
-            return $criminosos->offset($deslocar)->limit($limite)->get();
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);
         }

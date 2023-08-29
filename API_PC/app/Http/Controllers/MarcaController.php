@@ -26,7 +26,7 @@ class MarcaController extends Controller
     public function mostrarMarcasPorCriminosoId($id)
     {
         try{
-            return Marca::where('criminoso_id', $id)->get();
+            return Marca::where('criminoso_id', $id)->where('excluido', false)->get();
         }catch(Exception){
             return response("Requisição feita de maneira incorreta", 400);
         }

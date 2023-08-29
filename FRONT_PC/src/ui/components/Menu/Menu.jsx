@@ -14,7 +14,7 @@ export default function Menu() {
                 if (elemento.to == window.location.pathname) {
                     return <li key={index}><Link className="is-active" to={elemento.to}>{elemento.nome}</Link></li>
                 }
-                return <li><Link to={elemento.to}>{elemento.nome}</Link></li>
+                return <li key={index}><Link to={elemento.to}>{elemento.nome}</Link></li>
             }
             )}
             <li className="mt-6" key={listaDeRotas.length}><Link onClick={

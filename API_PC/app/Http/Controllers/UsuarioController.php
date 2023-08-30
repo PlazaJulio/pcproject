@@ -22,9 +22,12 @@ class UsuarioController extends Controller
         });
     }
 
-    public function mostrarTodos()
+    public function mostrarTodos(Request $request)
     {
-        return Usuario::all()->where('excluido', false);
+        $limite = $request->limite ? $request->limite : 10;
+        $deslocar = $request->deslocar ? $request->deslocar : 0;
+        $numero_de_dados_totais = Usuario::count();
+        return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar"=>$deslocar,"limite"=>$limite,"resultado" => Usuario::offset($deslocar)->limit($limite)->where('excluido', false)->orderBy("id")->get()]);
     }
 
     public function inserir(Request $request)

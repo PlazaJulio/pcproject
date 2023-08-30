@@ -21,7 +21,9 @@ export default function Paginacao({count, limit, alterOffset}){
             if(valor == paginaAtual){
                 return <li key={index} className="pagination-link is-current">{valor}</li>
             }
-            return <li key={index} className="pagination-link" onClick={()=>logicaDeAlteracaoDePaginacao(valor)}>{valor}</li>
+            else if((primeiraPagina+index) <= totalDePaginas){
+                return <li key={index} className="pagination-link" onClick={()=>logicaDeAlteracaoDePaginacao(valor)}>{valor}</li>
+            }
         })
     }
 

@@ -4,29 +4,41 @@ import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../../data/context/TokenContext";
 import Menu from "../../ui/components/Menu/Menu";
 import TableTatuagem from "../../ui/components/TableTatuagem/TableTatuagem";
+import Paginacao from "../../ui/components/Paginacao/Paginacao";
 
 export default function TatuagemPage() {
-    const [tatuagens, setTatuagens] = useState([]);
+    const [tatuagens, setTatuagens] = useState(null);
     const { tokenReact } = useContext(TokenContext)
+    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(1)
+    const [offset, setOffset] = useState(0);
     const navigate = useNavigate()
 
-    useEffect(() => async () => {
-        try {
-            const response = await requestGet("/tipo-de-tatuagem", { "limite": 10 }, tokenReact);
-            const responseData = response.data;
-            setTatuagens(responseData);
-        } catch (error) {
-            if(error.response.status == 401){
-                navigate("/login")
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await requestGet("/tipo-de-tatuagem", { "limite": limiteDeValoresPorRequisicao, "deslocar": offset }, tokenReact);
+                const responseData = response.data;
+                setTatuagens(responseData);
+            } catch (error) {
+                if (error.response.status == 401) {
+                    navigate("/login")
+                }
             }
         }
-    }, []);
+        fetchData();
+    }, [offset]);
 
     return (
         <div className="columns">
             <Menu />
             <div className="column">
-                <TableTatuagem valores={tatuagens.resultado}/>
+                {
+                    tatuagens &&
+                    <>
+                        <TableTatuagem valores={tatuagens.resultado} />
+                        <Paginacao count={tatuagens.numero_de_dados_totais} limit={limiteDeValoresPorRequisicao} alterOffset={setOffset} />
+                    </>
+                }
             </div>
         </div>
     );

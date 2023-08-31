@@ -9,7 +9,7 @@ import Paginacao from "../../ui/components/Paginacao/Paginacao";
 export default function TatuagemPage() {
     const [tatuagens, setTatuagens] = useState(null);
     const { tokenReact } = useContext(TokenContext)
-    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(1)
+    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(8)
     const [offset, setOffset] = useState(0);
     const navigate = useNavigate()
 
@@ -35,8 +35,7 @@ export default function TatuagemPage() {
                 {
                     tatuagens &&
                     <>
-                        <TableTatuagem valores={tatuagens.resultado} />
-                        <Paginacao count={tatuagens.numero_de_dados_totais} limit={limiteDeValoresPorRequisicao} alterOffset={setOffset} />
+                        <TableTatuagem valores={tatuagens.resultado} countPagination={tatuagens.numero_de_dados_totais} limitPagination={limiteDeValoresPorRequisicao} alterOffsetPagination={setOffset} />
                     </>
                 }
             </div>

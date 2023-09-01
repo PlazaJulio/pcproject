@@ -36,7 +36,7 @@ export default function Paginacao({count, limit, alterOffset}){
     }
 
     return <nav className="pagination" role="navigation">
-        <ul className="pagination-list is-flex is-justify-content-flex-end">
+        <ul className="pagination-list is-flex is-justify-content-center">
             {
                 gerarPaginas()
             }

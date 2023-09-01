@@ -5,12 +5,14 @@ import { TokenContext } from "../../data/context/TokenContext";
 import Menu from "../../ui/components/Menu/Menu";
 import TableTatuagem from "../../ui/components/TableTatuagem/TableTatuagem";
 import Paginacao from "../../ui/components/Paginacao/Paginacao";
+import ModalGenerico from "../../ui/components/ModalGenerico/ModalGenerico";
 
 export default function TatuagemPage() {
     const [tatuagens, setTatuagens] = useState(null);
     const { tokenReact } = useContext(TokenContext)
-    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(8)
+    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(1);
     const [offset, setOffset] = useState(0);
+    const [atualizar, setAtualizar] = useState("");
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -26,7 +28,7 @@ export default function TatuagemPage() {
             }
         }
         fetchData();
-    }, [offset]);
+    }, [offset, atualizar]);
 
     return (
         <div className="columns">
@@ -35,7 +37,7 @@ export default function TatuagemPage() {
                 {
                     tatuagens &&
                     <>
-                        <TableTatuagem valores={tatuagens.resultado} countPagination={tatuagens.numero_de_dados_totais} limitPagination={limiteDeValoresPorRequisicao} alterOffsetPagination={setOffset} />
+                        <TableTatuagem valores={tatuagens.resultado} countPagination={tatuagens.numero_de_dados_totais} limitPagination={limiteDeValoresPorRequisicao} alterOffsetPagination={setOffset} setAltualizarTabela={setAtualizar}/>
                     </>
                 }
             </div>

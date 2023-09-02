@@ -4,20 +4,23 @@ import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../../data/context/TokenContext";
 import Paginacao from "../../ui/components/Paginacao/Paginacao";
 import Menu from "../../ui/components/Menu/Menu";
+import Loading from "../../ui/components/Loading/Loading";
 
 export default function CriminosoPage() {
     const [criminosos, setCriminosos] = useState(null);
     const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(1)
     const [offset, setOffset] = useState(0);
     const { tokenReact } = useContext(TokenContext)
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
     useEffect(() => {
+        setLoading(true)
         const fetchData = async () => {
             try {
                 const response = await requestPost("/criminoso/filtro", null, { "limite": limiteDeValoresPorRequisicao, "deslocar": offset }, tokenReact);
                 const responseData = response.data;
                 setCriminosos(responseData);
-                console.log(responseData);
+                setLoading(false);
             } catch (error) {
                 setCriminosos({});
                 if (error.response && error.response.status === 401) {
@@ -33,6 +36,10 @@ export default function CriminosoPage() {
     return (
         <div className="columns">
             <Menu />
+            {
+                loading &&
+                <Loading/>
+            }
             <div className="column">
                 <p>Criminoso</p>
                 {

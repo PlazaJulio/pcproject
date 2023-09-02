@@ -34,7 +34,7 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                     }
                 } />
         }
-        <table className="table is-bordered is-hoverable width-table has-text-centered ml-auto mr-auto">
+        <table className="table mt-6 is-bordered is-hoverable width-table has-text-centered ml-auto mr-auto">
             <thead>
                 <tr>
                     <th className="has-text-centered">Id</th>

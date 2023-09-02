@@ -6,21 +6,26 @@ import Menu from "../../ui/components/Menu/Menu";
 import TableTatuagem from "../../ui/components/TableTatuagem/TableTatuagem";
 import Paginacao from "../../ui/components/Paginacao/Paginacao";
 import ModalGenerico from "../../ui/components/ModalGenerico/ModalGenerico";
+import Loading from "../../ui/components/Loading/Loading";
+import PopupGenerico from "../../ui/components/PopupGenerico/PopupGenerico";
 
 export default function TatuagemPage() {
     const [tatuagens, setTatuagens] = useState(null);
     const { tokenReact } = useContext(TokenContext)
-    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(1);
+    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(10);
     const [offset, setOffset] = useState(0);
     const [atualizar, setAtualizar] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
 
     useEffect(() => {
+        setLoading(true)
         const fetchData = async () => {
             try {
                 const response = await requestGet("/tipo-de-tatuagem", { "limite": limiteDeValoresPorRequisicao, "deslocar": offset }, tokenReact);
                 const responseData = response.data;
                 setTatuagens(responseData);
+                setLoading(false);
             } catch (error) {
                 if (error.response.status == 401) {
                     navigate("/login")
@@ -32,12 +37,19 @@ export default function TatuagemPage() {
 
     return (
         <div className="columns">
+            {
+                loading &&
+                <Loading />
+            }
             <Menu />
             <div className="column">
+                <div className="column">
+                    <PopupGenerico conteudo="Sucesso" />
+                </div>
                 {
                     tatuagens &&
                     <>
-                        <TableTatuagem valores={tatuagens.resultado} countPagination={tatuagens.numero_de_dados_totais} limitPagination={limiteDeValoresPorRequisicao} alterOffsetPagination={setOffset} setAltualizarTabela={setAtualizar}/>
+                        <TableTatuagem valores={tatuagens.resultado} countPagination={tatuagens.numero_de_dados_totais} limitPagination={limiteDeValoresPorRequisicao} alterOffsetPagination={setOffset} setAltualizarTabela={setAtualizar} />
                     </>
                 }
             </div>

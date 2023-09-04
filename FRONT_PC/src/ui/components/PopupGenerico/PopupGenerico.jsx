@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 
-export default function PopupGenerico({conteudo}) {
+export default function PopupGenerico({conteudo, bg}) {
     const [isNotHidden, setIsNotHidden] = useState(true);
     const [isLeaveActive, setIsLeaveActive] = useState(false);
 
@@ -22,21 +22,19 @@ export default function PopupGenerico({conteudo}) {
     };
 
     return (
-        <>
+        <div className="popup-flutuante">
             {isNotHidden && (
                 <div
-                    id="notification-popup"
-                    className={`notification fade-enter-active zi-1 ${isLeaveActive ? "fade-leave-active" : ""
+                    className={`notification ${bg} fade-enter-active sticky ${isLeaveActive ? "fade-leave-active" : ""
                         }`}
                 >
                     <button
-                        id="close-notification"
                         className="delete"
                         onClick={closePopup}
                     ></button>
                     <div id="notification-content">{conteudo}</div>
                 </div>
             )}
-        </>
+        </div>
     );
 }

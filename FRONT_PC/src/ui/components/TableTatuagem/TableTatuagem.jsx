@@ -8,11 +8,12 @@ import { useContext, useState } from "react";
 import ModalGenerico from "../ModalGenerico/ModalGenerico";
 import { TokenContext } from "../../../data/context/TokenContext";
 import requestPatch from "../../../data/utils/requestPatch";
+import requestDelete from "../../../data/utils/requestDelete";
 
 export default function TableTatuagem({ valores, countPagination, limitPagination, alterOffsetPagination, setAltualizarTabela }) {
     const [modalEditEnable, setModalEditEnable] = useState(false);
-    const [editId, setEditId] = useState(null);
-    const [valorAntigo, setValorAntigo] = useState("");
+    const [modalDeleteEnable, setModalDeleteEnable] = useState(false);
+    const [id, setId] = useState(null);
     const [tipo, setTipo] = useState("")
     const { tokenReact } = useContext(TokenContext)
 
@@ -25,14 +26,30 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                 onChange={(event) => setTipo(event.target.value)}></input>}
                 onClickAccept={
                     () => {
-                        requestPatch("/tipo-de-tatuagem/" + editId, { tipo: tipo }, {}, tokenReact).then(
+                        requestPatch("/tipo-de-tatuagem/" + id, { tipo: tipo }, {}, tokenReact).then(
                             () => {
                                 setModalEditEnable(false)
                                 setAltualizarTabela(tipo)
                             }
-                        ).catch(() => console.log(tokenReact))
+                        ).catch()
                     }
                 } />
+        }
+        {
+            modalDeleteEnable &&
+            <ModalGenerico setModalEnable={setModalDeleteEnable}
+            titulo="Deletar"
+            conteudo={<p>VOCÊ TEM CERTEZA QUE DESEJA DELETAR ESSE DADO?</p>}
+            onClickAccept={
+                () => {
+                    requestDelete("/tipo-de-tatuagem/" + id, {}, tokenReact).then(
+                        (a) => {
+                            console.log(a)
+                        }
+                    ).catch()
+                }
+            }
+            />
         }
         <table className="table mt-6 is-bordered is-hoverable width-table has-text-centered ml-auto mr-auto">
             <thead>
@@ -51,11 +68,13 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                         <td>
                             <ButtonEditar onHandle={() => {
                                 setModalEditEnable(true)
-                                setEditId(dado.id)
-                                setValorAntigo(dado.tipo)
+                                setId(dado.id)
                                 setTipo(dado.tipo)
                             }}><FontAwesomeIcon icon={faPenToSquare} /></ButtonEditar>
-                            <ButtonExcluir onHandle=""><FontAwesomeIcon icon={faTrash} /></ButtonExcluir>
+                            <ButtonExcluir onHandle={() =>{
+                                setModalDeleteEnable(true)
+                                setId(dado.id)
+                            }}><FontAwesomeIcon icon={faTrash} /></ButtonExcluir>
                         </td>
                     </tr>)
                 }

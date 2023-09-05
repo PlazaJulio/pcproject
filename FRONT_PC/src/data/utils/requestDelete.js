@@ -6,7 +6,7 @@ export default async function requestDelete(urlParams, params={}, token=null){
         token = 'Bearer ' + token;
     }
     
-    return axios.delete(url, null, {
+    return axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

@@ -39,12 +39,13 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
             modalDeleteEnable &&
             <ModalGenerico setModalEnable={setModalDeleteEnable}
             titulo="Deletar"
-            conteudo={<p>VOCÊ TEM CERTEZA QUE DESEJA DELETAR ESSE DADO?</p>}
+            conteudo={<p>Você tem certeza que deseja DELETAR esse dado? ({tipo})</p>}
             onClickAccept={
                 () => {
                     requestDelete("/tipo-de-tatuagem/" + id, {}, tokenReact).then(
-                        (a) => {
-                            console.log(a)
+                        () => {
+                            setModalDeleteEnable(false);
+                            setAltualizarTabela(tipo);
                         }
                     ).catch()
                 }
@@ -73,6 +74,7 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                             }}><FontAwesomeIcon icon={faPenToSquare} /></ButtonEditar>
                             <ButtonExcluir onHandle={() =>{
                                 setModalDeleteEnable(true)
+                                setTipo(dado.tipo)
                                 setId(dado.id)
                             }}><FontAwesomeIcon icon={faTrash} /></ButtonExcluir>
                         </td>

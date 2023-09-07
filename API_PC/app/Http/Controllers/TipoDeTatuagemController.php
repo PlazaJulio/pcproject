@@ -19,8 +19,9 @@ class TipoDeTatuagemController extends Controller
     {
         $limite = $request->limite ? $request->limite : 10;
         $deslocar = $request->deslocar ? $request->deslocar : 0;
-        $numero_de_dados_totais = TipoDeTatuagem::count();
-        return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar"=>$deslocar,"limite"=>$limite,"resultado" => TipoDeTatuagem::offset($deslocar)->limit($limite)->where('excluido', false)->orderBy("id")->get()]);
+        $resultado = TipoDeTatuagem::where('excluido', false)->orderBy("id");
+        $numero_de_dados_totais = count($resultado->get());
+        return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar"=>$deslocar,"limite"=>$limite,"resultado" => $resultado->offset($deslocar)->limit($limite)->get()]);
     }
 
     public function inserir(Request $request)

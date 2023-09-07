@@ -11,7 +11,7 @@ import requestDelete from "../../../data/utils/requestDelete";
 import PopupGenerico from "../PopupGenerico/PopupGenerico";
 import "./style.css"
 
-export default function TableTatuagem({ valores, countPagination, limitPagination, alterOffsetPagination, setAltualizarTabela }) {
+export default function TableTatuagem({ valores, countPagination, limitPagination, alterOffsetPagination, setAltualizarTabela, atualizar}) {
     const [modalEditEnable, setModalEditEnable] = useState(false);
     const [modalDeleteEnable, setModalDeleteEnable] = useState(false);
     const [popupSucesso, setPopupSucesso] = useState(false);
@@ -49,7 +49,7 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                         requestPatch("/tipo-de-tatuagem/" + id, { tipo: tipo }, {}, tokenReact).then(
                             () => {
                                 setModalEditEnable(false)
-                                setAltualizarTabela(tipo)
+                                setAltualizarTabela(!atualizar)
                                 setPopupSucesso(true)
                                 setConteudoPopup("Dado editado com sucesso!")
                             }
@@ -72,12 +72,12 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                         requestDelete("/tipo-de-tatuagem/" + id, {}, tokenReact).then(
                             () => {
                                 setModalDeleteEnable(false);
-                                setAltualizarTabela(tipo);
+                                setAltualizarTabela(!atualizar);
                                 setPopupSucesso(true)
                                 setConteudoPopup("Dadao excluido com sucesso!")
                             }
                         ).catch(
-                            ()=>{
+                            () => {
                                 setPopupErro(true)
                                 setConteudoPopup("Erro")
                             }
@@ -86,7 +86,7 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                 }
             />
         }
-        <table className="table mt-6 is-bordered is-hoverable width-table has-text-centered ml-auto mr-auto">
+        <table className="table mt-4 is-bordered is-hoverable width-table has-text-centered ml-auto mr-auto">
             <thead>
                 <tr>
                     <th className="has-text-centered">Id</th>

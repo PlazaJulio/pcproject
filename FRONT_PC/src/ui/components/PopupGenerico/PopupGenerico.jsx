@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 
-export default function PopupGenerico({conteudo, bg}) {
+export default function PopupGenerico({conteudo, bg, setVariavelDeEstado}) {
     const [isNotHidden, setIsNotHidden] = useState(true);
     const [isLeaveActive, setIsLeaveActive] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
             setIsNotHidden(false);
+            setVariavelDeEstado(false);
         }, 4000);
         setTimeout(()=>{
             setIsLeaveActive(true)
         }, 3700)
+
     }, []);
 
     const closePopup = () => {
         setTimeout(()=>{
             setIsNotHidden(false);
+            setVariavelDeEstado(false);
         }, 300)
-        setIsLeaveActive(true)
+        setIsLeaveActive(true);
     };
 
     return (

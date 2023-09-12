@@ -2,13 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import requestPost from "../../data/utils/requestPost";
 import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../../data/context/TokenContext";
+import CardCriminoso from "../../ui/components/CardCriminoso/CardCriminoso";
 import Paginacao from "../../ui/components/Paginacao/Paginacao";
 import Menu from "../../ui/components/Menu/Menu";
 import Loading from "../../ui/components/Loading/Loading";
 
 export default function CriminosoPage() {
     const [criminosos, setCriminosos] = useState(null);
-    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(1)
+    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(5)
     const [offset, setOffset] = useState(0);
     const { tokenReact } = useContext(TokenContext)
     const [loading, setLoading] = useState(false);
@@ -38,19 +39,21 @@ export default function CriminosoPage() {
             <Menu />
             {
                 loading &&
-                <Loading/>
+                <Loading />
             }
+
             <div className="column">
-                <p>Criminoso</p>
+                <div className="columns">
+                    {
+                        criminosos &&
+                        criminosos.resultado.map((criminoso) => {
+                            return <div className="column is-one-fifth"><CardCriminoso nomeCriminoso={criminoso.nome} conteudo="" imagem="" /></div>
+                        })
+                    }
+                </div>
                 {
                     criminosos &&
                     <Paginacao count={criminosos.numero_de_dados_totais} limit={limiteDeValoresPorRequisicao} alterOffset={setOffset} />
-                }
-                {
-                    criminosos &&
-                    criminosos.resultado.map((criminoso) => {
-                        return <p>{criminoso.nome}</p>
-                    })
                 }
             </div>
         </div>

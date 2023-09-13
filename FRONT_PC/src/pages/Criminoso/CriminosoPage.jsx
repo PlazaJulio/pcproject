@@ -9,7 +9,7 @@ import Loading from "../../ui/components/Loading/Loading";
 
 export default function CriminosoPage() {
     const [criminosos, setCriminosos] = useState(null);
-    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(5)
+    const [limiteDeValoresPorRequisicao, setLimiteDeValoresPorRequisicao] = useState(8)
     const [offset, setOffset] = useState(0);
     const { tokenReact } = useContext(TokenContext)
     const [loading, setLoading] = useState(false);
@@ -43,11 +43,12 @@ export default function CriminosoPage() {
             }
 
             <div className="column">
-                <div className="columns">
+                <h1> Criminosos: </h1>
+                <div className="columns is-multiline">
                     {
                         criminosos &&
                         criminosos.resultado.map((criminoso) => {
-                            return <div className="column is-one-fifth"><CardCriminoso nomeCriminoso={criminoso.nome} conteudo="" imagem="" /></div>
+                            return <div className="column is-one-quarter"><CardCriminoso nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem="" /></div>
                         })
                     }
                 </div>

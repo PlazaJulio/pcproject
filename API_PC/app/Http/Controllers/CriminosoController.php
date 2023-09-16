@@ -67,15 +67,16 @@ class CriminosoController extends Controller
                 "cor_da_pele" => $request->cor_da_pele,
                 "cor_do_cabelo" => $request->cor_do_cabelo,
                 "tipo_de_cabelo" => $request->tipo_de_cabelo,
-                "foto_perfil_esquerdo" => $request->foto_perfil_esquerdo,
-                "foto_perfil_direito" => $request->foto_perfil_direito,
-                "foto_frente" => $request->foto_frente,
+                "foto_perfil_esquerdo" => base64_encode(file_get_contents($request->foto_perfil_esquerdo)),
+                "foto_perfil_direito" => base64_encode(file_get_contents($request->foto_perfil_direito)),
+                "foto_frente" => base64_encode(file_get_contents($request->foto_frente)),
                 "endereco_id" => $request->endereco_id,
                 "usuario_id" => auth()->user()->id,
                 "excluido" => false
                 
             ]);
-        }catch(Exception){
+        }catch(Exception $e){
+            return $e;
             return response("Requisição feita de maneira incorreta", 400);
         }
     }

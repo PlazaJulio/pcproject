@@ -3,12 +3,13 @@ import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ButtonEditar from '../../partials/ButtonEditar';
 import ButtonExcluir from '../../partials/ButtonExcluir';
 import calcularIdade from "../../../data/utils/calcularIdade";
+import base64EmImagem from '../../../data/utils/base64EmImagem';
 
 export default function CardCriminoso({ nomeCriminoso, imagem, dataNasc }) {
     const dataN = new Date(dataNasc)
     return <div className="card m-2">
         <figure className="card-image">
-            <img src="https://img.freepik.com/fotos-gratis/criminoso-autoconfiante-posando-isolado-em-uma-superficie-cinza_176532-14391.jpg" />
+            <img src={base64EmImagem(imagem)} />
         </figure>
         <div className="card-content">
             <p><b>{nomeCriminoso}</b></p>

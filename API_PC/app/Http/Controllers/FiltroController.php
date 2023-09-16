@@ -64,7 +64,8 @@ class FiltroController extends Controller
             $criminosos->where("criminoso.excluido", false);
             $numero_de_dados_totais = count($criminosos->get());
             return response()->json(["numero_de_dados_totais" => $numero_de_dados_totais, "deslocar" => $deslocar, "limite" => $limite,  "resultado" =>$criminosos->offset($deslocar)->limit($limite)->orderBy("criminoso.id")->get()]);
-        }catch(Exception){
+        }catch(Exception $ex){
+            return $ex;
             return response("Requisição feita de maneira incorreta", 400);
         }
     }

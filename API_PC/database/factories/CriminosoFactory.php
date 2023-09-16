@@ -5,20 +5,21 @@ namespace Database\Factories;
 use App\Models\Criminoso;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Helpers\Converter;
 
 class CriminosoFactory extends Factory
 {
-    
+
     protected $model = Criminoso::class;
 
     public function definition()
     {
-        
+
         $listaDatasNsci = ["2000-05-22", "2005-04-21", "2001-03-04", "2003-12-12"];
         $listaobito_foragido = [true, false];
         $listaLocalTra = ["Padaria", "Buteco do Ze", "Amigao", "FarmaciaMarilia"];
         $listaTrabalho = ["Carpinteiro", "Pedreiro", "Pinto", "Vendedor"];
-        
+
         return [
             'nome' => $this->faker->name,
             'alcunha' => $this->faker->userName,
@@ -39,9 +40,9 @@ class CriminosoFactory extends Factory
             'genero' => $this->faker->word,
             'altura' => round(rand(1, 2) + (mt_rand() / mt_getrandmax()), 2),
             'etnia' => $this->faker->country,
-            'foto_perfil_esquerdo' => $this->faker->sentence,
-            'foto_perfil_direito' => $this->faker->sentence,
-            'foto_frente' => $this->faker->sentence,
+            'foto_perfil_esquerdo' => Converter::imagemEmBase64(base_path("public/imagemSeeder.png")),
+            'foto_perfil_direito' => Converter::imagemEmBase64(base_path("public/imagemSeeder.png")),
+            'foto_frente' => Converter::imagemEmBase64(base_path("public/imagemSeeder.png")),
             'cor_da_pele' => $this->faker->word,
             'cor_do_cabelo' => $this->faker->word,
             'porte_fisico' => $this->faker->word(),

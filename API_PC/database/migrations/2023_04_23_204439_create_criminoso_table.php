@@ -37,9 +37,9 @@ return new class extends Migration
             $table->string('cor_da_pele');
             $table->string('cor_do_cabelo');
             $table->string('tipo_de_cabelo');
-            $table->string('foto_perfil_esquerdo');
-            $table->string('foto_perfil_direito');
-            $table->string('foto_frente');
+            $table->text('foto_perfil_esquerdo');
+            $table->text('foto_perfil_direito');
+            $table->text('foto_frente');
             $table->boolean('excluido');
             
             $table->unsignedBigInteger('endereco_id');

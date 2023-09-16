@@ -48,7 +48,7 @@ export default function CriminosoPage() {
                     {
                         criminosos &&
                         criminosos.resultado.map((criminoso) => {
-                            return <div className="column is-one-quarter"><CardCriminoso nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem="" /></div>
+                            return <div className="column is-one-quarter"><CardCriminoso nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem={criminoso.foto_perfil_esquerdo} /></div>
                         })
                     }
                 </div>

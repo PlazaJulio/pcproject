@@ -13,6 +13,7 @@ export default function CriminosoPage() {
     const [offset, setOffset] = useState(0);
     const { tokenReact } = useContext(TokenContext)
     const [loading, setLoading] = useState(false);
+    const [atualizar, setAtualizar] = useState(false);
     const navigate = useNavigate()
     useEffect(() => {
         setLoading(true)
@@ -31,7 +32,7 @@ export default function CriminosoPage() {
         };
 
         fetchData();
-    }, [offset, limiteDeValoresPorRequisicao, tokenReact, navigate]);
+    }, [offset, limiteDeValoresPorRequisicao, tokenReact, atualizar]);
 
 
     return (
@@ -48,7 +49,7 @@ export default function CriminosoPage() {
                     {
                         criminosos &&
                         criminosos.resultado.map((criminoso) => {
-                            return <div className="column is-one-quarter"><CardCriminoso nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem={criminoso.foto_perfil_esquerdo} /></div>
+                            return <div className="column is-one-quarter"><CardCriminoso id={criminoso.id} nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem={criminoso.foto_perfil_esquerdo} atualizar={atualizar} setAtualizar={setAtualizar} criminosoObj={criminoso}/></div>
                         })
                     }
                 </div>

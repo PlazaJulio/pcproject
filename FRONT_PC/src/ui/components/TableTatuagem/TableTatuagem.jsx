@@ -3,7 +3,7 @@ import ButtonExcluir from "../../partials/ButtonExcluir";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Paginacao from "../Paginacao/Paginacao";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import ModalGenerico from "../ModalGenerico/ModalGenerico";
 import { TokenContext } from "../../../data/context/TokenContext";
 import requestPatch from "../../../data/utils/requestPatch";

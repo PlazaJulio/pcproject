@@ -4,11 +4,13 @@ import ButtonEditar from '../../partials/ButtonEditar';
 import ButtonExcluir from '../../partials/ButtonExcluir';
 import calcularIdade from "../../../data/utils/calcularIdade";
 import base64EmImagem from '../../../data/utils/base64EmImagem';
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { TokenContext } from "../../../data/context/TokenContext";
 import ModalGenerico from '../ModalGenerico/ModalGenerico';
 import PopupGenerico from '../PopupGenerico/PopupGenerico';
 import requestDelete from '../../../data/utils/requestDelete';
+import requestGet from "../../../data/utils/requestGet";
+import Loading from '../Loading/Loading';
 
 export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atualizar, setAtualizar, criminosoObj }) {
     const dataString = dataNasc;
@@ -23,7 +25,29 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
     const [popupErro, setPopupErro] = useState(false);
     const [conteudoPopup, setConteudoPopup] = useState("");
     const { tokenReact } = useContext(TokenContext)
+    const [objMarca, setObjMarca] = useState(null);
+    const [loading, setLoading] = useState(false);
 
+    useEffect(() => {
+        setLoading(true)
+        if (modalViewEnable) {
+            const fetchDataMarca = async () => {
+                try {
+                    const responseMarca = await requestGet("/marca/criminoso/" + id, {}, tokenReact);
+                    const responseDataMarca = responseMarca.data;
+                    if (responseDataMarca != []) {
+                        setObjMarca(responseDataMarca);
+                        console.log(responseDataMarca);
+                    }
+                } catch (error) {
+                }
+            }
+            fetchDataMarca();
+            setLoading(false);
+        } else {
+            setLoading(false)
+        }
+    }, [modalViewEnable]);
     return <>
         {
             popupSucesso &&
@@ -32,6 +56,10 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                 conteudo={<p>{conteudoPopup}</p>}
                 setVariavelDeEstado={setPopupSucesso}
             />
+        }
+        {
+            loading &&
+            <Loading />
         }
         {
             popupErro &&
@@ -97,6 +125,17 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                         <li><b>Foto perfil esquerdo:</b> <figure className='image  is-128x128'><img src={base64EmImagem(criminosoObj.foto_perfil_esquerdo)}></img></figure></li>
                         <li><b>Foto perfil direito:</b> <figure className='image  is-128x128'><img src={base64EmImagem(criminosoObj.foto_perfil_direito)}></img></figure></li>
                         <li><b>Data de nascimento:</b> {data.toLocaleDateString("pt-BR")}</li>
+                        <li><b>CEP:</b> {criminosoObj.cep}</li>
+                        <li><b>Rua:</b> {criminosoObj.rua}</li>
+                        <li><b>Bairro:</b> {criminosoObj.bairro}</li>
+                        <li><b>Numero da residencia:</b> {criminosoObj.numero}</li>
+                        <li><b>Complemento:</b> {criminosoObj.complemento}</li>
+                        {
+                            objMarca &&
+                            objMarca.map(() => {
+                                <p>oi</p>
+                            })
+                        }
                     </ul>
                 }
             />

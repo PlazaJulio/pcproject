@@ -48,9 +48,15 @@ class Criminoso extends Model
                            'foto_frente',
                            'cor_da_pele',
                            'cor_do_cabelo',
-                           'endereco_id',
+                           'cep',
+                           'rua',
+                           'bairro',
+                           'numero',
+                           'complemento',
                            'excluido',
-                           'usuario_id'];
+                           'excluido',
+                           'usuario_id'
+                        ];
     const CREATED_AT = 'criado_em';
     const UPDATED_AT = 'alterado_em';
 }

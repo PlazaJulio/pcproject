@@ -72,6 +72,10 @@ class CriminosoController extends Controller
                 "foto_frente" => base64_encode(file_get_contents($request->foto_frente)),
                 "endereco_id" => $request->endereco_id,
                 "usuario_id" => auth()->user()->id,
+                'cep' => $request->cep, 
+                'rua' => $request->rua,
+                'bairro' => $request->bairro,
+                'numero' => $request->numero,
                 "excluido" => false
                 
             ]);

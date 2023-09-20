@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-                EnderecoSeeder::class,
                 CriminosoSeeder::class,
                 MarcaSeeder::class,
                 AntecedenteSeeder::class,

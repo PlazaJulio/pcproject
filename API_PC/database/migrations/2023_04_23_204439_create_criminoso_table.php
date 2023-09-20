@@ -40,10 +40,12 @@ return new class extends Migration
             $table->text('foto_perfil_esquerdo');
             $table->text('foto_perfil_direito');
             $table->text('foto_frente');
+            $table->string('cep')->nullable(true);
+            $table->string('rua');
+            $table->string('bairro');
+            $table->integer('numero');
+            $table->string('complemento')->nullable(true);
             $table->boolean('excluido');
-            
-            $table->unsignedBigInteger('endereco_id');
-            $table->foreign('endereco_id')->references('id')->on('endereco');
 
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuario');

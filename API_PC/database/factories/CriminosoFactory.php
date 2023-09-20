@@ -48,9 +48,13 @@ class CriminosoFactory extends Factory
             'porte_fisico' => $this->faker->word(),
             'cor_dos_olhos' => $this->faker->word(),
             'tipo_de_cabelo' => $this->faker->word(),
-            'endereco_id' => random_int(1, 10),
             'usuario_id' => 1,
-            'excluido' => false
+            'excluido' => false,
+            'cep' => $this->faker->numerify('########'), 
+            'rua' => $this->faker->name,
+            'bairro' => $this->faker->name,
+            'numero' => $this->faker->numberBetween(0, 1000),
+            'complemento' => $this->faker->randomElement(['Bloco A', 'Bloco B', 'Bloco C', null]),
         ];
     }
 }

@@ -20,10 +20,6 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
         $router->post("/acusacao/inserir", "AcusacaoController@inserir");
         $router->delete("/acusacao/{id}", "AcusacaoController@deletar");
         $router->patch("/acusacao/{id}", "AcusacaoController@alterar");
-
-        $router->post("/endereco/inserir", "EnderecoController@inserir");
-        $router->delete("/endereco/{id}", "EnderecoController@deletar");
-        $router->patch("/endereco/{id}", "EnderecoController@alterar");
         
         $router->post("/antecedente/inserir", "AntecedenteController@inserir");
         $router->delete("/antecedente/{id}", "AntecedenteController@deletar");
@@ -53,9 +49,6 @@ $router->group(['middleware' => 'auth:api'], function ($router) {
 
     $router->get("/acusacao/{id}", "AcusacaoController@mostrarPorId");
     $router->get("/acusacao", "AcusacaoController@mostrarTodos");
-
-    $router->get("/endereco/{id}", "EnderecoController@mostrarPorId");
-    $router->get("/endereco", "EnderecoController@mostrarTodos");
 
     $router->get("/antecedente/{id}", "AntecedenteController@mostrarPorId");
     $router->get("/antecedente", "AntecedenteController@mostrarTodos");

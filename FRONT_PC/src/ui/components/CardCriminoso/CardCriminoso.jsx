@@ -26,7 +26,6 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
     const [conteudoPopup, setConteudoPopup] = useState("");
     const { tokenReact } = useContext(TokenContext)
     const [objMarca, setObjMarca] = useState(null);
-    const [objTipoDeTatuagem, setObjTipoDeTatuagem] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -35,22 +34,23 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
             const fetchDataMarca = async () => {
                 try {
                     const responseMarca = await requestGet("/marca/criminoso/" + id, {}, tokenReact);
-                    const responseDataMarca = responseMarca.data;
-                    responseDataMarca = await responseDataMarca.map(async (marca)=>{
-                        const pegarTipoDeTatuagem = async() => {
-                            if(marca.tipo_de_tatuagem_id != null){
-                                const tipo = await requestGet("/tipo-de-tatuagem/"+ marca.tipo_de_tatuagem_id, {}, tokenReact)
-                                return tipo.data.tipo                           
+                    const responseDataMarca = await Promise.all(responseMarca.data.map(async (marca) => {
+                        const pegarTipoDeTatuagem = async () => {
+                            if (marca.tipo_de_tatuagem_id != null) {
+                                const tipo = await requestGet("/tipo-de-tatuagem/" + marca.tipo_de_tatuagem_id, {}, tokenReact);
+                                return tipo.data.tipo;
                             }
-                            return null
+                            return null;
                         }
-                        marca.tipo_de_tatuagem = await pegarTipoDeTatuagem()
-                    })
+                        marca.tipo_de_tatuagem = await pegarTipoDeTatuagem();
+                        return marca;
+                    }));
                     console.log(responseDataMarca)
-                    if (responseDataMarca != []) {
+                    if (responseDataMarca.length > 0) {
                         setObjMarca(responseDataMarca);
                     }
                 } catch (error) {
+                    console.log(error)
                 }
             }
             fetchDataMarca();
@@ -163,7 +163,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                                     <li><b>Tipo da tatuagem: </b> {tatuagem.tipo_de_tatuagem == null ? "Não é uma tatuagem" : tatuagem.tipo_de_tatuagem}</li>
                                     <li><b>Descrição da marca:</b> {tatuagem.descricao}</li>
                                     <li><b>Parte do corpo com a marca:</b> {tatuagem.parte_do_corpo}</li>
-                                    <li><b>Foto da marca:</b> <figure className='image  is-128x128'><img src={base64EmImagem(tatuagem.foto)}></img></figure></li>                                    
+                                    <li><b>Foto:</b> <figure className='image  is-128x128'><img src={base64EmImagem(tatuagem.foto)}></img></figure></li>
                                 </>
                             })
                         }

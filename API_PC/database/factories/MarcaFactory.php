@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Marca;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Helpers\Converter;
 
 class MarcaFactory extends Factory
 {
@@ -20,7 +21,7 @@ class MarcaFactory extends Factory
             'cicatriz_ou_tatuagem' => $cOuT,
             'descricao' => $this->faker->sentence,
             'parte_do_corpo' => $this->faker->word,
-            'foto' => $this->faker->sentence,
+            'foto' => Converter::imagemEmBase64(base_path("public/imagemSeeder.png")),
             'tipo_de_tatuagem_id' => ($cOuT == 't')? random_int(1, 5): null,
             'criminoso_id' => random_int(1, 10),
             'usuario_id' => 1,

@@ -33,8 +33,6 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
     const [loading, setLoading] = useState(false);
     const [modalAddMarca, setModalAddMarca] = useState(false);
 
-
-
     const [nome, setNome] = useState(criminosoObj.nome);
     const [alcunha, setAlcunha] = useState(criminosoObj.alcunha);
     const [genero, setGenero] = useState(criminosoObj.genero);
@@ -81,6 +79,15 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
 
     useEffect(() => {
         setLoading(true)
+        if (!modalAddMarca) {
+            setTatuagens(null)
+            setTipoTatuagemAddMarcaId(null)
+            setEhTatuagem(false)
+            setDescricaoTatuagem("")
+            setParteDoCorpo("")
+            setFotoMarca("")
+            setFotoMarcaBase64("")
+        }
         if (!modalEditEnable) {
             setNome(criminosoObj.nome)
             setAlcunha(criminosoObj.alcunha)
@@ -150,7 +157,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
         fetchDataMarca();
         setLoading(false);
 
-    }, [modalViewEnable, modalDeleteEnable, modalEditEnable]);
+    }, [modalViewEnable, modalDeleteEnable, modalEditEnable, modalAddMarca]);
 
     async function deletarMarca(id) {
         await requestDelete("/marca/" + id, {}, tokenReact)
@@ -572,20 +579,24 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                     </>
                 }
                 onClickAccept={
-                    () =>{
-                        requestPost("/marca/inserir",{
-                            cicatriz_ou_tatuagem: 't',
-                            descricao: "Serpente",
-                            parte_do_corpo: "ombro",
+                    () => {
+                        requestPost("/marca/inserir", {
+                            cicatriz_ou_tatuagem: ehTatuagem ? "t" : "c",
+                            descricao: descricaoTatuagem,
+                            parte_do_corpo: parteDoCorpo,
                             foto: fotoMarcaBase64,
-                            tipo_de_tatuagem_id: null,
-                            criminoso_id: 1
+                            tipo_de_tatuagem_id: tipoTatuagemAddMarcaId,
+                            criminoso_id: criminosoObj.id
                         }, {}, tokenReact).then(() => {
                             setModalAddMarca(false);
                             setAtualizar(!atualizar);
                             setPopupSucesso(true)
                             setConteudoPopup("Marca adicionada com sucesso!")
-                        }).catch((ex) => console.log("Ola"))
+                        }).catch(() => {
+                            setPopupErro(true)
+                            setConteudoPopup("Erro")
+                        }
+                        )
                     }
                 }
             />
@@ -637,7 +648,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                         {
                             objMarca &&
                             objMarca.map((tatuagem, index) => {
-                                return <>
+                                return <div className='mb-4'>
                                     <hr></hr>
                                     <b><span className='is-size-4'>{index + 1}º - Marca</span></b>
                                     <li><b>Cicatriz ou tatuagem:</b> {tatuagem.cicatriz_ou_tatuagem == 'c' ? "cicatriz" : "tatuagem"}</li>
@@ -645,14 +656,16 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                                     <li><b>Descrição da marca:</b> {tatuagem.descricao}</li>
                                     <li><b>Parte do corpo com a marca:</b> {tatuagem.parte_do_corpo}</li>
                                     <li><b>Foto:</b> <figure className='image  is-128x128'><img src={base64EmImagem(tatuagem.foto)}></img></figure></li>
-                                    <button className='button is-danger' onClick={() => deletarMarca(tatuagem.id)}>Excluir Marca</button>
-                                </>
+                                    <button className='button is-danger mt-2' onClick={() => deletarMarca(tatuagem.id)}>Excluir Marca</button>
+                                </div>
                             })
                         }
-                        <button className='button' onClick={() => {
-                            setModalAddMarca(true)
-                            setModalViewEnable(false)
-                        }}>Adicionar marca +</button>
+                        <div className='mt-4'>
+                            <button className='button is-success' onClick={() => {
+                                setModalAddMarca(true)
+                                setModalViewEnable(false)
+                            }}>Adicionar marca +</button>
+                        </div>
                     </ul>
                 }
             />

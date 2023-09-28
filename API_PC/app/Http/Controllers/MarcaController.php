@@ -39,14 +39,14 @@ class MarcaController extends Controller
                 "cicatriz_ou_tatuagem" => $request->cicatriz_ou_tatuagem,
                 "descricao" => $request->descricao,
                 "parte_do_corpo" => $request->parte_do_corpo,
-                "foto" => base64_encode(file_get_contents($request->foto)),
+                "foto" => $request->foto,
                 "tipo_de_tatuagem_id" => $request->tipo_de_tatuagem_id,
                 "criminoso_id" => $request->criminoso_id,
                 "usuario_id" => auth()->user()->id,
                 "excluido" => false
                 
             ]);
-        }catch(Exception){
+        }catch(Exception $e){
             return response("Requisição feita de maneira incorreta", 400);
         }
     }

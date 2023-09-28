@@ -49,7 +49,7 @@ export default function CriminosoPage() {
                     {
                         criminosos &&
                         criminosos.resultado.map((criminoso) => {
-                            return <div className="column is-one-quarter"><CardCriminoso id={criminoso.id} nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem={criminoso.foto_perfil_esquerdo} atualizar={atualizar} setAtualizar={setAtualizar} criminosoObj={criminoso}/></div>
+                            return <div className="column is-one-quarter"><CardCriminoso id={criminoso.id} nomeCriminoso={criminoso.nome} dataNasc={criminoso.data_de_nascimento} imagem={criminoso.foto_frente} atualizar={atualizar} setAtualizar={setAtualizar} criminosoObj={criminoso}/></div>
                         })
                     }
                 </div>

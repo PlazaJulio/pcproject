@@ -46,7 +46,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
     const [foragido, setForagido] = useState(criminosoObj.foragido);
     const [naturalidade, setNaturalidade] = useState(criminosoObj.naturalidade);
     const [nacionalidade, setNacionalidade] = useState(criminosoObj.nacionalidade);
-    const [localDeTrablho, setLocalDeTrablho] = useState(criminosoObj.local_de_trabalho);
+    const [localDeTrabalho, setLocalDeTrabalho] = useState(criminosoObj.local_de_trabalho);
     const [profissao, setProfissao] = useState(criminosoObj.profissao);
     const [grauDeEscolaridade, setGrauDeEscolaridade] = useState(criminosoObj.grau_de_escolaridade);
     const [altura, setAltura] = useState(criminosoObj.altura);
@@ -81,7 +81,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
         setLoading(true)
         if (!modalAddMarca) {
             setTatuagens(null)
-            setTipoTatuagemAddMarcaId(null)
+            setTipoTatuagemAddMarcaId(1)
             setEhTatuagem(false)
             setDescricaoTatuagem("")
             setParteDoCorpo("")
@@ -102,7 +102,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
             setForagido(criminosoObj.foragido)
             setNaturalidade(criminosoObj.naturalidade)
             setNacionalidade(criminosoObj.nacionalidade)
-            setLocalDeTrablho(criminosoObj.local_de_tabalho)
+            setLocalDeTrabalho(criminosoObj.local_de_tabalho)
             setProfissao(criminosoObj.profissao)
             setGrauDeEscolaridade(criminosoObj.grau_de_escolaridade)
             setAltura(criminosoObj.altura)
@@ -286,8 +286,8 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
 
                         <div className='mb-3'>
                             <p>Local de trabalho:</p>
-                            <input className="input" placeholder="Local de tabalho" value={localDeTrablho}
-                                onChange={(event) => setLocalDeTrablho(event.target.value)}></input>
+                            <input className="input" placeholder="Local de tabalho" value={localDeTrabalho}
+                                onChange={(event) => setLocalDeTrabalho(event.target.value)}></input>
                         </div>
 
                         <div className='mb-3'>
@@ -481,7 +481,7 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                                 "foragido": foragido,
                                 "naturalidade": naturalidade,
                                 "nacionalidade": nacionalidade,
-                                "local_de_tabalho": localDeTrablho,
+                                "local_de_tabalho": localDeTrabalho,
                                 "profissao": profissao,
                                 "grau_de_escolaridade": grauDeEscolaridade,
                                 "altura": altura,

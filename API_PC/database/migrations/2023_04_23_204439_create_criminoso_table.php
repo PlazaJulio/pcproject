@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('alcunha');
-            $table->string('telefone');
+            $table->string('telefone')->nullable(true);
             $table->string('pai');
             $table->string('mae');
             $table->date('data_de_nascimento');
@@ -23,15 +23,15 @@ return new class extends Migration
             $table->boolean('foragido');
             $table->string('rg')->unique();
             $table->string('cpf')->unique();
-            $table->string('naturalidade');
-            $table->string('nacionalidade');
-            $table->string('local_de_trabalho');
-            $table->string('profissao');
+            $table->string('naturalidade')->nullable(true);
+            $table->string('nacionalidade')->nullable(true);
+            $table->string('local_de_trabalho')->nullable(true);
+            $table->string('profissao')->nullable(true);
             $table->string('estado_civil')->nullable('true');
             $table->string('grau_de_escolaridade')->nullable('true');
             $table->string('genero');
-            $table->float('altura');
-            $table->string('etnia');
+            $table->float('altura')->nullable('true');
+            $table->string('etnia')->nullable('true');
             $table->string('porte_fisico');
             $table->string('cor_dos_olhos');
             $table->string('cor_da_pele');
@@ -41,9 +41,9 @@ return new class extends Migration
             $table->text('foto_perfil_direito');
             $table->text('foto_frente');
             $table->string('cep')->nullable(true);
-            $table->string('rua');
-            $table->string('bairro');
-            $table->integer('numero');
+            $table->string('rua')->nullable(true);
+            $table->string('bairro')->nullable(true);
+            $table->integer('numero')->nullable(true);
             $table->string('complemento')->nullable(true);
             $table->boolean('excluido');
 

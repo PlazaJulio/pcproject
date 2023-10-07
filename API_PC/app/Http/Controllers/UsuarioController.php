@@ -40,7 +40,8 @@ class UsuarioController extends Controller
                 "password" => Hash::make($request->password),
                 "excluido" => false
             ]);
-        }catch(Exception){
+        }catch(Exception $e){
+            return $e;
             return response("Requisição feita de maneira incorreta", 400);
         }
     }

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('usuario')->unique();
             $table->string('password');
             $table->string('nome');
-            $table->dateTime('ultimo_acesso');
+            $table->dateTime('ultimo_acesso')->nullable(true);
             $table->boolean('permissao_de_escrita');
             $table->boolean('excluido');
             $table->timestamp('criado_em')->useCurrent();

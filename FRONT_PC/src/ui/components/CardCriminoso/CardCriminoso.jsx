@@ -499,7 +499,17 @@ export default function CardCriminoso({ id, nomeCriminoso, imagem, dataNasc, atu
                                 "bairro": bairro,
                                 "numero": numero,
                                 "complemento": complemento
-                            }, {}, tokenReact)
+                            }, {}, tokenReact).then(
+                                () => {
+                                    setPopupSucesso(true)
+                                    setConteudoPopup("Alteração feita com sucesso!")
+                                }
+                            ).catch(
+                                () => {
+                                    setPopupErro(true)
+                                    setConteudoPopup("erro")
+                                }
+                            )
                         setModalEditEnable(false)
                         setAtualizar(!atualizar)
                     }

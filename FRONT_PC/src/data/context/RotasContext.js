@@ -8,9 +8,5 @@ export const RotasContext = createContext([
     {
         to: "/tatuagem",
         nome: "Tatuagens"
-    },
-    {
-        to: "/acusacao",
-        nome: "Acusações"
-    },
+    }   
 ]);

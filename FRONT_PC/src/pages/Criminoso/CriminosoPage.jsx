@@ -9,6 +9,7 @@ import Loading from "../../ui/components/Loading/Loading";
 import ModalGenerico from "../../ui/components/ModalGenerico/ModalGenerico";
 import ImagemEmBase64 from "../../data/utils/ImagemEmBase64";
 import PopupGenerico from "../../ui/components/PopupGenerico/PopupGenerico";
+import requestGet from "../../data/utils/requestGet";
 
 export default function CriminosoPage() {
 
@@ -27,11 +28,12 @@ export default function CriminosoPage() {
     const [popupSucesso, setPopupSucesso] = useState(false);
     const [popupErro, setPopupErro] = useState(false);
     const [conteudoPopup, setConteudoPopup] = useState("");
+    const [modalFilterEnable, setModalFilterEnable] = useState(false);
     const navigate = useNavigate()
 
     const [nome, setNome] = useState("");
     const [alcunha, setAlcunha] = useState("");
-    const [genero, setGenero] = useState("");
+    const [genero, setGenero] = useState("Masculino");
     const [dataDeNascimento, setDataDeNascimento] = useState(`${ano}-${mes}-${dia}`);
     const [pai, setPai] = useState("");
     const [mae, setMae] = useState("");
@@ -64,12 +66,52 @@ export default function CriminosoPage() {
     const [numero, setNumero] = useState(null);
     const [complemento, setComplemento] = useState("");
 
+    const [tatuagens, setTatuagens] = useState({});
+
+    const [nomeF, setNomeF] = useState(null);
+    const [alcunhaF, setAlcunhaF] = useState(null);
+    const [generoF, setGeneroF] = useState(null);
+    const [idadeMinF, setIdadeMinF] = useState(null);
+    const [idadeMaxF, setIdadeMaxF] = useState(null);
+    const [paiF, setPaiF] = useState(null);
+    const [maeF, setMaeF] = useState(null);
+    const [rgF, setRgF] = useState(null);
+    const [cpfF, setCpfF] = useState(null);
+    const [telefoneF, setTelefoneF] = useState(null);
+    const [obitoF, setObitoF] = useState(null);
+    const [foragidoF, setForagidoF] = useState(null);
+    const [naturalidadeF, setNaturalidadeF] = useState(null);
+    const [nacionalidadeF, setNacionalidadeF] = useState(null);
+    const [localDeTrabalhoF, setLocalDeTrabalhoF] = useState(null);
+    const [profissaoF, setProfissaoF] = useState(null);
+    const [grauDeEscolaridadeF, setGrauDeEscolaridadeF] = useState(null);
+    const [alturaMinF, setAlturaMinF] = useState(null);
+    const [alturaMaxF, setAlturaMaxF] = useState(null);
+    const [etniaF, setEtniaF] = useState(null);
+    const [porteFisicoF, setPorteFisicoF] = useState(null);
+    const [corDosOlhosF, setCorDosOlhosF] = useState(null);
+    const [corDaPeleF, setCorDaPeleF] = useState(null);
+    const [corDoCabeloF, setCorDoCabeloF] = useState(null);
+    const [tipoDeCabeloF, setTipoDeCabeloF] = useState(null);
+    const [cepF, setCepF] = useState(null);
+    const [ruaF, setRuaF] = useState(null);
+    const [bairroF, setBairroF] = useState(null);
+    const [numeroF, setNumeroF] = useState(null);
+    const [complementoF, setComplementoF] = useState(null);
+
+    const [temMarca, setTemMarca] = useState(null);
+    const [ehTatuagem, setEhTatuagem] = useState(false);
+    const [descricaoMarca, setDescricaoMarca] = useState(null)
+    const [parteDoCorpoF, setParteDoCorpoF] = useState(null);
+    const [tipoTatuagemAddMarcaId, setTipoTatuagemAddMarcaId] = useState(null);
+    const [limparFiltro, setLimparFiltro] = useState(false);
+
     useEffect(() => {
         setLoading(true)
-        if(!modalAddEnable){
+        if (!modalAddEnable) {
             setNome("")
             setAlcunha("")
-            setGenero("")
+            setGenero("Masculino")
             setDataDeNascimento(`${ano}-${mes}-${dia}`)
             setPai("")
             setMae("")
@@ -102,9 +144,131 @@ export default function CriminosoPage() {
             setNumero(null)
             setComplemento("")
         }
+
+        if(limparFiltro){
+            setNomeF("")
+            setAlcunhaF("")
+            setGeneroF("")
+            setIdadeMinF(null)
+            setIdadeMaxF(null)
+            setPaiF("")
+            setMaeF("")
+            setRgF("")
+            setCpfF("")
+            setTelefoneF("")
+            setObitoF(false)
+            setForagidoF(false)
+            setNaturalidadeF("")
+            setNacionalidadeF("")
+            setLocalDeTrabalhoF("")
+            setProfissaoF("")
+            setGrauDeEscolaridadeF("")
+            setAlturaMaxF(null)
+            setAlturaMinF(null)
+            setEtniaF("")
+            setPorteFisicoF("")
+            setCorDaPeleF("")
+            setCorDoCabeloF("")
+            setCorDosOlhosF("")
+            setTipoDeCabeloF("")
+            setCepF("")
+            setRuaF("")
+            setBairroF("")
+            setNumeroF(null)
+            setComplementoF("")
+            setTemMarca(null)
+            setEhTatuagem(false)
+            setDescricaoMarca("")
+            setParteDoCorpoF("")
+            setTipoTatuagemAddMarcaId(null)
+        }
+
+
+
+        var nomeBody = nomeF == null || nomeF == "" ? {} : { "nome": nomeF };
+        var alcunhaBody = alcunhaF == null || alcunhaF == "" ? {} : { "alcunha": alcunhaF };
+        var paiBody = paiF == null || paiF == "" ? {} : { "pai": paiF };
+        var maeBody = maeF == null || maeF == "" ? {} : { "mae": maeF };
+        var generoBody = generoF == null || generoF == "" ? {} : { "genero": generoF };
+        var idadeMinBody = idadeMinF == null || idadeMinF == "" ? {} : { "idade_min": idadeMinF }
+        var idadeMaxBody = idadeMaxF == null || idadeMaxF == "" ? {} : { "idade_max": idadeMaxF }
+        var rgBody = rgF == null || rgF == "" ? {} : { "rg": rgF }
+        var cpfBody = cpfF == null || cpfF == "" ? {} : { "cpf": cpfF }
+        var telefoneBody = telefoneF == null || telefoneF == "" ? {} : { "telefone": telefoneF }
+        var obitoBody = obitoF == null || obitoF == "" ? {} : { "obito": obitoF }
+        var foragidoBody = foragidoF == null || foragidoF == "" ? {} : { "foragido": foragidoF }
+        var naturalidadeBody = naturalidadeF == null || naturalidadeF == "" ? {} : { "naturalidade": naturalidadeF }
+        var nacionalidadeBody = nacionalidadeF == null || nacionalidadeF == "" ? {} : { "nacionalidade": nacionalidadeF }
+        var localDeTrabalhoBody = localDeTrabalhoF == null || localDeTrabalhoF == "" ? {} : { "local_de_trabalho": localDeTrabalhoF }
+        var profissaoBody = profissaoF == null || profissaoF == "" ? {} : { "profissao": profissaoF }
+        var grauDeEscolaridadeBody = grauDeEscolaridadeF == null || grauDeEscolaridadeF == "" ? {} : { "grau_de_escolaridade": grauDeEscolaridadeF }
+        var alturaMinBody = alturaMinF == null || alturaMinF == "" ? {} : { "altura_min": alturaMinF }
+        var alturaMaxBody = alturaMaxF == null || alturaMaxF == "" ? {} : { "altura_max": alturaMaxF }
+        var etniaBody = etniaF == null || etniaF == "" ? {} : { "etnia": etniaF }
+        var porteFisicoBody = porteFisicoF == null || porteFisicoF == "" ? {} : { "porte_fisico": porteFisicoF }
+        var corDaPeleBody = corDaPeleF == null || corDaPeleF == "" ? {} : { "cor_da_pele": corDaPeleF }
+        var corDosOlhosBody = corDosOlhosF == null || corDosOlhosF == "" ? {} : { "cor_dos_olhos": corDosOlhosF }
+        var corDoCabeloBody = corDoCabeloF == null || corDoCabeloF == "" ? {} : { "cor_do_cabelo": corDoCabeloF }
+        var tipoDeCabeloBody = tipoDeCabeloF == null || tipoDeCabeloF == "" ? {} : { "tipo_de_cabelo": tipoDeCabeloF }
+        var cepBody = cepF == null || cepF == "" ? {} : { "cep": cepF }
+        var ruaBody = ruaF == null || ruaF == "" ? {} : { "rua": ruaF }
+        var bairroBody = bairroF == null || bairroF == "" ? {} : { "bairro": bairroF }
+        var numeroBody = numeroF == null || numeroF == "" ? {} : { "numero": numeroF }
+        var complementoBody = complementoF == null || complementoF == "" ? {} : { "complemento": complementoF }
+
+        var marcaOuTatuagemBody = temMarca == null || temMarca == "" ? {} : ehTatuagem ? { "cicatriz_ou_tatuagem": "t" } : { "cicatriz_ou_tatuagem": "c" };
+        var parteDoCorpoBody = parteDoCorpoF == null || parteDoCorpoF == "" ? {} : { "parte_do_corpo": parteDoCorpoF }
+        var descricaoMarcaBody = descricaoMarca == null || descricaoMarca == "" ? {} : { "descricao": descricaoMarca }
+        var tipoTatuagemAddMarcaIdBody = tipoTatuagemAddMarcaId == null || tipoTatuagemAddMarcaId == "" ? {} : { "tipo_de_tatuagem_id": tipoTatuagemAddMarcaId }
+
+
+        var bodyRequest = {
+            
+            ...nomeBody,
+            ...alcunhaBody,
+            ...marcaOuTatuagemBody,
+            ...generoBody,
+            ...idadeMinBody,
+            ...idadeMaxBody,
+            ...paiBody,
+            ...maeBody,
+            ...rgBody,
+            ...cpfBody,
+            ...telefoneBody,
+            ...obitoBody,
+            ...foragidoBody,
+            ...naturalidadeBody,
+            ...nacionalidadeBody,
+            ...localDeTrabalhoBody,
+            ...profissaoBody,
+            ...grauDeEscolaridadeBody,
+            ...alturaMinBody,
+            ...alturaMaxBody,
+            ...etniaBody,
+            ...porteFisicoBody,
+            ...corDaPeleBody,
+            ...corDosOlhosBody,
+            ...corDoCabeloBody,
+            ...tipoDeCabeloBody,
+            ...cepBody,
+            ...ruaBody,
+            ...bairroBody,
+            ...numeroBody,
+            ...complementoBody,
+            ...parteDoCorpoBody,
+            ...descricaoMarcaBody,
+            ...tipoTatuagemAddMarcaIdBody
+            
+        }
+
         const fetchData = async () => {
             try {
-                const response = await requestPost("/criminoso/filtro", null, { "limite": limiteDeValoresPorRequisicao, "deslocar": offset }, tokenReact);
+                const responseTatuagens = await requestGet("/tipo-de-tatuagem", { "limite": 999 }, tokenReact);
+                const responseTatuagensData = responseTatuagens.data.resultado;
+                if (responseTatuagensData != null) {
+                    setTatuagens(responseTatuagensData)
+                }
+                const response = await requestPost("/criminoso/filtro", bodyRequest, { "limite": limiteDeValoresPorRequisicao, "deslocar": offset }, tokenReact);
                 const responseData = response.data;
                 setCriminosos(responseData);
                 setLoading(false);
@@ -117,7 +281,7 @@ export default function CriminosoPage() {
         };
 
         fetchData();
-    }, [offset, limiteDeValoresPorRequisicao, tokenReact, atualizar, modalAddEnable]);
+    }, [offset, limiteDeValoresPorRequisicao, tokenReact, atualizar, modalAddEnable, limparFiltro]);
 
 
     return (
@@ -170,8 +334,13 @@ export default function CriminosoPage() {
 
                             <div className='mb-3'>
                                 <p>Data de nascimento:</p>
-                                <input className="input" type='date' value={dataDeNascimento}
-                                    onChange={(event) => setDataDeNascimento(event.target.value)}></input>
+                                <input
+                                    className="input"
+                                    type="date"
+                                    value={dataDeNascimento}
+                                    onChange={(event) => setDataDeNascimento(event.target.value)}
+                                    locale="pt-BR" // Defina o locale para português do Brasil
+                                ></input>
                             </div>
 
                             <div className='mb-3'>
@@ -455,7 +624,7 @@ export default function CriminosoPage() {
                                     "complemento": complemento
                                 }, {}, tokenReact).then(() => {
                                     setPopupSucesso(true)
-                                    setConteudoPopup("Marca adicionada com sucesso!")
+                                    setConteudoPopup("Criminoso adicionada com sucesso!")
                                 })
                                 .catch(() => {
                                     setPopupErro(true)
@@ -474,14 +643,338 @@ export default function CriminosoPage() {
                 />
             }
             {
+                modalFilterEnable &&
+                <ModalGenerico
+                    setModalEnable={setModalFilterEnable}
+                    titulo="Filtrar criminoso"
+                    conteudo={
+                        <>
+                            <div className='mb-3'>
+                                <span>Nome:</span>
+                                <input className="input" placeholder="Nome" value={nomeF}
+                                    onChange={(event) => setNomeF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <span>Alcunha:</span>
+                                <input className="input" placeholder="Alcunha" value={alcunhaF}
+                                    onChange={(event) => setAlcunhaF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Genero:</p>
+                                <div className="select">
+                                    <select value={generoF}
+                                        onChange={(event) => setGeneroF(event.target.value)}>
+                                        <option value="">-</option>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Idade Minima:</p>
+                                <input className="input" type="number" placeholder="Idade Minima" value={idadeMinF}
+                                    onChange={(event) => setIdadeMinF(event.target.value)}></input>
+
+                                <p>Idade Maxima:</p>
+                                <input className="input" type="number" placeholder="Idade Maxima" value={idadeMaxF}
+                                    onChange={(event) => setIdadeMaxF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Nome do pai:</p>
+                                <input className="input" placeholder="Nome do pai" value={paiF}
+                                    onChange={(event) => setPaiF(event.target.value)}></input>
+                            </div>
+
+
+                            <div className='mb-3'>
+                                <p>Nome da mãe:</p>
+                                <input className="input" placeholder="Nome da mãe" value={maeF}
+                                    onChange={(event) => setMaeF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>RG:</p>
+                                <input className="input" placeholder="RG" value={rgF}
+                                    onChange={(event) => setRgF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>CPF:</p>
+                                <input className="input" placeholder="Cpf" value={cpfF}
+                                    onChange={(event) => setCpfF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Telefone:</p>
+                                <input className="input" placeholder="Telefone" value={telefoneF}
+                                    onChange={(event) => setTelefoneF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <div>
+                                    <label className='checkbox'>
+                                        <input type='checkbox' value={obitoF}
+                                            checked={obitoF}
+                                            onChange={() => setObitoF(!obitoF)}></input>
+                                        Obito
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <label className='checkbox'>
+                                        <input type="checkbox" value={foragidoF}
+                                            checked={foragidoF}
+                                            onChange={() => setForagidoF(!foragidoF)}></input>
+                                        Foragido
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <label className='checkbox'>
+                                    <input type="checkbox" value={temMarca}
+                                        checked={temMarca}
+                                        onChange={() => setTemMarca(!temMarca)}></input>
+                                    Tem marca
+                                </label>
+                            </div>
+
+                            {
+                                temMarca &&
+                                <>
+                                    <div className='mb-3'>
+                                        <p>Descricao da marca:</p>
+                                        <input className="input" placeholder="Descrição da marca" value={descricaoMarca}
+                                            onChange={(event) => setDescricaoMarca(event.target.value)}></input>
+                                    </div>
+
+                                    <div className='mb-3'>
+                                        <p>Parte do corpo com a marca:</p>
+                                        <input className="input" placeholder="Parte do corpo" value={parteDoCorpoF}
+                                            onChange={(event) => setParteDoCorpoF(event.target.value)}></input>
+                                    </div>
+                                    <div className='mb-3'>
+                                        <label className='checkbox'>
+                                            <input type="checkbox" value={ehTatuagem}
+                                                checked={ehTatuagem}
+                                                onChange={() => setEhTatuagem(!ehTatuagem)}></input>
+                                            É tatuagem
+                                        </label>
+                                    </div>
+                                </>
+                            }
+
+                            {
+                                temMarca && ehTatuagem &&
+
+                                <div className='mb-3'>
+                                    <p>Tipo da tatuagem:</p>
+                                    <div className="select">
+                                        <select value={tipoTatuagemAddMarcaId}
+                                            onChange={(event) => setTipoTatuagemAddMarcaId(event.target.value)}>
+                                            <option value="">-</option>
+                                            {tatuagens.map((tatuagem) => {
+                                                return <option value={tatuagem.id}>{tatuagem.tipo}</option>
+                                            })}
+                                        </select>
+                                    </div>
+                                </div>
+                            }
+
+
+                            <div className='mb-3'>
+                                <p>Naturalidade:</p>
+                                <input className="input" placeholder="Naturalidade" value={naturalidadeF}
+                                    onChange={(event) => setNaturalidadeF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Nacionalidade:</p>
+                                <input className="input" placeholder="Nacionalidade" value={nacionalidadeF}
+                                    onChange={(event) => setNacionalidadeF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Local de trabalho:</p>
+                                <input className="input" placeholder="Local de tabalho" value={localDeTrabalhoF}
+                                    onChange={(event) => setLocalDeTrabalhoF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Profissão:</p>
+                                <input className="input" placeholder="Profissao" value={profissaoF}
+                                    onChange={(event) => setProfissaoF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Grau de Escolaridade:</p>
+                                <div className="select">
+                                    <select value={grauDeEscolaridadeF}
+                                        onChange={(event) => setGrauDeEscolaridadeF(event.target.value)}>
+                                        <option value="">-</option>
+                                        <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                        <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                                        <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                                        <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                                        <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                        <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Altura Minima:</p>
+                                <input className="input" type="number" placeholder="Altura Minima (digite com ponto em vez de virgula - Ex: 1.75)" value={alturaMinF}
+                                    onChange={(event) => setAlturaMinF(event.target.value)}></input>
+
+                                <p>Altura Maxima:</p>
+                                <input className="input" type="number" placeholder="Altura Maxima (digite com ponto em vez de virgula - Ex: 1.75)" value={alturaMaxF}
+                                    onChange={(event) => setAlturaMaxF(event.target.value)}></input>
+                            </div>
+
+
+                            <div className='mb-3'>
+                                <p>Etnia:</p>
+                                <input className="input" placeholder="Etnia" value={etniaF}
+                                    onChange={(event) => setEtniaF(event.target.value)}></input>
+                            </div>
+
+
+                            <div className='mb-3'>
+                                <p>Porte fisico:</p>
+                                <div className="select">
+                                    <select value={porteFisicoF}
+                                        onChange={(event) => setPorteFisicoF(event.target.value)}>
+                                        <option value="">-</option>
+                                        <option value="Magro">Magro</option>
+                                        <option value="Médio">Médio</option>
+                                        <option value="Gordo">Gordo</option>
+                                        <option value="Forte">Forte</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Cor dos olhos:</p>
+                                <div>
+                                    <div className="select">
+                                        <select value={corDosOlhosF}
+                                            onChange={(event) => setCorDosOlhosF(event.target.value)}>
+                                            <option value="">-</option>
+                                            <option value="Azul">Azul</option>
+                                            <option value="Castanho">Castanho claro</option>
+                                            <option value="Verde">Verde</option>
+                                            <option value="Castanho escuro">Castanho escuro</option>
+                                            <option value="Ambar">Ambar</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Cor da pele:</p>
+                                <div>
+                                    <div className="select">
+                                        <select value={corDaPeleF}
+                                            onChange={(event) => setCorDaPeleF(event.target.value)}>
+                                            <option value="">-</option>
+                                            <option value="Amarelo">Amarelo</option>
+                                            <option value="Branco">Branco</option>
+                                            <option value="Indigena">Indigena</option>
+                                            <option value="Preto">Preto</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Cor do cabelo:</p>
+                                <div>
+                                    <div className="select">
+                                        <select placeholder="Cor do cabelo" value={corDoCabeloF}
+                                            onChange={(event) => setCorDoCabeloF(event.target.value)}>
+                                            <option value="">-</option>
+                                            <option value="Preto">Preto</option>
+                                            <option value="Castanho">Castaho</option>
+                                            <option value="Loiro">Loiro</option>
+                                            <option value="Ruivo">Ruivo</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Tipo de cabelo:</p>
+                                <div>
+                                    <div className="select">
+                                        <select value={tipoDeCabeloF}
+                                            onChange={(event) => setTipoDeCabeloF(event.target.value)}>
+                                            <option value="">-</option>
+                                            <option value="">Encaracolado</option>
+                                            <option value="Liso">Liso</option>
+                                            <option value="Careca">Careca</option>
+                                            <option value="Calvo">Calvo</option>
+                                            <option value="Outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>CEP:</p>
+                                <input className="input" placeholder="CEP" value={cepF}
+                                    onChange={(event) => setCepF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Rua:</p>
+                                <input className="input" placeholder="Rua" value={ruaF}
+                                    onChange={(event) => setRuaF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Bairro:</p>
+                                <input className="input" placeholder="Bairro" value={bairroF}
+                                    onChange={(event) => setBairroF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Numero:</p>
+                                <input className="input" type="number" placeholder="Numero (digite um numero, nunca uma letra)" value={numeroF}
+                                    onChange={(event) => setNumeroF(event.target.value)}></input>
+                            </div>
+
+                            <div className='mb-3'>
+                                <p>Complemento:</p>
+                                <input className="input" placeholder="Complemento" value={complementoF}
+                                    onChange={(event) => setComplementoF(event.target.value)}></input>
+                            </div>
+                        </>
+                    }
+                    onClickAccept={() => {
+                        setAtualizar(!atualizar)
+                        setModalFilterEnable(false)
+                    }}
+                />
+            }
+            {
                 loading &&
                 <Loading />
             }
 
             <div className="column">
-                <h1> Criminosos: </h1>
-                <div className="is-flex is-justify-content-flex-end mr-6">
-                    <button className="button mt-4 btn-success" onClick={setModalAddEnable}>+ Adicionar</button>
+                <div className="is-flex is-justify-content-flex-end">
+                    <button className="button mt-4 mr-3 is-success" onClick={setModalAddEnable}>+ Adicionar</button>
+                    <button className="button mt-4 mr-3 is-info" onClick={setModalFilterEnable}>Filtrar</button>
+                    <button className="button mt-4 mb-4 mr-3 is-primary" onClick={setLimparFiltro}>Limpar Filtro</button>
                 </div>
                 <div className="columns is-multiline">
                     {

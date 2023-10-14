@@ -23,4 +23,6 @@
 - Banco de dados:
   - PostgreSQL(Modelo-Relacional de banco)
   
-## Ambiente de Desenvolvimento: 
+## Ambiente de Desenvolvimento:
+
+  <code>git clone https://github.com/RenanKawamoto/ProjetoPc.git</code>

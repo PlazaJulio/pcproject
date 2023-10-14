@@ -18,7 +18,9 @@
   - PHP - com o micro-framework Lumen
 
 - Front-end:
+  - ReactJS - Framework(Biblioteca Javascript)   
 
 - Banco de dados:
   - PostgreSQL(Modelo-Relacional de banco)
   
+## Ambiente de Desenvolvimento: 

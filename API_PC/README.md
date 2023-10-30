@@ -1,3 +1,30 @@
+O Lumen é um micro-framework PHP desenvolvido pela mesma equipe por trás do Laravel, um dos frameworks PHP mais populares. Ele compartilha muitos conceitos e características com o Laravel, mas é projetado para ser mais leve e focado em aplicações pequenas e rápidas, como APIs e microservices. Vamos explorar a arquitetura do Lumen em detalhes:
+
+# 1. Kernel:
+O núcleo (kernel) do Lumen é o ponto de entrada para todas as solicitações HTTP. Ele gerencia as solicitações e direciona cada uma para a rota correspondente. O kernel do Lumen é bastante simplificado em comparação com o Laravel completo, o que contribui para a velocidade e a eficiência do framework.
+
+# 2. Roteamento:
+O Lumen utiliza um sistema de roteamento para associar solicitações HTTP a ações específicas em seu código. Você define rotas em arquivos de rota, que são geralmente encontrados no diretório routes. Quando uma solicitação é recebida, o sistema de roteamento verifica a URL da solicitação e chama a função ou controlador associado à rota correspondente.
+
+# 3. Controladores:
+Os controladores no Lumen são responsáveis por processar solicitações específicas. Eles organizam a lógica de manipulação de solicitações em métodos, tornando o código mais organizado e fácil de manter. Os controladores geralmente residem no diretório app/Http/Controllers.
+
+# 4. Serviços:
+O Lumen fornece uma variedade de serviços integrados que você pode usar para realizar várias tarefas. Por exemplo, o serviço de banco de dados facilita a interação com bancos de dados, enquanto o serviço de cache facilita a implementação do cache em seu aplicativo.
+
+# 5. Middleware:
+Os middlewares são camadas intermediárias que podem processar uma solicitação antes que ela atinja a rota apropriada. Eles são usados para realizar tarefas como autenticação, logging ou transformação de dados antes que a solicitação atinja seu controlador.
+
+# 6. Eloquent ORM:
+O Eloquent ORM é uma parte do Laravel e também está disponível no Lumen. Ele fornece uma maneira elegante e intuitiva de interagir com seu banco de dados, representando tabelas como classes e registros como instâncias dessas classes.
+
+# 7. Templates e Views:
+Embora o Lumen seja frequentemente usado para criar APIs, ele ainda suporta a criação de interfaces de usuário usando templates e views. Você pode usar o mecanismo de template Blade, que é uma característica poderosa do Laravel, para criar vistas reutilizáveis e dinâmicas.
+
+# 8. Arquivos de Configuração:
+O Lumen utiliza arquivos de configuração (como .env e arquivos dentro do diretório config) para armazenar variáveis de ambiente e outras configurações importantes do aplicativo. Isso permite que você configure facilmente seu aplicativo sem modificar o código fonte.
+<br><br><br>
+
 <h1>API Documentação</h1>
 
 ----

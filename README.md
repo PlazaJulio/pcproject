@@ -65,6 +65,29 @@
 - 7 - Após essas configurações será necessário rodar o comando `php artisan jwt:secret` dentro do seu terminal;
 - 8 - Logo após rode o comando `php artisan migrate`, para criar as tabelas do banco automaticamente;
 - 9 - Após rodar o migrate devemos popular nosso banco rodando `php artisan db:seed RodeUmaVezSeeder` e logo após o `php artisan db:seed`;
-- 10 - Após todos esses passos basta ir no ditorio API_PC do nosso repositorio e rodar o comando `php -t public -S localhost:8000` para que o backend rode;
+- 10 - Após todos esses passos basta ir no diretorio API_PC do nosso repositorio e rodar o comando `php -t public -S localhost:8000` para que o backend rode;
 
+### FrontEnd:
+- 1 - Inicialmente para rodar o frontend é necessário ter o **node na versão 21.x ou maior e o npm na versão 10.x ou maior** (quando você instala o node o npm já vem junto);
+- 2 - Após instalar o node e o npm vá até o diretorio **FRONT_PC** do projeto recem clonado e rode o comando `npm install` ou `npm i`;
+- 3 - Agora que já instalamos as dependencias do projeto vamos especificar as variaveis de ambiente:
+    - 1 - Para fazer isso vá até o diretorio **FRONT_PC** e encontre o arquivo `.env_example`;
+    - 2 - Crie uma cópia desse arquivo e nomei como .env;
+    - 3 - Agora basta alterar as informações presentes dentro do arquivo .env de acordo com seu ambiente de desenvolvimento:
+    ~~~
+    VITE_PROTOCOLO_DEV = "http://"
+    VITE_IP_DEV = "localhost:8000"
+    ~~~
+    As informações presente nesse arquivo são `VITE_PROTOCOLO_DEV` onde definimos o protocolo a ser utilizado nas requisições para a API e o `VITE_IP_DEV` que se trata do IP que a nossa API esta rodando.
+- 4 - Após todas essas configurações basta rodar o comando `npm run dev` dentro do diretorio FRONT_PC;
 
+### Ordem ideal para rodar o projeto:
+- Rode o banco de dados
+- Rode o backend (API)
+- Rode o frontend
+- OBS: Não esqueça que para o sistema funcionar 100% é necessário que todos os três componentes estejam rodando juntos.
+
+## Qual o usuario inicial para eu entrar no sistema:
+Após rodar o projeto, caso você deseje entrar deixamos um usuario admin cadastrado:
+- **Usuario: admin**
+- **Senha: 123**

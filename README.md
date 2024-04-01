@@ -8,9 +8,9 @@
   - Luis Hilário Tobler Garcia
 
 - Estagiários:
-  - Igor Rafael de Sousa (R.A: 607568)
-  - Mateus dos Santos de Andrade (R.A: 603872)
-  - Renan Kawamoto Da Rocha (R.A: 600997)
+  - Júlio César Plaza D'aloia (R.A: 618012)
+  - Enzo Kato Rocha
+  - 
 
 ## Tecnologias utilizadas: 
 

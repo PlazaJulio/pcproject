@@ -10,7 +10,7 @@
 - Estagiários:
   - Júlio César Plaza D'aloia (R.A: 618012)
   - Enzo Kato Rocha
-  - 
+  - Lucas Ferrari Lopes
 
 ## Tecnologias utilizadas: 
 

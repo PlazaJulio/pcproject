@@ -1,0 +1,23 @@
+<div class="page">
+<!--
+    <div class="page__info">
+        <h1>Delegacia Seccional de Policia</h1>
+        <img src="../../assets/Logo.png" alt="Brazao da Policia" height="400" width="300">
+    </div>
+-->
+
+    <form class="page__login" [formGroup]="loginForm">
+        <div class="login__input">
+            <input type="text" id="login" formControlName="login">
+            <label for="login">Login</label>
+        </div>
+        <br>
+        <div class="login__input">
+            <input type="text" id="password" formControlName="password">
+            <label for="password">Senha</label>
+        </div>
+        <br>
+        <button  class="login__input" type="submit" (click)="onSubmit($event)">Log In</button>
+    </form>
+
+</div>

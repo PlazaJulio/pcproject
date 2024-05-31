@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { TokenContext } from "../../data/context/TokenContext";
 import Menu from "../../ui/components/Menu/Menu";
 import TableTatuagem from "../../ui/components/TableTatuagem/TableTatuagem";
-import Paginacao from "../../ui/components/Paginacao/Paginacao";
 import ModalGenerico from "../../ui/components/ModalGenerico/ModalGenerico";
 import Loading from "../../ui/components/Loading/Loading";
 import PopupGenerico from "../../ui/components/PopupGenerico/PopupGenerico";
-import "./style.css"
 import requestPost from "../../data/utils/requestPost";
 
 export default function TatuagemPage() {
@@ -21,8 +19,8 @@ export default function TatuagemPage() {
     const [loading, setLoading] = useState(false);
     const [tipo, setTipo] = useState("")
     const [popupSucesso, setPopupSucesso] = useState(false);
-    const [conteudoPopup, setConteudoPopup] = useState("");
     const [popupErro, setPopupErro] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -43,40 +41,48 @@ export default function TatuagemPage() {
     }, [offset, atualizar]);
 
     function adicionar() {
-        requestPost("/tipo-de-tatuagem/inserir",
-            {
-                "tipo": tipo
-            },
-            {},
-            tokenReact
-        ).then(() => {
-            setAtualizar(!atualizar)
-            setModalAddEnable(false)
-            setPopupSucesso(true)
-            setConteudoPopup("Sucesso na adição do dado!!")
-        }).catch(() => {
+        if (tipo != "") {
+            requestPost("/tipo-de-tatuagem/inserir",
+                {
+                    "tipo": tipo
+                },
+                {},
+                tokenReact
+            ).then(() => {
+                setAtualizar(!atualizar)
+                setModalAddEnable(false)
+                setPopupSucesso(true)
+            }).catch((error) => {
+                setPopupErro(true)
+                setErrorMessage(error)
+            });
+        } else {
             setPopupErro(true)
-            setConteudoPopup("Erro")
-        });
+            setErrorMessage("Preencha todos os campos")
+        }
     }
 
     return (
-        <div className="columns">
+        <section className="flex flex-col">
             {
                 popupErro &&
                 <PopupGenerico
-                    bg="is-danger"
-                    conteudo={conteudoPopup}
+                    color="red"
                     setVariavelDeEstado={setPopupErro}
-                />
+                >
+                    <h3 className="text-lg font-semibold text-red-800">Algo deu errado!</h3>
+                    <p className="text-sm text-red-700">{errorMessage}</p>
+                </PopupGenerico>
             }
             {
                 popupSucesso &&
                 <PopupGenerico
-                    bg="is-success"
-                    conteudo={conteudoPopup}
+                    color="lime"
                     setVariavelDeEstado={setPopupErro}
-                />
+                >
+                    <h3 className="text-lg font-semibold text-lime-800">Tatuagem adicionada com sucesso!</h3>
+                    <p className="text-sm text-lime-700">Tatuagem de tipo {tipo} foi adicionada!</p>
+                </PopupGenerico>
             }
             {
                 loading &&
@@ -88,8 +94,27 @@ export default function TatuagemPage() {
                 <ModalGenerico
                     titulo="Adicionar tatuagem"
                     conteudo={
-                        <input className="input" placeholder="Digite o tipo da tatuagem" value={tipo}
-                            onChange={(event) => setTipo(event.target.value)}></input>
+                        <input 
+                            className="
+                                shadow-inner 
+                                shadow-stone-100
+                                text-stone-600
+                                text-sm
+                                bg-stone-50 
+                                w-full 
+                                border 
+                                rounded 
+                                border-stone-200 
+                                py-2 
+                                px-3 
+                                hover:border-stone-500 
+                                focus:border-stone-500 
+                                focus:outline-none
+                            "
+                            placeholder="Digite o tipo da tatuagem" 
+                            value={tipo}
+                            onChange={(event) => setTipo(event.target.value)}
+                        />
                     }
                     onClickAccept={
                         () => adicionar()
@@ -97,17 +122,39 @@ export default function TatuagemPage() {
                     setModalEnable={setModalAddEnable}
                 />
             }
-            <div className="column">
-                <div className="is-flex is-justify-content-flex-end mr-6">
-                    <button className="button mt-4 btn-success" onClick={setModalAddEnable}>+ Adicionar</button>
-                </div>
+            <div className="max-w-5xl w-full m-auto">
+                <button 
+                    className="
+                        shadow
+                        shadow-stone-200
+                        bg-lime-400
+                        text-sm
+                        text-lime-800
+                        mb-2
+                        p-2
+                        border
+                        rounded
+                        border-lime-800
+                        focus:outline-none
+                        hover:bg-lime-200
+                        transition-all
+                    " 
+                    onClick={setModalAddEnable}
+                >
+                    + Adicionar
+                </button>
                 {
                     tatuagens &&
-                    <>
-                        <TableTatuagem valores={tatuagens.resultado} countPagination={tatuagens.numero_de_dados_totais} limitPagination={limiteDeValoresPorRequisicao} alterOffsetPagination={setOffset} setAltualizarTabela={setAtualizar} atualizar={atualizar} />
-                    </>
+                    <TableTatuagem 
+                        valores={tatuagens.resultado} 
+                        countPagination={tatuagens.numero_de_dados_totais} 
+                        limitPagination={limiteDeValoresPorRequisicao} 
+                        alterOffsetPagination={setOffset} 
+                        setAltualizarTabela={setAtualizar} 
+                        atualizar={atualizar} 
+                    />
                 }
             </div>
-        </div>
+        </section>
     );
 }

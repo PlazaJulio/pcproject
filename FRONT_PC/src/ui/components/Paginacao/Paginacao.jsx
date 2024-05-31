@@ -19,10 +19,47 @@ export default function Paginacao({count, limit, alterOffset}){
     function gerarNumeracao(arrayComValoresCorretos){
         return arrayComValoresCorretos.map((valor, index) => {
             if(valor == paginaAtual){
-                return <li key={index} className="pagination-link is-current">{valor}</li>
+                return (
+                    <li 
+                        key={index} 
+                        className="
+                            w-11
+                            h-11
+                            flex
+                            justify-center
+                            items-center
+                            bg-stone-800
+                            rounded
+                            text-stone-200
+                            cursor-default
+                        "
+                    >
+                        {valor}
+                    </li>
+                )
             }
             else if((primeiraPagina+index) <= totalDePaginas){
-                return <li key={index} className="pagination-link" onClick={()=>logicaDeAlteracaoDePaginacao(valor)}>{valor}</li>
+                return (
+                    <li 
+                        key={index} 
+                        className="
+                            w-11
+                            h-11
+                            flex
+                            justify-center
+                            items-center
+                            bg-stone-600
+                            rounded
+                            text-stone-200
+                            hover:bg-stone-800
+                            cursor-pointer
+                            transition-all
+                        " 
+                        onClick={()=>logicaDeAlteracaoDePaginacao(valor)}
+                    >
+                        {valor}
+                    </li>
+                )
             }
         })
     }
@@ -35,11 +72,13 @@ export default function Paginacao({count, limit, alterOffset}){
         return gerarNumeracao(arrayComValoresCorretos)
     }
 
-    return <nav className="pagination" role="navigation">
-        <ul className="pagination-list is-flex is-justify-content-center">
-            {
-                gerarPaginas()
-            }
-        </ul>
-    </nav>
+    return (
+        <nav className="my-3" role="navigation">
+            <ul className="flex gap-3 justify-center">
+                {
+                    gerarPaginas()
+                }
+            </ul>
+        </nav>
+    ) 
 }

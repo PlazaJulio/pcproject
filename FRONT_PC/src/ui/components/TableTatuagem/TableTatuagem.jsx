@@ -9,7 +9,6 @@ import { TokenContext } from "../../../data/context/TokenContext";
 import requestPatch from "../../../data/utils/requestPatch";
 import requestDelete from "../../../data/utils/requestDelete";
 import PopupGenerico from "../PopupGenerico/PopupGenerico";
-import "./style.css"
 
 export default function TableTatuagem({ valores, countPagination, limitPagination, alterOffsetPagination, setAltualizarTabela, atualizar}) {
     const [modalEditEnable, setModalEditEnable] = useState(false);
@@ -25,40 +24,65 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
         {
             popupSucesso &&
             <PopupGenerico
-                bg="is-success"
-                conteudo={<p>{conteudoPopup}</p>}
+                color="lime"
                 setVariavelDeEstado={setPopupSucesso}
-            />
+            >
+                <h3 className="text-lg font-semibold text-lime-800">Alteração realizada com sucesso!</h3>
+                <p className="text-sm text-lime-700">{conteudoPopup}</p>
+            </PopupGenerico>
         }
         {
             popupErro &&
             <PopupGenerico
-                bg="is-danger"
-                conteudo={<p>{conteudoPopup}</p>}
+                color="red"
                 setVariavelDeEstado={setPopupErro}
-            />
+            >
+                <h3 className="text-lg font-semibold text-red-800">Algo deu errado!</h3>
+                <p className="text-sm text-red-700">{conteudoPopup}</p>
+            </PopupGenerico>
         }
         {
             modalEditEnable &&
             <ModalGenerico setModalEnable={setModalEditEnable}
                 titulo="Editar"
-                conteudo={<input className="input" placeholder="Digite o tipo da tatuagem" value={tipo}
-                    onChange={(event) => setTipo(event.target.value)}></input>}
+                conteudo={
+                    <input 
+                        className="
+                            shadow-inner 
+                            shadow-stone-100
+                            text-stone-600
+                            text-sm
+                            bg-stone-50 
+                            w-full 
+                            border 
+                            rounded 
+                            border-stone-200 
+                            py-2 
+                            px-3 
+                            hover:border-stone-500 
+                            focus:border-stone-500 
+                            focus:outline-none
+                        " 
+                        placeholder="Digite o tipo da tatuagem" 
+                        value={tipo}
+                        onChange={(event) => setTipo(event.target.value)}
+                    />
+                }
                 onClickAccept={
                     () => {
-                        requestPatch("/tipo-de-tatuagem/" + id, { tipo: tipo }, {}, tokenReact).then(
-                            () => {
-                                setModalEditEnable(false)
-                                setAltualizarTabela(!atualizar)
-                                setPopupSucesso(true)
-                                setConteudoPopup("Dado editado com sucesso!")
-                            }
-                        ).catch(
-                            () => {
+                        if (tipo != "") {
+                            requestPatch("/tipo-de-tatuagem/" + id, { tipo: tipo }, {}, tokenReact).then(
+                                () => {
+                                    setModalEditEnable(false)
+                                    setAltualizarTabela(!atualizar)
+                                    setPopupSucesso(true)
+                                    setConteudoPopup(`Tipo de tatuagem foi alterado para ${tipo}`)
+                                }
+                            ).catch((error) => {
                                 setPopupErro(true)
-                                setConteudoPopup("Erro")
-                            }
-                        )
+                                setErrorMessage(error)
+                            })
+                        }
                     }
                 } />
         }
@@ -66,7 +90,7 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
             modalDeleteEnable &&
             <ModalGenerico setModalEnable={setModalDeleteEnable}
                 titulo="Deletar"
-                conteudo={<p>Você tem certeza que deseja DELETAR esse dado? ({tipo})</p>}
+                conteudo={<p>Você tem certeza que deseja DELETAR esse tipo? ({tipo})</p>}
                 onClickAccept={
                     () => {
                         requestDelete("/tipo-de-tatuagem/" + id, {}, tokenReact).then(
@@ -74,54 +98,50 @@ export default function TableTatuagem({ valores, countPagination, limitPaginatio
                                 setModalDeleteEnable(false);
                                 setAltualizarTabela(!atualizar);
                                 setPopupSucesso(true)
-                                setConteudoPopup("Dadao excluido com sucesso!")
+                                setConteudoPopup("Tipo de tatuagem foi excluído")
                             }
-                        ).catch(
-                            () => {
+                        ).catch((error) => {
                                 setPopupErro(true)
-                                setConteudoPopup("Erro")
-                            }
-                        )
+                                setConteudoPopup(error)
+                        })
                     }
                 }
             />
         }
-        <table className="table mt-4 is-bordered is-hoverable width-table has-text-centered ml-auto mr-auto">
-            <thead>
+        <table className="table-auto w-full border border-solid border-stone-900 border-separate" border="1">
+            <thead className="bg-stone-700">
                 <tr>
-                    <th className="has-text-centered">Id</th>
-                    <th className="has-text-centered">Tipo</th>
-                    <th className="has-text-centered">Ações</th>
+                    <th className="text-stone-100 font-bold text-center p-2.5 border border-solid border-stone-900">Id</th>
+                    <th className="text-stone-100 font-bold text-center p-2.5 border border-solid border-stone-900">Tipo</th>
+                    <th className="text-stone-100 font-bold text-center p-2.5 border border-solid border-stone-900">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {
                     valores &&
-                    valores.map((dado) => <tr>
-                        <td>{dado.id}</td>
-                        <td>{dado.tipo}</td>
-                        <td>
-                            <ButtonEditar onHandle={() => {
-                                setModalEditEnable(true)
-                                setId(dado.id)
-                                setTipo(dado.tipo)
-                            }}><FontAwesomeIcon icon={faPenToSquare} /></ButtonEditar>
-                            <ButtonExcluir onHandle={() => {
-                                setModalDeleteEnable(true)
-                                setTipo(dado.tipo)
-                                setId(dado.id)
-                            }}><FontAwesomeIcon icon={faTrash} /></ButtonExcluir>
-                        </td>
-                    </tr>)
+                    valores.map((dado, index) => {
+                        return (
+                            <tr key={index} className={`${index%2==0?"bg-stone-300":"bg-stone-100"} text-center`}>
+                                <td className="p-2 border border-solid border-stone-900">{dado.id}</td>
+                                <td className="p-2 border border-solid border-stone-900">{dado.tipo}</td>
+                                <td className="flex gap-3 justify-center p-2 border border-solid border-stone-900">
+                                    <ButtonEditar onHandle={() => {
+                                        setModalEditEnable(true)
+                                        setId(dado.id)
+                                        setTipo(dado.tipo)
+                                    }}><FontAwesomeIcon icon={faPenToSquare} /></ButtonEditar>
+                                    <ButtonExcluir onHandle={() => {
+                                        setModalDeleteEnable(true)
+                                        setTipo(dado.tipo)
+                                        setId(dado.id)
+                                    }}><FontAwesomeIcon icon={faTrash} /></ButtonExcluir>
+                                </td>
+                            </tr>
+                        )
+                    })
                 }
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colSpan='3' className="ml-auto">
-                        <Paginacao count={countPagination} limit={limitPagination} alterOffset={alterOffsetPagination} />
-                    </td>
-                </tr>
-            </tfoot>
         </table>
+        <Paginacao count={countPagination} limit={limitPagination} alterOffset={alterOffsetPagination} />
     </>
 }

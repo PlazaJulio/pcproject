@@ -80,7 +80,7 @@ class CriminosoController extends Controller
                 
             ]);
         }catch(Exception $e){
-            return response("Requisição feita de maneira incorreta", 400);
+            return response("Dados inseridos de maneira incorreta, verifique e tente novamente", 400);
         }
     }
 
